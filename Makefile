@@ -39,14 +39,13 @@ MLX_FLAGS	= -framework OpenGL -framework AppKit
 all		:	mlx libft $(NAME_RT)
 
 mlx:
-			@echo "Making $(MLX_PATH)$(MLX)"
 			@make -C $(MLX_PATH)
 
 libft	:
 			@make -C $(DIR_LIB)
 
-$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
-			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT) -o $@
+$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
