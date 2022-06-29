@@ -1,4 +1,4 @@
-NAME_RT			=	minirt
+NAME_RT			=	miniRT
 
 INCLUDES_RT		=	includes/
 HEADER_RT		=	includes/minirt.h
@@ -9,8 +9,13 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 #include your directory name and files here
 DIR_SRC			=	src/
-FILES_SRC		=	main.c \
+FILES_SRC		=	main_2.c \
 					print_structs.c \
+					vector.c \
+					utils.c \
+					sphere.c \
+					camera.c \
+					scene.c \
 
 SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
 OBJS_SRC		=	$(SRCS_SRC:%.c=%.o)
@@ -32,20 +37,21 @@ RM				=	rm -f
 #MLX
 MLX			= libmlx.a
 MLX_PATH	= mlx_1/
-MLX_FLAGS	= -framework OpenGL -framework AppKit
+MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
 
 .PHONY	:	all clean fclean re libft mlx norm
 
 all		:	mlx libft $(NAME_RT)
 
 mlx:
+			@echo "Making $(MLX_PATH)$(MLX)"
 			@make -C $(MLX_PATH)
 
 libft	:
 			@make -C $(DIR_LIB)
 
-$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
-			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
+$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT) $(MLX_FLAGS) -o $@
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
