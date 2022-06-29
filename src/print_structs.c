@@ -36,11 +36,11 @@ void	print_alight(t_alight *alight)
 void	print_camera(t_camera *camera)
 {
 	printf("\n*******Camera*******\n");
-	printf("View point: %.2f,%.2f,%.2f\n", camera->view_point.x,
-		camera->view_point.y, camera->view_point.z);
-	printf("Orientation vector: %.2f,%.2f,%.2f\n", camera->orient_vector.x,
-		camera->orient_vector.y, camera->orient_vector.z);
-	printf("Horizontal degree: %.2f\n", camera->horiz_degrees);
+	printf("View point: %.2f,%.2f,%.2f\n", camera->position.x,
+		camera->position.y, camera->position.z);
+	printf("Orientation vector: %.2f,%.2f,%.2f\n", camera->orient.x,
+		camera->orient.y, camera->orient.z);
+	printf("Horizontal degree: %.2f\n", camera->fov);
 	printf("*********************\n");
 }
 
@@ -56,9 +56,9 @@ void	print_light(t_light *light)
 void	print_sphere(t_sphere *sphere)
 {
 	printf("\n*******Sphere*******\n");
-	printf("Coord: %.2f,%.2f,%.2f\n", sphere->coord.x,
-		sphere->coord.y, sphere->coord.z);
-	printf("Diameter: %.2f\n", sphere->diameter);
+	printf("Coord: %.2f,%.2f,%.2f\n", sphere->position.x,
+		sphere->position.y, sphere->position.z);
+	printf("Diameter: %.2f\n", sphere->radius);
 	printf("Color: %d,%d,%d\n", sphere->color.r,
 		sphere->color.g, sphere->color.b);
 	printf("*********************\n");
@@ -67,7 +67,7 @@ void	print_sphere(t_sphere *sphere)
 void	print_plane(t_plane *plane)
 {
 	printf("\n*******Plane*******\n");
-		printf("Coord: %.2f,%.2f,%.2f\n", plane->coord.x,
+	printf("Coord: %.2f,%.2f,%.2f\n", plane->coord.x,
 		plane->coord.y, plane->coord.z);
 	printf("Orientation vector: %.2f,%.2f,%.2f\n", plane->orient_vector.x,
 		plane->orient_vector.y, plane->orient_vector.z);

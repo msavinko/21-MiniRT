@@ -1,4 +1,4 @@
-NAME_RT			=	minirt
+NAME_RT			=	miniRT
 
 INCLUDES_RT		=	includes/
 HEADER_RT		=	includes/minirt.h
@@ -9,8 +9,13 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 #include your directory name and files here
 DIR_SRC			=	src/
-FILES_SRC		=	main.c \
+FILES_SRC		=	main_2.c \
 					print_structs.c \
+					vector.c \
+					utils.c \
+					sphere.c \
+					camera.c \
+					scene.c \
 
 SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
 OBJS_SRC		=	$(SRCS_SRC:%.c=%.o)
@@ -39,6 +44,7 @@ MLX_FLAGS	= -framework OpenGL -framework AppKit
 all		:	mlx libft $(NAME_RT)
 
 mlx:
+			@echo "Making $(MLX_PATH)$(MLX)"
 			@make -C $(MLX_PATH)
 
 libft	:
