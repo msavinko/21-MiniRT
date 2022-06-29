@@ -9,7 +9,7 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 #include your directory name and files here
 DIR_SRC			=	src/
-FILES_SRC		=	main.c \
+FILES_SRC		=	main_2.c \
 					print_structs.c \
 
 SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
@@ -44,8 +44,8 @@ mlx:
 libft	:
 			@make -C $(DIR_LIB)
 
-$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
-			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
+$(NAME_RT)	:	$(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+			$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
