@@ -31,9 +31,9 @@ void	fill_sp(char *str, t_sphere *sphere)
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
-	fill_coord(&i, str, &sphere->coord);
+	fill_coord(&i, str, &sphere->position);
 	while_space(&i, str);
-	sphere->diameter = ft_atof(&str[i]);
+	sphere->radius = ft_atof(&str[i]) / 2;
 	while_space(&i, str);
 	fill_color(&i, str, &sphere->color);
 	if (sphere->color.r < 0 || sphere->color.r > 255
