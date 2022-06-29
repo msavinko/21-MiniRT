@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,19 @@
 
 #include "minirt.h"
 
-static int	close_minirt(void)
+t_camera	*new_camera(t_coord position, t_coord orient, double fov)
 {
-	printf("\nExit\n");
-	ft_exit(0);
-	return (0);
-}
+	t_camera	*camera;
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
+	camera = (t_camera *)malloc(sizeof(t_camera));
+	if (!camera)
 		ft_error(1);
-	init_data(data);
-	open_scene(argc, argv, data);
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		ft_error(-1);
-	data->window = mlx_new_window(data->mlx, 1920, 1080, "miniRT");
-	if (!data->window)
-		ft_error(-1);
-	mlx_hook(data->window, 17, 0, close_minirt, data);
-	mlx_loop(data->mlx);
-	return (0);
+	camera->position = position;
+	camera->orient = orient;
+	camera->fov = fov;
+	// camera->rotate = vector3_arotate(vector3_normalise(orient), camera->orient);
+	// camera->rotate_origin = position;
+	// camera->zoom = DEFAULT_ZOOM;
+	// camera->defaults = copy_camera(position, orient, fov);
+	return (camera);
 }

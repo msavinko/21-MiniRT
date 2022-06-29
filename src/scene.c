@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,14 @@
 
 #include "minirt.h"
 
-static int	close_minirt(void)
+t_scene	*new_scene(t_camera *camera, t_sphere *sphere)
 {
-	printf("\nExit\n");
-	ft_exit(0);
-	return (0);
-}
+	t_scene	*scene;
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
+	scene = (t_scene *)malloc(sizeof(t_scene));
+	if (!scene)
 		ft_error(1);
-	init_data(data);
-	open_scene(argc, argv, data);
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		ft_error(-1);
-	data->window = mlx_new_window(data->mlx, 1920, 1080, "miniRT");
-	if (!data->window)
-		ft_error(-1);
-	mlx_hook(data->window, 17, 0, close_minirt, data);
-	mlx_loop(data->mlx);
-	return (0);
+	scene->camera = camera;
+	scene->sphere = sphere;
+	return (scene);
 }
