@@ -37,7 +37,7 @@ RM				=	rm -f
 #MLX
 MLX			= libmlx.a
 MLX_PATH	= mlx_1/
-MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS	= -framework OpenGL -framework AppKit
 
 .PHONY	:	all clean fclean re libft mlx norm
 
@@ -50,8 +50,8 @@ mlx:
 libft	:
 			@make -C $(DIR_LIB)
 
-$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
-			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT) $(MLX_FLAGS) -o $@
+$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
