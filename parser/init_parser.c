@@ -26,25 +26,32 @@ void	init_scene(t_scene *scene)
 	scene->alight.color.r = 0;
 	scene->alight.color.g = 0;
 	scene->alight.color.b = 0;
-	scene->camera.view_point.x = 0.00f;
-	scene->camera.view_point.y = 0.00f;
-	scene->camera.view_point.z = 0.00f;
-	scene->camera.orient_vector.x = 0.00f;
-	scene->camera.orient_vector.y = 0.00f;
-	scene->camera.orient_vector.z = 0.00f;
-	scene->camera.horiz_degrees = 0.00f;
+	scene->camera->position.x = 0.00f;
+	scene->camera->position.y = 0.00f;
+	scene->camera->position.z = 0.00f;
+	scene->camera->orient.x = 0.00f;
+	scene->camera->orient.y = 0.00f;
+	scene->camera->orient.z = 0.00f;
+	scene->camera->fov = 0.00f;
 	scene->light.coord.x = 0.00f;
 	scene->light.coord.y = 0.00f;
 	scene->light.coord.z = 0.00f;
 	scene->light.bright = 0.00f;
+	scene->sphere->position.x = 0.0f;
+	scene->sphere->position.y = 0.0f;
+	scene->sphere->position.z = 0.0f;
+	scene->sphere->radius = 0.0f;
+	scene->sphere->color.r = 0;
+	scene->sphere->color.g = 0;
+	scene->sphere->color.b = 0;
 }
 
 void	init_objects(t_objects *obj)
 {
-	obj->sphere.coord.x = 0.0f;
-	obj->sphere.coord.y = 0.0f;
-	obj->sphere.coord.z = 0.0f;
-	obj->sphere.diameter = 0.0f;
+	obj->sphere.position.x = 0.0f;
+	obj->sphere.position.y = 0.0f;
+	obj->sphere.position.z = 0.0f;
+	obj->sphere.radius = 0.0f;
 	obj->sphere.color.r = 0;
 	obj->sphere.color.g = 0;
 	obj->sphere.color.b = 0;

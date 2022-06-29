@@ -74,23 +74,23 @@ void	fill_c(char *str, t_camera *camera)
 	i = 1;
 	while (ft_isspace(str[i]))
 		i++;
-	fill_coord(&i, str, &camera->view_point);
+	fill_coord(&i, str, &camera->position);
 	while (!ft_isspace(str[i]))
 		i++;
 	while (ft_isspace(str[i]))
 		i++;
-	fill_coord(&i, str, &camera->orient_vector);
-	if (camera->orient_vector.x < -1.0f || camera->orient_vector.x > 1.0f
-		|| camera->orient_vector.y < -1.0f || camera->orient_vector.y > 1.0f
-		|| camera->orient_vector.z < -1.0f || camera->orient_vector.z > 1.0f)
+	fill_coord(&i, str, &camera->orient);
+	if (camera->orient.x < -1.0f || camera->orient.x > 1.0f
+		|| camera->orient.y < -1.0f || camera->orient.y > 1.0f
+		|| camera->orient.z < -1.0f || camera->orient.z > 1.0f)
 		error_parser("3d normalized orientation vector. In range [-1,1]\
 		for each x,y,z axis");
 	while (!ft_isspace(str[i]))
 		i++;
 	while (ft_isspace(str[i]))
 		i++;
-	camera->horiz_degrees = ft_atof(&str[i]);
-	if (camera->horiz_degrees < 0.0f || camera->horiz_degrees > 180.0f)
+	camera->fov = ft_atof(&str[i]);
+	if (camera->fov < 0.0f || camera->fov > 180.0f)
 		error_parser("Horizontal field of view in degrees in range [0,180]");
 }
 
