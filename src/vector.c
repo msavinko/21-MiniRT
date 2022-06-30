@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:08:03 by marlean          ###   ########.fr       */
+/*   Updated: 2022/06/30 12:39:18 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ double	vector_sumpow2(t_coord a)
 
 double	vector_scalar(t_coord a, t_coord b) // vec_dot_product
 {
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
+	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
 }

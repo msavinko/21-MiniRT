@@ -1,0 +1,20 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/rdanyell/Desktop/21-MiniRT'
+echo "Making mlx_1/libmlx.a"
+make -C mlx_1/
+make -C libft/
+cc -Wall -Wextra -Werror -I includes/ -c parser/parser.c -o parser/parser.o
+cc -Wall -Wextra -Werror -I includes/ -c parser/utils_parser.c -o parser/utils_parser.o
+cc -Wall -Wextra -Werror -I includes/ -c parser/init_parser.c -o parser/init_parser.o
+cc -Wall -Wextra -Werror -I includes/ -c parser/fill_obj.c -o parser/fill_obj.o
+cc -Wall -Wextra -Werror -I includes/ -c parser/fill_scene.c -o parser/fill_scene.o
+cc -Wall -Wextra -Werror -I includes/ -c src/main_2.c -o src/main_2.o
+cc -Wall -Wextra -Werror -I includes/ -c src/print_structs.c -o src/print_structs.o
+cc -Wall -Wextra -Werror -I includes/ -c src/new_vector.c -o src/new_vector.o
+cc -Wall -Wextra -Werror -I includes/ -c src/utils.c -o src/utils.o
+cc -Wall -Wextra -Werror -I includes/ -c src/new_sphere.c -o src/new_sphere.o
+cc -Wall -Wextra -Werror -I includes/ -c src/new_camera.c -o src/new_camera.o
+cc -Wall -Wextra -Werror -I includes/ -c src/scene.c -o src/scene.o
+cc parser/parser.o parser/utils_parser.o parser/init_parser.o parser/fill_obj.o parser/fill_scene.o src/main_2.o src/print_structs.o src/new_vector.o src/utils.o src/new_sphere.o src/new_camera.o src/scene.o libft/libft.a -lmlx -framework OpenGL -framework AppKit -o miniRT
+make: Leaving directory `/Users/rdanyell/Desktop/21-MiniRT'
+ 

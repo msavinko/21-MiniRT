@@ -11,10 +11,10 @@ LIBFT			=	$(DIR_LIB)libft.a
 DIR_SRC			=	src/
 FILES_SRC		=	main_2.c \
 					print_structs.c \
-					vector.c \
+					new_vector.c \
 					utils.c \
-					sphere.c \
-					camera.c \
+					new_sphere.c \
+					new_camera.c \
 					scene.c \
 
 SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))

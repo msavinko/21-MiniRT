@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:49:58 by marlean          ###   ########.fr       */
+/*   Updated: 2022/06/30 13:16:18 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <math.h>
 # include "parser.h"
 
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 800
+#define HEIGHT 600
 
 typedef struct s_vplane
 {
@@ -68,6 +68,13 @@ typedef struct s_camera //КАМЕРА
 	double			fov;
 }	t_camera;
 
+typedef struct s_camera2 //КАМЕРА
+{
+	struct s_coord	*position;
+	struct s_coord	*orient;
+	double			fov;
+}	t_camera2;
+
 typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
 {
 	struct s_coord	coord;
@@ -79,8 +86,20 @@ typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕ
 	struct s_alight	alight;
 	struct s_camera	*camera;
 	struct s_sphere	*sphere;
+	// float			width;
+	// float			height;
 	struct s_light	light;
 }	t_scene;
+
+typedef struct s_scene2 //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕРОЙ, НАПРАВЛЕННЫМ СВЕТОМ
+{
+	struct s_alight	alight;
+	struct s_camera2	*camera;
+	struct s_sphere2	*sphere;
+	// float			width;
+	// float			height;
+	struct s_light	light;
+}	t_scene2;
 
 typedef struct s_sphere // СФЕРА 
 {
@@ -88,6 +107,13 @@ typedef struct s_sphere // СФЕРА
 	double			radius;
 	struct s_color	color;
 }	t_sphere;
+
+typedef struct s_sphere2 // СФЕРА 
+{
+	struct s_coord	*position;
+	double			radius;
+	struct s_color	color;
+}	t_sphere2;
 
 typedef struct s_plane // ПЛОСКОСТЬ
 {
@@ -144,22 +170,22 @@ void	print_plane(t_plane *plane);
 void	print_cylind(t_cylind *cylind);
 
 //vector.c
-t_vector2	new_vector2(double u, double v);
-t_coord		new_vector3(double x, double y, double z);
-t_coord		vector_subtract(t_coord a, t_coord b);
-t_coord		vector_addition(t_coord a, t_coord b);
-t_coord		vector_multiply(t_coord direction, double multiply);
-double		vector_length(t_coord a);
-double		vector_sumpow2(t_coord a);
-double		vector_scalar(t_coord a, t_coord b);
-void		vector_normalize(t_coord a);
+// t_vector2	new_vector2(double u, double v);
+// t_coord		new_vector3(double x, double y, double z);
+// t_coord		vector_subtract(t_coord a, t_coord b);
+// t_coord		vector_addition(t_coord a, t_coord b);
+// t_coord		vector_multiply(t_coord direction, double multiply);
+// double		vector_length(t_coord a);
+// double		vector_sumpow2(t_coord a);
+// double		vector_scalar(t_coord a, t_coord b);
+// void		vector_normalize(t_coord a);
 
 //utils.c
 void	ft_error(int error);
 void	ft_exit(int status);
 
 //sphere.c
-t_sphere	*new_sphere(t_coord position, double radius, t_color color);
+//t_sphere	*new_sphere(t_coord position, double radius, t_color color);
 int			sphere_intersect(t_camera *cam, t_coord ray, t_sphere *sphere);
 
 //scene.c
@@ -167,5 +193,18 @@ t_scene	*new_scene(t_camera *camera, t_sphere *sphere);
 
 //camera.c
 t_camera	*new_camera(t_coord position, t_coord orient, double fov);
+
+//rdanyell
+
+t_coord	*new_vec(double x, double y, double z);
+double	vec_length(t_coord *a);
+t_coord	*vec_subtract(t_coord *a, t_coord *b);
+void	vec_normalize(t_coord *a);
+t_coord	*vec_addition(t_coord *a, t_coord *b);
+double	vec_scalar(t_coord *a, t_coord *b); // vec_dot_product
+t_sphere2	*new_sphere2(t_coord *position, double radius, t_color color);
+t_camera2	*new_cam(t_coord *position, t_coord *orient, double fov);
+int	sphere_intersect2(t_camera2 *cam, t_coord *ray, t_sphere2 *sphere);
+t_scene2	*new_scene2(t_camera2 *camera, t_sphere2 *sphere);
 
 #endif
