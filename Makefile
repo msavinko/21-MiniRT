@@ -11,6 +11,7 @@ LIBFT			=	$(DIR_LIB)libft.a
 DIR_SRC			=	src/
 FILES_SRC		=	main.c \
 					print_structs.c \
+					free_all.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \

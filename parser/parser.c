@@ -6,11 +6,21 @@
 /*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 14:08:22 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/06/30 15:42:22 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void free_parser(t_parser *pars)
+{
+	int i;
+
+	i = 0;
+	while (pars->map[i])
+		free(pars->map[i++]);
+	free(pars->map);
+}
 
 void error_parser(char *str)
 {
@@ -70,7 +80,8 @@ void fill_scene(t_parser *pars, t_data *data)
 int open_scene(int argc, char **argv, t_data *data)
 {
 	t_parser pars;
-
+	(void)data;
+	//(void)argv;
 	init_parser(&pars);
 	if (argc != 2)
 		error_parser("Wrong number of arguments");
@@ -81,5 +92,6 @@ int open_scene(int argc, char **argv, t_data *data)
 	init_data(data);
 	fill_scene(&pars, data);
 	// print_objects(data);
+	free_parser(&pars);
 	return (0);
 }
