@@ -9,26 +9,20 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 #include your directory name and files here
 DIR_SRC			=	src/
-FILES_SRC		=	main_2.c \
+FILES_SRC		=	main.c \
 					print_structs.c \
-					vector.c \
-					utils.c \
-					sphere.c \
-					camera.c \
-					scene.c \
-
-SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
-OBJS_SRC		=	$(SRCS_SRC:%.c=%.o)
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
-					utils_parser.c \
+					validation.c \
 					init_parser.c \
 					fill_obj.c \
 					fill_scene.c \
 
+SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
 SRCS_PARSE		=	$(addprefix $(DIR_PARSE), $(FILES_PARSE))
-OBJS_PARSE		=	$(SRCS_PARSE:%.c=%.o)
+OBJS_SRC		=	$(SRCS_SRC:%.c=%.o) $(SRCS_PARSE:%.c=%.o)
+
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -44,20 +38,19 @@ MLX_FLAGS	= -framework OpenGL -framework AppKit
 all		:	mlx libft $(NAME_RT)
 
 mlx:
-			@echo "Making $(MLX_PATH)$(MLX)"
 			@make -C $(MLX_PATH)
 
 libft	:
 			@make -C $(DIR_LIB)
 
-$(NAME_RT)	:	$(OBJS_PARSE) $(OBJS_SRC) $(MLX_PATH)$(MLX) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
-			$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
+$(NAME_RT)	:	 $(OBJS_SRC) $(MLX_PATH)$(MLX)
+			$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
 
 clean	:
-			$(RM) $(OBJS_PARSE) $(OBJS_SRC) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+			$(RM)  $(OBJS_SRC)
 			make -C $(DIR_LIB) clean
 	
 fclean	:	clean
