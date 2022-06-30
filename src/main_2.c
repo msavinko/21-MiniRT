@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:43:08 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:11:55 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int	main(void)
 	ray_tracing(mlx, window, scene);
 	// mlx_hook(window, 17, 0, close_minirt, data);
 	mlx_loop(mlx);
+	//free_scene(scene);
 	return (0);
 }
