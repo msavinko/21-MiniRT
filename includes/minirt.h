@@ -6,7 +6,7 @@
 /*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:08:09 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/06/30 15:54:03 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,11 @@ typedef struct s_data
 	struct s_scene scene;
 	void *mlx;
 	void *window;
+	void *img;
 } t_data;
+
+// free_all.c
+void free_data(t_data *data);
 
 // print_structs.c
 void print_objects(t_data *data);

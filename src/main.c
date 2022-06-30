@@ -6,7 +6,7 @@
 /*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:32:56 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/06/30 15:33:49 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 	if (!data)
 		exit(1);
 	open_scene(argc, argv, data);
-
 	// data->mlx = mlx_init();
 	// if (!data->mlx)
 	//	exit(1);
@@ -45,5 +44,6 @@ int main(int argc, char **argv)
 	// mlx_hook(data->window, 2, (1L << 0), ft_key_hook, data);
 	// mlx_hook(data->window, 17, 0, close_minirt, data);
 	// mlx_loop(data->mlx);
+	free_data(data);
 	return (0);
 }
