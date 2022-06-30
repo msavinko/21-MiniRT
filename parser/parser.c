@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:55:46 by marlean          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:08:22 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	read_file(t_parser *pars, char *arg)
+void error_parser(char *str)
 {
-	int	len;
+	if (str)
+		printf("Error\n%s\n", str);
+	exit(1);
+}
+
+void read_file(t_parser *pars, char *arg)
+{
+	int len;
 
 	len = ft_strlen(arg);
 	if (ft_strncmp(&arg[len - 3], ".rt", 3))
@@ -31,50 +38,48 @@ void	read_file(t_parser *pars, char *arg)
 		error_parser("Empty file");
 }
 
-void	fill_scene(t_parser *pars, t_data *data)
+void fill_scene(t_parser *pars, t_data *data)
 {
-	int	i;
+	int i;
+	int s;
+	int p;
+	int c;
 
 	i = 0;
+	s = 0;
+	p = 0;
+	c = 0;
 	while (pars->map[i])
 	{
 		if (pars->map[i][0] == 'A')
 			fill_a(pars->map[i], &data->scene.alight);
 		else if (pars->map[i][0] == 'C')
-			fill_c(pars->map[i], data->scene.camera);
+			fill_c(pars->map[i], &data->scene.camera);
 		else if (pars->map[i][0] == 'L')
 			fill_l(pars->map[i], &data->scene.light);
 		else if (!ft_strncmp(pars->map[i], "sp ", 3))
-			fill_sp(pars->map[i], &data->objects.sphere);
+			fill_sp(pars->map[i], &data->objects.sphere[s++]);
 		else if (!ft_strncmp(pars->map[i], "pl ", 3))
-			fill_pl(pars->map[i], &data->objects.plane);
+			fill_pl(pars->map[i], &data->objects.plane[p++]);
 		else if (!ft_strncmp(pars->map[i], "cy ", 3))
-			fill_cy(pars->map[i], &data->objects.cylind);
+			fill_cy(pars->map[i], &data->objects.cylind[c++]);
 		i++;
 	}
 }
 
-void	print_objects(t_data *data)
+int open_scene(int argc, char **argv, t_data *data)
 {
-	print_alight(&data->scene.alight);
-	print_camera(data->scene.camera);
-	print_light(&data->scene.light);
-	print_sphere(&data->objects.sphere);
-	print_plane(&data->objects.plane);
-	print_cylind(&data->objects.cylind);
-}
-
-int	open_scene(int argc, char **argv, t_data *data)
-{
-	t_parser	pars;
+	t_parser pars;
 
 	init_parser(&pars);
 	if (argc != 2)
 		error_parser("Wrong number of arguments");
 	read_file(&pars, argv[1]);
 	capital_valid(&pars);
-	obj_valid(&pars);
+	obj_valid(&pars, &data->objects);
+	letters_valid(&pars);
+	init_data(data);
 	fill_scene(&pars, data);
-	print_objects(data);
+	// print_objects(data);
 	return (0);
 }
