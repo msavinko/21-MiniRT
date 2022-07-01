@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 15:54:03 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/01 13:46:19 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@
 #include <errno.h>
 #include <math.h>
 #include "parser.h"
+#include "draw.h"
 
 #define ESCAPE 53
-#define WIDTH 1920
-#define WIDTH_S 1440
-#define HEIGHT 1080
-#define HEIGHT_S 800
+#define WIDTH_1 1920.00
+#define HEIGHT_1 1080.00
 
-typedef struct s_parser t_parser;
+#define WIDTH 1440.00
+#define HEIGHT 800.00
+
 
 typedef struct s_color //ЦВЕТ
 {
@@ -56,7 +57,7 @@ typedef struct s_camera //КАМЕРА
 {
 	struct s_coord view_point;
 	struct s_coord orient_vector;
-	double horiz_degrees;
+	double fov;
 } t_camera;
 
 typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
@@ -65,17 +66,10 @@ typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
 	double bright;
 } t_light;
 
-typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕРОЙ, НАПРАВЛЕННЫМ СВЕТОМ
-{
-	struct s_alight alight;
-	struct s_camera camera;
-	struct s_light light;
-} t_scene;
-
 typedef struct s_sphere // СФЕРА
 {
 	struct s_coord coord;
-	double diameter;
+	double radius;
 	struct s_color color;
 } t_sphere;
 
@@ -105,11 +99,27 @@ typedef struct s_objects //СТРУКТУРА С ОБЪЕКТАМИ
 	int ncylinder;
 } t_objects;
 
+typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕРОЙ, НАПРАВЛЕННЫМ СВЕТОМ
+{
+	struct s_alight alight;
+	struct s_camera camera;
+	struct s_light light;
+} t_scene;
+
+typedef struct s_screen // ЭКРАН
+{
+	double	width;
+	double	height;
+	double	x_pixel;
+	double	y_pixel;
+	// double	fov;
+} t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
 typedef struct s_data
 {
 	struct s_objects objects;
 	struct s_scene scene;
+	struct s_screen screen;
 	void *mlx;
 	void *window;
 	void *img;
@@ -121,11 +131,4 @@ void free_data(t_data *data);
 // print_structs.c
 void print_objects(t_data *data);
 
-void print_array(char **arr);
-void print_alight(t_alight *alight);
-void print_camera(t_camera *camera);
-void print_light(t_light *light);
-void print_sphere(t_sphere *sphere);
-void print_plane(t_plane *plane);
-void print_cylind(t_cylind *cylind);
 #endif

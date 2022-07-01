@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 15:42:22 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/01 12:58:44 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int open_scene(int argc, char **argv, t_data *data)
 	init_data(data);
 	fill_scene(&pars, data);
 	// print_objects(data);
+	
 	free_parser(&pars);
 	return (0);
 }

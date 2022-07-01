@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:45:19 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:35:56 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/01 13:35:35 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void fill_sp(char *str, t_sphere *sphere)
 		i++;
 	fill_coord(&i, str, &sphere->coord);
 	while_space(&i, str);
-	sphere->diameter = ft_atof(&str[i]);
+	sphere->radius = ft_atof(&str[i]) / 2;
 	while_space(&i, str);
 	fill_color(&i, str, &sphere->color);
 	if (sphere->color.r < 0 || sphere->color.r > 255 || sphere->color.g < 0 || sphere->color.g > 255 || sphere->color.b < 0 || sphere->color.b > 255)
