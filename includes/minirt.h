@@ -6,166 +6,129 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:49:58 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/01 13:46:19 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
-# define MINIRT_H
+#define MINIRT_H
 
-# include "../mlx_1/mlx.h"
-# include "../libft/libft.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <math.h>
-# include "parser.h"
+#include "../mlx_1/mlx.h"
+#include "../libft/libft.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <math.h>
+#include "parser.h"
+#include "draw.h"
 
-#define WIDTH 1920
-#define HEIGHT 1080
+#define ESCAPE 53
+#define WIDTH_1 1920.00
+#define HEIGHT_1 1080.00
 
-typedef struct s_vplane
+#define WIDTH 1440.00
+#define HEIGHT 800.00
+
+
+typedef struct s_color //ЦВЕТ
+{
+	int r;
+	int g;
+	int b;
+} t_color;
+
+typedef struct s_coord //КООРДИНАТЫ
+{
+	double x;
+	double y;
+	double z;
+} t_coord;
+
+typedef struct s_alight //ОБЩЕЕ ОСВЕЩЕНИЕ
+{
+	double light_range;
+	struct s_color color;
+} t_alight;
+
+typedef struct s_camera //КАМЕРА
+{
+	struct s_coord view_point;
+	struct s_coord orient_vector;
+	double fov;
+} t_camera;
+
+typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
+{
+	struct s_coord coord;
+	double bright;
+} t_light;
+
+typedef struct s_sphere // СФЕРА
+{
+	struct s_coord coord;
+	double radius;
+	struct s_color color;
+} t_sphere;
+
+typedef struct s_plane // ПЛОСКОСТЬ
+{
+	struct s_coord coord;
+	struct s_coord orient_vector;
+	struct s_color color;
+} t_plane;
+
+typedef struct s_cylind // ЦИЛИНДР
+{
+	struct s_coord coord;
+	struct s_coord orient_vector;
+	double diameter;
+	double height;
+	struct s_color color;
+} t_cylind;
+
+typedef struct s_objects //СТРУКТУРА С ОБЪЕКТАМИ
+{
+	struct s_sphere *sphere;
+	struct s_plane *plane;
+	struct s_cylind *cylind;
+	int nplane;
+	int nsphere;
+	int ncylinder;
+} t_objects;
+
+typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕРОЙ, НАПРАВЛЕННЫМ СВЕТОМ
+{
+	struct s_alight alight;
+	struct s_camera camera;
+	struct s_light light;
+} t_scene;
+
+typedef struct s_screen // ЭКРАН
 {
 	double	width;
 	double	height;
 	double	x_pixel;
 	double	y_pixel;
-}	t_vplane;
-
-typedef struct s_color //ЦВЕТ
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
-
-typedef struct s_vector2 //ВЕКТОР
-{
-	double		u;
-	double		v;
-}	t_vector2;
-
-typedef struct s_coord //КООРДИНАТЫ
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_coord;
-
-typedef struct s_alight //ОБЩЕЕ ОСВЕЩЕНИЕ
-{
-	double			light_range;
-	struct s_color	color;
-}	t_alight;
-
-typedef struct s_camera //КАМЕРА
-{
-	struct s_coord	position;
-	struct s_coord	orient;
-	double			fov;
-}	t_camera;
-
-typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
-{
-	struct s_coord	coord;
-	double			bright;
-}	t_light;
-
-typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕРОЙ, НАПРАВЛЕННЫМ СВЕТОМ
-{
-	struct s_alight	alight;
-	struct s_camera	*camera;
-	struct s_sphere	*sphere;
-	struct s_light	light;
-}	t_scene;
-
-typedef struct s_sphere // СФЕРА 
-{
-	struct s_coord	position;
-	double			radius;
-	struct s_color	color;
-}	t_sphere;
-
-typedef struct s_plane // ПЛОСКОСТЬ
-{
-	struct s_coord	coord;
-	struct s_coord	orient_vector;
-	struct s_color	color;
-}	t_plane;
-
-typedef struct s_cylind // ЦИЛИНДР
-{
-	struct s_coord	coord;
-	struct s_coord	orient_vector;
-	double			diameter;
-	double			height;
-	struct s_color	color;
-}	t_cylind;
-
-typedef struct s_objects //СТРУКТУРА С ОБЪЕКТАМИ
-{
-	struct s_sphere	sphere;
-	struct s_plane	plane;
-	struct s_cylind	cylind;
-}	t_objects;
-
-typedef struct s_img
-{
-	void				*img;
-	int					width;
-	int					height;
-	char				*addr;
-	int					bits_per_pixel;
-	int					bytes_per_line;
-	int					endian;
-}	t_img;
-
+	// double	fov;
+} t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
 typedef struct s_data
 {
-	struct s_objects	objects;
-	struct s_scene		scene;
-	void				*mlx;
-	void				*window;
-	t_img				*img;
-}	t_data;
+	struct s_objects objects;
+	struct s_scene scene;
+	struct s_screen screen;
+	void *mlx;
+	void *window;
+	void *img;
+} t_data;
 
-//print_structs.c
-void	print_array(char **arr);
+// free_all.c
+void free_data(t_data *data);
 
-void	print_alight(t_alight *alight);
-void	print_camera(t_camera *camera);
-void	print_light(t_light *light);
-void	print_sphere(t_sphere *sphere);
-void	print_plane(t_plane *plane);
-void	print_cylind(t_cylind *cylind);
-
-//vector.c
-t_vector2	new_vector2(double u, double v);
-t_coord		new_vector3(double x, double y, double z);
-t_coord		vector_subtract(t_coord a, t_coord b);
-t_coord		vector_addition(t_coord a, t_coord b);
-t_coord		vector_multiply(t_coord direction, double multiply);
-double		vector_length(t_coord a);
-double		vector_sumpow2(t_coord a);
-double		vector_scalar(t_coord a, t_coord b);
-void		vector_normalize(t_coord a);
-
-//utils.c
-void	ft_error(int error);
-void	ft_exit(int status);
-
-//sphere.c
-t_sphere	*new_sphere(t_coord position, double radius, t_color color);
-int			sphere_intersect(t_camera *cam, t_coord ray, t_sphere *sphere);
-
-//scene.c
-t_scene	*new_scene(t_camera *camera, t_sphere *sphere);
-
-//camera.c
-t_camera	*new_camera(t_coord position, t_coord orient, double fov);
+// print_structs.c
+void print_objects(t_data *data);
 
 #endif

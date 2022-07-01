@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:08:03 by marlean          ###   ########.fr       */
+/*   Created: 2022/06/30 15:34:06 by mariasavino       #+#    #+#             */
+/*   Updated: 2022/07/01 13:43:59 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_scene	*new_scene(t_camera *camera, t_sphere *sphere)
+void free_data(t_data *data)
 {
-	t_scene	*scene;
-
-	scene = (t_scene *)malloc(sizeof(t_scene));
-	if (!scene)
-		ft_error(1);
-	scene->camera = camera;
-	scene->sphere = sphere;
-	return (scene);
+	if (data->objects.sphere)
+		free(data->objects.sphere);
+	if (data->objects.plane)
+		free(data->objects.plane);
+	if (data->objects.cylind)
+		free(data->objects.cylind);
+	// if (data)
+	// 	free(data);
 }
