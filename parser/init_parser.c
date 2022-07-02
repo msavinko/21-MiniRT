@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:06:42 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 13:52:27 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/02 19:38:44 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,19 +115,8 @@ void init_cylinder(t_cylind *cylind)
 	cylind->color.b = 0;
 }
 
-void init_screen(t_data *data)
-{
-	double aspect_ratio;
-
-	aspect_ratio = WIDTH / HEIGHT;
-	data->screen.width = 1;
-	data->screen.height = data->screen.width / aspect_ratio;
-	data->screen.x_pixel = data->screen.width / WIDTH;
-	data->screen.y_pixel = data->screen.height / HEIGHT;
-}
 void init_data(t_data *data)
 {
 	init_scene(&data->scene);
 	init_objects(&data->objects);
-	init_screen(data);
 }

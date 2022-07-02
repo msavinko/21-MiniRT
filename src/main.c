@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 13:44:10 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/02 19:36:42 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ int main(int argc, char **argv)
 	t_data data;
 
 	open_scene(argc, argv, &data);
+//	init_screen(&data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		exit(1);
 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "miniRT");
 	if (!data.window)
 		exit(1);
-	// draw(&data);
+//	printf("data->screen->height = %f\n", data.screen.height);
+	draw(data);
 	mlx_hook(data.window, 2, (1L << 0), ft_key_hook, &data);
 	mlx_hook(data.window, 17, 0, close_minirt, &data);
 	mlx_loop(data.mlx);
