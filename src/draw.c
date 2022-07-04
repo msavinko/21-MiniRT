@@ -6,13 +6,43 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 11:02:13 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/04 13:16:21 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+int	choose_color(int s)
+{
+	if (s == 0)
+		return (14661887);
+	else if (s == 1)
+		return (16445630);
+	else
+		return (12245933);
+}
+void	draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
+{
+	int i = *ind;
+	int s = 0;
+	// int c = 0;
+	// int p = 0;
 
+	while (s < data->objects.nsphere)
+	{
+		if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]))
+		{
+			*color = choose_color(s);
+			i++;
+			*ind = i;
+			return ;
+		}
+		// else if (cylinder)
+		// else if (plane)
+		s++;
+	}
+	*color = 0;
+}
 void	ray_tracing(t_data *data)
 {
 	// (void)data;
@@ -28,7 +58,6 @@ void	ray_tracing(t_data *data)
 	double		y_ray;
 	t_coord		ray;
 	int i = 0;
-	int s = 0;
 
 	mlx_y = 0;
 	y_angle = HEIGHT / 2;
@@ -44,17 +73,10 @@ void	ray_tracing(t_data *data)
 			ray = new_vector3(x_ray, y_ray, -1);// -1 только когда камера в 000 и направлена на -1
 //			printf("x_angle = %f, data->screen.x_pixel = %f, ray.x = %f, ray.y = %f, ray.z = %f\n", x_angle, data->screen.x_pixel, ray.x, ray.y, ray.z);
 			vector_normalize(&ray);
-			if (sphere_intersect(data->scene.camera, ray, &data->objects.sphere[s]))
-			{
-				color = 14661887;
-				i++;
-			}
-			else
-				color = 0;
+			draw_objects(data, &ray, &color, &i);
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
 			x_angle++;
 			mlx_x++;
-			// free(ray);
 		}
 		y_angle--;
 		mlx_y++;

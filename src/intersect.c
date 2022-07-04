@@ -6,11 +6,12 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 10:58:23 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/04 12:37:35 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
 
 int	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 {
@@ -23,21 +24,17 @@ int	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	dist = 0;
 	if (!sphere)
 		return (0);
-//	printf("cam.view_point.x = %f\n", cam.view_point.x);
-//	printf("sphere.coord.x = %f, sphere.coord.y = %f, sphere.coord.z = %f\n", sphere.coord.x, sphere.coord.y, sphere.coord.z);
 	cam_sphere = vector_subtract(cam.view_point, sphere->coord);
-//	printf("cam_sph.x = %f, cam_sph.y = %f, cam_sph.z = %f\n", cam_sphere.x, cam_sphere.y, cam_sphere.z);
-	b = 2 * (vector_scalar(cam_sphere, ray));
-//	printf("cam_sph.x = %f, cam_sph.y = %f, cam_sph.z = %f\n", cam_sphere.x, cam_sphere.y, cam_sphere.z);
-	// printf("b = %f\n", b);
+	b = 2.00f * (vector_scalar(cam_sphere, ray));
+	// printf("b = %.2f\n", b);
 	// Неправильно считается скалярное произведение
 	c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius * sphere->radius);
-	discr = (b * b) - (4 * c);
+	discr = (b * b) - (4.0f * c);
 //	free(&cam_sphere);
 	if (discr < 0)
 		return (0);
-	dist = ((-1 * b) - sqrt(discr)) / 2;
-	if (dist > 0)
+	dist = ((-1.0f * b) - sqrt(discr)) / 2.0f;
+	if (dist > 0.0f)
 		return (1);
 	return (0);
 }

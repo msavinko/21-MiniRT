@@ -15,6 +15,7 @@ FILES_SRC		=	main.c \
 					draw.c \
 					vector.c\
 					intersect.c\
+					color.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \

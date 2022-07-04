@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 10:49:48 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/04 13:20:07 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ t_coord	vector_subtract(t_coord a, t_coord b) // Разность векторо
 	return (difference);
 }
 
-t_coord	vector_addition(t_coord a, t_coord b) // Сумма векторов
-{
-	t_coord	sum;
+// t_coord	vector_addition(t_coord a, t_coord b) // Сумма векторов
+// {
+// 	t_coord	sum;
 
-	// sum = malloc(sizeof(t_coord));
-	sum.x = a.x + b.x;
-	sum.y = a.y + b.y;
-	sum.z = a.z + b.z;
-	return (sum);
-}
+// 	// sum = malloc(sizeof(t_coord));
+// 	sum.x = a.x + b.x;
+// 	sum.y = a.y + b.y;
+// 	sum.z = a.z + b.z;
+// 	return (sum);
+// }
 
 double	vector_length(t_coord a) // Длина вектора
 {
@@ -77,12 +77,12 @@ void	vector_normalize(t_coord *a) // Нормализация вектора
 	a->z /= length;
 }
 
-void	vector_multiply(t_coord direction, double multiply) // Умножение вектора на число
-{
-	direction.x *= multiply;
-	direction.y *= multiply;
-	direction.z *= multiply;
-}
+// void	vector_multiply(t_coord *direction, double multiply) // Умножение вектора на число
+// {
+// 	direction->x *= multiply;
+// 	direction->y *= multiply;
+// 	direction->z *= multiply;
+// }
 
 double	vector_sumpow2(t_coord a) // Квадрат длины вектора
 {
