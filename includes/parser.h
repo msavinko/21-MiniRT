@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:41:57 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:10:35 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/01 12:29:20 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_sphere t_sphere;
 typedef struct s_plane t_plane;
 typedef struct s_cylind t_cylind;
 typedef struct s_objects t_objects;
+typedef struct s_screen t_screen;
 typedef struct s_data t_data;
 
 typedef struct s_parser
@@ -42,15 +43,17 @@ void init_objects(t_objects *obj);
 void init_sphere(t_sphere *sphere);
 void init_plane(t_plane *plane);
 void init_cylinder(t_cylind *cylind);
+void init_screen(t_data *data);
 void init_data(t_data *data);
 
 // parser.c
+void error_parser(char *str);
+void free_parser(t_parser *pars);
 void read_file(t_parser *pars, char *arg);
 void fill_scene(t_parser *pars, t_data *data);
 int open_scene(int argc, char **argv, t_data *data);
 
 // validation.c
-void error_parser(char *str);
 void capital_valid(t_parser *pars);
 void obj_valid(t_parser *pars, t_objects *obj);
 void letters_valid(t_parser *pars);
