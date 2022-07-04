@@ -13,6 +13,8 @@ FILES_SRC		=	main.c \
 					print_structs.c \
 					free_all.c \
 					draw.c \
+					vector.c\
+					intersect.c\
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
@@ -27,7 +29,7 @@ OBJS_SRC		=	$(SRCS_SRC:%.c=%.o) $(SRCS_PARSE:%.c=%.o)
 
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 RM				=	rm -f
 
 #MLX
@@ -46,7 +48,7 @@ libft	:
 			@make -C $(DIR_LIB)
 
 $(NAME_RT)	:	 $(OBJS_SRC) $(MLX_PATH)$(MLX)
-			$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@ 
+			$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
@@ -54,7 +56,7 @@ $(NAME_RT)	:	 $(OBJS_SRC) $(MLX_PATH)$(MLX)
 clean	:
 			$(RM)  $(OBJS_SRC)
 			make -C $(DIR_LIB) clean
-	
+
 fclean	:	clean
 			$(RM) $(NAME_RT)
 			make -C $(DIR_LIB) fclean
