@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 17:58:10 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:14:55 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,19 @@ typedef struct s_cylind t_cylind;
 typedef struct s_objects t_objects;
 typedef struct s_data t_data;
 
-void	draw(t_data data);
-void	ray_tracing(t_data data);
+void draw(t_data *data);
+void ray_tracing(t_data *data);
 
-t_coord	new_vector3(double x, double y, double z);
-t_coord	vector_subtract(t_coord a, t_coord b);
-t_coord	vector_addition(t_coord a, t_coord b);
-double	vector_length(t_coord a);
-void	vector_normalize(t_coord a);
-void	vector_multiply(t_coord direction, double multiply);
-double	vector_sumpow2(t_coord a);
-double	vector_scalar(t_coord a, t_coord b);
+t_coord new_vector3(float x, float y, float z);
+t_coord vector_subtract(t_coord a, t_coord b);
+t_coord vector_addition(t_coord a, t_coord b);
+float vector_length(t_coord a);
+void vector_normalize(t_coord *a);
+void vector_multiply(t_coord *direction, float multiply);
+float vector_sumpow2(t_coord a);
+float vector_scalar(t_coord a, t_coord b);
 
-int	sphere_intersect(t_camera cam, t_coord ray, t_sphere sphere);
+int sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 
+int set_color(t_color color, float l);
 #endif

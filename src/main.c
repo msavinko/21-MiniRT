@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/02 19:36:42 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:14:23 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	if (!data.window)
 		exit(1);
 //	printf("data->screen->height = %f\n", data.screen.height);
-	draw(data);
+	draw(&data);
 	mlx_hook(data.window, 2, (1L << 0), ft_key_hook, &data);
 	mlx_hook(data.window, 17, 0, close_minirt, &data);
 	mlx_loop(data.mlx);
