@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:06:42 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 15:37:13 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/02 19:38:44 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void init_parser(t_parser *pars)
 
 void init_scene(t_scene *scene)
 {
+	// scene = malloc(sizeof(t_scene));
+	// if (!scene)
+	// 	error_parser("Malloc error");
 	scene->alight.light_range = 0.00f;
 	scene->alight.color.r = 0;
 	scene->alight.color.g = 0;
@@ -32,7 +35,7 @@ void init_scene(t_scene *scene)
 	scene->camera.orient_vector.x = 0.00f;
 	scene->camera.orient_vector.y = 0.00f;
 	scene->camera.orient_vector.z = 0.00f;
-	scene->camera.horiz_degrees = 0.00f;
+	scene->camera.fov = 0.00f;
 	scene->light.coord.x = 0.00f;
 	scene->light.coord.y = 0.00f;
 	scene->light.coord.z = 0.00f;
@@ -43,6 +46,9 @@ void init_objects(t_objects *obj)
 {
 	int i;
 
+	// obj = malloc(sizeof(t_objects));
+	// if (!obj)
+	// 	error_parser("Malloc error");
 	obj->sphere = malloc(sizeof(t_sphere) * obj->nsphere);
 	if (!obj->sphere)
 		error_parser("Malloc error");
@@ -76,7 +82,7 @@ void init_sphere(t_sphere *sphere)
 	sphere->coord.x = 0.0f;
 	sphere->coord.y = 0.0f;
 	sphere->coord.z = 0.0f;
-	sphere->diameter = 0.0f;
+	sphere->radius = 0.0f;
 	sphere->color.r = 0;
 	sphere->color.g = 0;
 	sphere->color.b = 0;

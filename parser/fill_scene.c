@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:24:43 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 18:53:58 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/01 12:49:58 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	fill_c(char *str, t_camera *camera)
 		i++;
 	while (ft_isspace(str[i]))
 		i++;
-	camera->horiz_degrees = ft_atof(&str[i]);
-	if (camera->horiz_degrees < 0.0f || camera->horiz_degrees > 180.0f)
+	camera->fov = ft_atof(&str[i]);
+	if (camera->fov < 0.0f || camera->fov > 180.0f)
 		error_parser("Horizontal field of view in degrees in range [0,180]");
 }
 

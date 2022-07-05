@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 15:34:06 by mariasavino       #+#    #+#             */
-/*   Updated: 2022/07/01 13:43:59 by marlean          ###   ########.fr       */
+/*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
+/*   Updated: 2022/07/05 12:52:45 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void free_data(t_data *data)
+int set_color(t_color color, float l)
 {
-	if (data->objects.sphere)
-		free(data->objects.sphere);
-	if (data->objects.plane)
-		free(data->objects.plane);
-	if (data->objects.cylind)
-		free(data->objects.cylind);
-	// if (data)
-	// 	free(data);
+	float result;
+	(void)l;
+	// float r = color.r * l;
+	// float g = color.g * l;
+	// float b = color.b * l;
+	// result = r * 65536.0f + g * 256.0f + b ;
+	result = color.r  * 65536.0f + color.g * 256.0f + color.b;
+	// printf("r: %.2f g: %.2f b: %.2f color: %.2f\n", r, g, b, result);
+	// printf("res: %.2f\n", result);
+	return (result);
 }

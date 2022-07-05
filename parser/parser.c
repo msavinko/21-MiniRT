@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 15:42:22 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/02 19:39:23 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ void read_file(t_parser *pars, char *arg)
 		error_parser("Empty file");
 }
 
+void fill_screen(t_data *data)
+{
+	data->screen.width = 2 * tan(data->scene.camera.fov / 180 * M_PI);
+	data->screen.height = data->screen.width * HEIGHT / WIDTH;
+	data->screen.x_pixel = data->screen.width / WIDTH;
+	data->screen.y_pixel = data->screen.height / HEIGHT;
+}
+
 void fill_scene(t_parser *pars, t_data *data)
 {
 	int i;
@@ -75,6 +83,7 @@ void fill_scene(t_parser *pars, t_data *data)
 			fill_cy(pars->map[i], &data->objects.cylind[c++]);
 		i++;
 	}
+	fill_screen(data);
 }
 
 int open_scene(int argc, char **argv, t_data *data)
