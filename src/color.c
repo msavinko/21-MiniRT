@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 19:01:12 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/05 12:52:45 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int set_color(t_color color)
+int set_color(t_color color, float l)
 {
-	int result;
-	result = color.r * 65536 + color.g * 256 + color.b;
+	float result;
+	(void)l;
+	// float r = color.r * l;
+	// float g = color.g * l;
+	// float b = color.b * l;
+	// result = r * 65536.0f + g * 256.0f + b ;
+	result = color.r  * 65536.0f + color.g * 256.0f + color.b;
+	// printf("r: %.2f g: %.2f b: %.2f color: %.2f\n", r, g, b, result);
+	// printf("res: %.2f\n", result);
 	return (result);
 }
