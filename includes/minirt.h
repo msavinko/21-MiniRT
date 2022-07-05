@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 12:50:53 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/05 16:18:52 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@
 #define WIDTH 800.00
 #define HEIGHT 600.00
 
-
 typedef struct s_color //ЦВЕТ
 {
-	float r;
-	float g;
-	float b;
+	int r;
+	int g;
+	int b;
 } t_color;
 
 typedef struct s_coord //КООРДИНАТЫ
@@ -108,10 +107,10 @@ typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕ
 
 typedef struct s_screen // ЭКРАН
 {
-	float	width;
-	float	height;
-	float	x_pixel;
-	float	y_pixel;
+	float width;
+	float height;
+	float x_pixel;
+	float y_pixel;
 	// float	fov;
 } t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ

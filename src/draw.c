@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 12:51:24 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/05 19:01:07 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 	{
 		if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]))
 		{
-			*color = set_color(data->objects.sphere[s].color, data->scene.alight.light_range);
+			*color = set_color(data->objects.sphere[s].color, data->scene.alight.light_range, data->scene.alight.color);
 			i++;
 			*ind = i;
+
 			return;
 		}
 		s++;
@@ -58,7 +59,7 @@ void ray_tracing(t_data *data)
 		{
 			x_ray = x_angle * data->screen.x_pixel;
 			ray = new_vector3(x_ray, y_ray, -1.0f); // -1 только когда камера в 000 и направлена на -1
-												 //			printf("x_angle = %f, data->screen.x_pixel = %f, ray.x = %f, ray.y = %f, ray.z = %f\n", x_angle, data->screen.x_pixel, ray.x, ray.y, ray.z);
+													//			printf("x_angle = %f, data->screen.x_pixel = %f, ray.x = %f, ray.y = %f, ray.z = %f\n", x_angle, data->screen.x_pixel, ray.x, ray.y, ray.z);
 			vector_normalize(&ray);
 			draw_objects(data, &ray, &color, &i);
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
@@ -75,4 +76,12 @@ void draw(t_data *data)
 {
 
 	ray_tracing(data);
+	int s = 0;
+
+	while (s < data->objects.nsphere)
+	{
+
+		printf("radius %d: %.2f\n", s, data->objects.sphere[s].radius);
+		s++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 12:51:05 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/05 19:05:54 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ float vector_scalar(t_coord a, t_coord b);
 
 int sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 
-int set_color(t_color color, float l);
+// float set_color(t_color color);
+char *ft_dectohex(unsigned int num);
+unsigned long htoi(const char *s);
+unsigned int set_color(t_color color, double l, t_color alight);
+
 #endif
