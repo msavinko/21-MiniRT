@@ -6,7 +6,7 @@
 /*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 19:06:15 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/05 22:29:26 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,39 @@ unsigned long htoi(const char *s)
 	for (i = 0; s[i] != '\0'; ++i)
 	{
 		if ((i == 0 && s[i] == '0') || (i == 1 && s[i] == 'x'))
-		{
 			continue;
-		}
 		else if (s[i] >= '0' && s[i] <= '9')
-		{
 			n = 16 * n + (s[i] - '0');
-		}
 		else if (s[i] >= 'A' && s[i] <= 'F')
-		{
 			n = 16 * n + (s[i] - '7');
-		}
 		else if (s[i] >= 'a' && s[i] <= 'f')
-		{
 			n = 16 * n + (s[i] - 'W');
-		}
 		else
-		{
 			return 0;
-		}
 	}
 	return n;
 }
+float get_color(float color, float light, double bright)
+{
+	float res;
 
+	if (color < light)
+		res = color;
+	else
+		res = light;
+	return (res * bright);
+}
 unsigned int set_color(t_color color, double l, t_color alight)
 {
 	unsigned long result;
 	char *res;
-	// char *light;
-	float r = color.r * l;
-	float g = color.g * l;
-	float b = color.b * l;
-	(void)alight;
-	// r = choose_light(color.r, alight.r, l);
+	float r;
+	float g;
+	float b;
+
+	r = get_color(color.r, alight.r, l);
+	g = get_color(color.g, alight.g, l);
+	b = get_color(color.b, alight.b, l);
 	res = ft_strjoin(ft_dectohex(r), ft_dectohex(g));
 	res = ft_strjoin(res, ft_dectohex(b));
 	result = htoi(res);

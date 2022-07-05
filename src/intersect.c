@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 12:50:43 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/05 21:35:14 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-int	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
+int sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 {
-	float	b;
-	float	c;
-	float	discr;
-	float	dist;
-	t_coord	cam_sphere;
+	float b;
+	float c;
+	float discr;
+	float dist;
+	t_coord cam_sphere;
 
 	dist = 0;
 	if (!sphere)
@@ -29,8 +28,9 @@ int	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	// printf("b = %.2f\n", b);
 	// Неправильно считается скалярное произведение
 	c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius * sphere->radius);
+	// printf("radius: %.2f\n", sphere->radius);
 	discr = (b * b) - (4.0f * c);
-//	free(&cam_sphere);
+	//	free(&cam_sphere);
 	if (discr < 0)
 		return (0);
 	dist = ((-1.0f * b) - sqrt(discr)) / 2.0f;
