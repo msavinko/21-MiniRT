@@ -6,13 +6,13 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 14:45:03 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:33:52 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_coord	new_vector3(double x, double y, double z) // Создание нового вектора
+t_coord	new_vector3(float x, float y, float z) // Создание нового вектора
 {
 	t_coord	a;
 
@@ -23,7 +23,7 @@ t_coord	new_vector3(double x, double y, double z) // Создание новог
 	return (a);
 }
 
-// t_vector2	new_vector2(double u, double v)
+// t_vector2	new_vector2(float u, float v)
 // {
 // 	t_vector2	a;
 
@@ -51,25 +51,25 @@ t_coord	vector_subtract(t_coord a, t_coord b) // Разность векторо
 	return (difference);
 }
 
-t_coord	vector_addition(t_coord a, t_coord b) // Сумма векторов
-{
-	t_coord	sum;
+// t_coord	vector_addition(t_coord a, t_coord b) // Сумма векторов
+// {
+// 	t_coord	sum;
 
-	// sum = malloc(sizeof(t_coord));
-	sum.x = a.x + b.x;
-	sum.y = a.y + b.y;
-	sum.z = a.z + b.z;
-	return (sum);
-}
+// 	// sum = malloc(sizeof(t_coord));
+// 	sum.x = a.x + b.x;
+// 	sum.y = a.y + b.y;
+// 	sum.z = a.z + b.z;
+// 	return (sum);
+// }
 
-double	vector_length(t_coord a) // Длина вектора
+float	vector_length(t_coord a) // Длина вектора
 {
 	return (sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z)));
 }
 
 void	vector_normalize(t_coord *a) // Нормализация вектора
 {
-	double	length;
+	float	length;
 
 	length = vector_length(*a);
 	a->x /= length;
@@ -77,19 +77,19 @@ void	vector_normalize(t_coord *a) // Нормализация вектора
 	a->z /= length;
 }
 
-void	vector_multiply(t_coord direction, double multiply) // Умножение вектора на число
-{
-	direction.x *= multiply;
-	direction.y *= multiply;
-	direction.z *= multiply;
-}
+// void	vector_multiply(t_coord *direction, float multiply) // Умножение вектора на число
+// {
+// 	direction->x *= multiply;
+// 	direction->y *= multiply;
+// 	direction->z *= multiply;
+// }
 
-double	vector_sumpow2(t_coord a) // Квадрат длины вектора
+float	vector_sumpow2(t_coord a) // Квадрат длины вектора
 {
 	return (pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2));
 }
 
-double	vector_scalar(t_coord a, t_coord b) // Скалярное произведение векторов
+float	vector_scalar(t_coord a, t_coord b) // Скалярное произведение векторов
 {
 	printf("a.x %f, a.y %f, a.z %f\n", a.x, a.y, a.z);
 	printf("b.x %f, b.y %f, b.z %f\n", b.x, b.y, b.z);

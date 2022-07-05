@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 12:14:24 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:34:45 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@
 
 typedef struct s_color //ЦВЕТ
 {
-	int r;
-	int g;
-	int b;
+	float r;
+	float g;
+	float b;
 } t_color;
 
 typedef struct s_coord //КООРДИНАТЫ
 {
-	double x;
-	double y;
-	double z;
+	float x;
+	float y;
+	float z;
 } t_coord;
 
 typedef struct s_alight //ОБЩЕЕ ОСВЕЩЕНИЕ
 {
-	double light_range;
+	float light_range;
 	struct s_color color;
 } t_alight;
 
@@ -57,19 +57,19 @@ typedef struct s_camera //КАМЕРА
 {
 	struct s_coord view_point;
 	struct s_coord orient_vector;
-	double fov;
+	float fov;
 } t_camera;
 
 typedef struct s_light //НАПРАВЛЕННЫЙ СВЕТ
 {
 	struct s_coord coord;
-	double bright;
+	float bright;
 } t_light;
 
 typedef struct s_sphere // СФЕРА
 {
 	struct s_coord coord;
-	double radius;
+	float radius;
 	struct s_color color;
 } t_sphere;
 
@@ -84,8 +84,8 @@ typedef struct s_cylind // ЦИЛИНДР
 {
 	struct s_coord coord;
 	struct s_coord orient_vector;
-	double diameter;
-	double height;
+	float diameter;
+	float height;
 	struct s_color color;
 } t_cylind;
 
@@ -108,11 +108,11 @@ typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕ
 
 typedef struct s_screen // ЭКРАН
 {
-	double	width;
-	double	height;
-	double	x_pixel;
-	double	y_pixel;
-	// double	fov;
+	float	width;
+	float	height;
+	float	x_pixel;
+	float	y_pixel;
+	// float	fov;
 } t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
 typedef struct s_data
