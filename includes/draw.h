@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 10:58:36 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/04 14:29:20 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void	vector_multiply(t_coord direction, double multiply);
 double	vector_sumpow2(t_coord a);
 double	vector_scalar(t_coord a, t_coord b);
 
-int	sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
+int	sphere_intersect(t_camera cam, t_coord *ray, t_sphere *sphere);
 
 #endif

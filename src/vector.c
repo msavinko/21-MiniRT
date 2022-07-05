@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 10:49:48 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/04 14:45:03 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ double	vector_sumpow2(t_coord a) // Квадрат длины вектора
 
 double	vector_scalar(t_coord a, t_coord b) // Скалярное произведение векторов
 {
+	printf("a.x %f, a.y %f, a.z %f\n", a.x, a.y, a.z);
+	printf("b.x %f, b.y %f, b.z %f\n", b.x, b.y, b.z);
+	printf("a.x * b.x %f, a.y * b.y % f, a.z * b.z %f\n", a.x * b.x, a.y * b.y, a.z * b.z);
+	printf("return %f\n", a.x * b.x + a.y * b.y + a.z * b.z);
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

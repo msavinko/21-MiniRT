@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/02 19:39:23 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/04 14:21:44 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,16 @@ void read_file(t_parser *pars, char *arg)
 
 void fill_screen(t_data *data)
 {
-	data->screen.width = 2 * tan(data->scene.camera.fov / 180 * M_PI);
+//	double	aspect_ratio;
+	//data->screen.width = 2 * tan(data->scene.camera.fov / 180 * M_PI);
+	data->screen.width = 2 * tan((data->scene.camera.fov / 2) * (M_PI / 180));
 	data->screen.height = data->screen.width * HEIGHT / WIDTH;
 	data->screen.x_pixel = data->screen.width / WIDTH;
 	data->screen.y_pixel = data->screen.height / HEIGHT;
+	// aspect_ratio = WIDTH / HEIGHT;
+	//data->screen.height = data->screen.width * HEIGHT / WIDTH;
+	// data->screen.x_pixel = data->screen.width / WIDTH;
+	// data->screen.y_pixel = data->screen.height / HEIGHT;
 }
 
 void fill_scene(t_parser *pars, t_data *data)
