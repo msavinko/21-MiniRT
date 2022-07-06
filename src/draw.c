@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 19:01:07 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/06 18:13:01 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 {
 	int i = *ind;
 	int s = 0;
-
+	// int min = INT32_MAX;
+	// while (s + 1 < data->objects.nsphere)
 	while (s < data->objects.nsphere)
 	{
+		// if ()
 		if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]))
 		{
 			*color = set_color(data->objects.sphere[s].color, data->scene.alight.light_range, data->scene.alight.color);
@@ -49,7 +51,7 @@ void ray_tracing(t_data *data)
 
 	mlx_y = 0;
 	y_angle = HEIGHT / 2.0f;
-	printf("start i = % d\n", i);
+	// printf("start i = % d\n", i);
 	while (y_angle > (-1 * HEIGHT / 2.0f))
 	{
 		y_ray = y_angle * data->screen.y_pixel;
@@ -69,19 +71,12 @@ void ray_tracing(t_data *data)
 		y_angle--;
 		mlx_y++;
 	}
-	printf("i = % d\n", i);
+	// printf("i = % d\n", i);
 }
 
 void draw(t_data *data)
 {
 
 	ray_tracing(data);
-	int s = 0;
 
-	while (s < data->objects.nsphere)
-	{
-
-		printf("radius %d: %.2f\n", s, data->objects.sphere[s].radius);
-		s++;
-	}
 }

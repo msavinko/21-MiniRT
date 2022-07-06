@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:54 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:52:44 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/06 11:47:14 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void obj_valid(t_parser *pars, t_objects *obj)
 			obj->ncylinder++;
 		i++;
 	}
-	if (!obj->nplane || !obj->nsphere || !obj->ncylinder)
-		error_parser("You need at least these 3 simple geometric objects: plane, sphere, cylinder.");
+	if (!obj->nplane && !obj->nsphere && !obj->ncylinder)
+		error_parser("You need at least one of these 3 simple geometric objects: plane, sphere, cylinder.");
 	// printf("plane: %d, sphere: %d, cylinder: %d", obj->nplane, obj->nsphere, obj->ncylinder);
 }
 

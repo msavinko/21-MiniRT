@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:06:42 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/02 19:38:44 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:27:37 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void init_parser(t_parser *pars)
 
 void init_scene(t_scene *scene)
 {
-	// scene = malloc(sizeof(t_scene));
-	// if (!scene)
-	// 	error_parser("Malloc error");
 	scene->alight.light_range = 0.00f;
 	scene->alight.color.r = 0;
 	scene->alight.color.g = 0;
@@ -46,9 +43,6 @@ void init_objects(t_objects *obj)
 {
 	int i;
 
-	// obj = malloc(sizeof(t_objects));
-	// if (!obj)
-	// 	error_parser("Malloc error");
 	obj->sphere = malloc(sizeof(t_sphere) * obj->nsphere);
 	if (!obj->sphere)
 		error_parser("Malloc error");
