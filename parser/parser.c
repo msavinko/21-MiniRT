@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:48 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 14:21:44 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:10:18 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ void read_file(t_parser *pars, char *arg)
 
 void fill_screen(t_data *data)
 {
-//	double	aspect_ratio;
+	float	aspect_ratio;
+
+	aspect_ratio = WIDTH / HEIGHT;
 	//data->screen.width = 2 * tan(data->scene.camera.fov / 180 * M_PI);
-	data->screen.width = 2 * tan((data->scene.camera.fov / 2) * (M_PI / 180));
-	data->screen.height = data->screen.width * HEIGHT / WIDTH;
-	data->screen.x_pixel = data->screen.width / WIDTH;
-	data->screen.y_pixel = data->screen.height / HEIGHT;
+	data->screen.width = 2 * tanf((data->scene.camera.fov / 2) * (M_PI / 180));
+	data->screen.height = data->screen.width / aspect_ratio;
+	//data->screen.height = data->screen.width * HEIGHT / WIDTH;
+	data->screen.x_pixel = roundf((data->screen.width / WIDTH)*1000000)/1000000; //округление
+	data->screen.y_pixel = roundf((data->screen.height / HEIGHT)*1000000)/1000000; //округление
 	// aspect_ratio = WIDTH / HEIGHT;
 	//data->screen.height = data->screen.width * HEIGHT / WIDTH;
 	// data->screen.x_pixel = data->screen.width / WIDTH;

@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Thu Jun 30 13:55:11 2022
+# Make data base, printed on Wed Jul  6 12:51:32 2022
 
 # Variables
 
@@ -30,35 +29,35 @@ DIR_SRC = src/
 CURDIR := /Users/rdanyell/Desktop/21-MiniRT
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 35)
+# makefile (from `Makefile', line 34)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 38)
+# makefile (from `Makefile', line 37)
 MLX = libmlx.a
-# makefile (from `Makefile', line 23)
+# makefile (from `Makefile', line 20)
 DIR_PARSE = parser/
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 34)
-CFLAGS = -Wall -Wextra -Werror
+# makefile (from `Makefile', line 33)
+CFLAGS = -Wall -Wextra -Werror -g
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0001y6w000gjq/T/vscode-ipc-840a2ace-264b-48bc-a852-bbeb408253b6.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0001y6w000gjq/T/vscode-ipc-58de5a0a-ce18-49d3-a328-8f709acdba77.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.IyUxwF8HDf/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.9jpRxsArLB/Render
 # environment
 PATH = /Users/rdanyell/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/munki:/opt/X11/bin
-# makefile (from `Makefile', line 20)
+# makefile (from `Makefile', line 27)
 SRCS_SRC = $(addprefix $(DIR_SRC), $(FILES_SRC))
 # makefile (from `Makefile', line 1)
 NAME_RT = miniRT
-# makefile (from `Makefile', line 39)
+# makefile (from `Makefile', line 38)
 MLX_PATH = mlx_1/
 # environment
 VSCODE_LOG_STACK = false
@@ -67,13 +66,13 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.gskiWM6sYY/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Mid84CWmjY/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 HOMEBREW_TEMP = /tmp/rdanyell/Homebrew/Temp
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.zZbtiRfqYg/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.gAzvCkbMjO/org.xquartz:0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -91,7 +90,7 @@ VSCODE_CODE_CACHE_PATH = /Users/rdanyell/Library/Application Support/Code/Cached
 # environment
 LOGNAME = rdanyell
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # makefile (from `Makefile', line 4)
 HEADER_RT = includes/minirt.h
 # environment
@@ -110,7 +109,7 @@ HOMEBREW_CACHE = /tmp/rdanyell/Homebrew/Caches
 SHLVL = 1
 # makefile (from `Makefile', line 8)
 LIBFT = $(DIR_LIB)libft.a
-# makefile (from `Makefile', line 33)
+# makefile (from `Makefile', line 32)
 CC = cc
 # default
 MAKE_VERSION := 3.81
@@ -122,18 +121,16 @@ USER = rdanyell
 DIR_LIB = libft/
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
-# makefile (from `Makefile', line 21)
-OBJS_SRC = $(SRCS_SRC:%.c=%.o)
+# makefile (from `Makefile', line 29)
+OBJS_SRC = $(SRCS_SRC:%.c=%.o) $(SRCS_PARSE:%.c=%.o)
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # makefile (from `Makefile', line 12)
-FILES_SRC = main_2.c print_structs.c new_vector.c utils.c new_sphere.c new_camera.c scene.c 
+FILES_SRC = main.c print_structs.c free_all.c draw.c vector.c intersect.c color.c 
 # default
 .VARIABLES := 
 # environment
 TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n0001y6w000gjq/T/
-# makefile (from `Makefile', line 31)
-OBJS_PARSE = $(SRCS_PARSE:%.c=%.o)
 # automatic
 *F = $(notdir $*)
 # environment
@@ -142,14 +139,14 @@ VSCODE_IPC_HOOK = /Users/rdanyell/Library/Application Support/Code/1.68.1-main.s
 INCLUDES_RT = includes/
 # makefile
 MAKEFLAGS = Rrqp
-# makefile (from `Makefile', line 24)
-FILES_PARSE = parser.c utils_parser.c init_parser.c fill_obj.c fill_scene.c 
+# makefile (from `Makefile', line 21)
+FILES_PARSE = parser.c validation.c init_parser.c fill_obj.c fill_scene.c 
 # environment
 MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000011.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000015.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -162,12 +159,12 @@ COMMAND_MODE = unix2003
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-# makefile (from `Makefile', line 40)
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+# makefile (from `Makefile', line 39)
+MLX_FLAGS = -framework OpenGL -framework AppKit
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186ee
+SECURITYSESSIONID = 18742
 # automatic
 ^F = $(notdir $^)
 # default
@@ -176,14 +173,14 @@ SUFFIXES :=
 .INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
-# makefile (from `Makefile', line 30)
+# makefile (from `Makefile', line 28)
 SRCS_PARSE = $(addprefix $(DIR_PARSE), $(FILES_PARSE))
 # environment
 LANG = C
 # environment
-VSCODE_PID = 66872
+VSCODE_PID = 49708
 # variable set hash-table stats:
-# Load=85/1024=8%, Rehash=0, Collisions=3/129=2%
+# Load=84/1024=8%, Rehash=0, Collisions=3/127=2%
 
 # Pattern-specific Variable Values
 
@@ -191,20 +188,26 @@ VSCODE_PID = 66872
 
 # Directories
 
-# . (device 16777227, inode 1816920): 19 files, no impossibilities.
+# . (device 16777227, inode 1837587): 14 files, no impossibilities.
 
-# 19 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 %.o: %.c libft/libft.a includes/minirt.h mlx_1/libmlx.a Makefile
-#  commands to execute (from `Makefile', line 57):
+#  commands to execute (from `Makefile', line 55):
 	$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
+
+# Not a target:
+parser/validation.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: mlx libft miniRT
 #  Phony target (prerequisite of .PHONY).
@@ -214,7 +217,7 @@ all: mlx libft miniRT
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 # Not a target:
 parser/parser.o:
@@ -246,13 +249,18 @@ mlx:
 # automatic
 # ? := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
-#  commands to execute (from `Makefile', line 47):
-	@echo "Making $(MLX_PATH)$(MLX)"
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  commands to execute (from `Makefile', line 46):
 	@make -C $(MLX_PATH)
 	
 
 .PHONY: all clean fclean re libft mlx norm
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -262,12 +270,12 @@ libft:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 51):
+#  commands to execute (from `Makefile', line 49):
 	@make -C $(DIR_LIB)
 	
 
 # Not a target:
-src/scene.o:
+src/color.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -278,32 +286,27 @@ src/scene.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-miniRT: parser/parser.o parser/utils_parser.o parser/init_parser.o parser/fill_obj.o parser/fill_scene.o src/main_2.o src/print_structs.o src/new_vector.o src/utils.o src/new_sphere.o src/new_camera.o src/scene.o
+miniRT: src/main.o src/print_structs.o src/free_all.o src/draw.o src/vector.o src/intersect.o src/color.o parser/parser.o parser/validation.o parser/init_parser.o parser/fill_obj.o parser/fill_scene.o mlx_1/libmlx.a
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 54):
-	$(CC) $(OBJS_PARSE) $(OBJS_SRC) $(LIBFT) $(MLX_FLAGS) -o $@
+#  commands to execute (from `Makefile', line 52):
+	$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@
 	
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:00:01
+#  Last modified 2022-07-05 13:29:06
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-parser/utils_parser.o:
+parser/init_parser.o:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/new_camera.o:
-#  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -312,20 +315,13 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 64):
+#  commands to execute (from `Makefile', line 62):
 	$(RM) $(NAME_RT)
 	make -C $(DIR_LIB) fclean
 	
 
 # Not a target:
-src/new_sphere.o:
- 
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/main_2.o:
+src/intersect.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -335,7 +331,7 @@ norm:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 70):
+#  commands to execute (from `Makefile', line 68):
 	norminette includes
 	norminette libft
 	norminette parser
@@ -344,18 +340,6 @@ norm:
 
 # Not a target:
 src/print_structs.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-parser/init_parser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/utils.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -377,10 +361,16 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 60):
-	$(RM) $(OBJS_PARSE) $(OBJS_SRC) #PLACE FOR ADDITIONAL OBJECTS IF ANY.
+#  commands to execute (from `Makefile', line 58):
+	$(RM)  $(OBJS_SRC)
 	make -C $(DIR_LIB) clean
 	
+
+# Not a target:
+src/free_all.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 parser/fill_scene.o:
@@ -389,7 +379,19 @@ parser/fill_scene.o:
 #  File has not been updated.
 
 # Not a target:
-src/new_vector.o:
+mlx_1/libmlx.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/vector.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/draw.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -401,7 +403,7 @@ parser/fill_obj.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=24/1024=2%, Rehash=0, Collisions=4/63=6%
+# Load=25/1024=2%, Rehash=0, Collisions=0/65=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -413,6 +415,6 @@ parser/fill_obj.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 30 13:55:11 2022
+# Finished Make data base on Wed Jul  6 12:51:32 2022
 
  

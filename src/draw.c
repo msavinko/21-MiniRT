@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 13:34:27 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/06 18:08:34 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,21 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 		}
 		s++;
 	}
+	if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[0]))
+	{
+		*color = set_color(data->objects.plane[0].color, data->scene.alight.light_range);
+		return;
+	}
+	if (cylindr_intersect(data->scene.camera, *ray,  &data->objects.cylind[0]))
+	{
+		*color = set_color(data->objects.cylind[0].color, data->scene.alight.light_range);
+		return;
+	}
+
 	*color = 0;
 }
 void ray_tracing(t_data *data)
 {
-	// (void)data;
-	// printf("In ray_tracing\n");
-	// printf("data->screen->height = %f\n", data->screen.height);
-	// printf("data->scene.camera.view_point.x = %f\n", data->scene.camera.view_point.x);
 	int mlx_x;
 	int mlx_y;
 	float x_angle;
