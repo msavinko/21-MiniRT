@@ -21,6 +21,7 @@ DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
 					validation.c \
 					init_parser.c \
+					init_parser2.c \
 					fill_obj.c \
 					fill_scene.c \
 

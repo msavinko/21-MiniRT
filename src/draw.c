@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 18:13:01 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 15:49:03 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 {
-	int i = *ind;
-	int s = 0;
-	// int min = INT32_MAX;
+	int i;
+	float min_dist;
+	int s;
+	int p;
+	int c;
+
+	s = 0;
+	p = 0;
+	c = 0;
+	i = *ind;
+	min_dist = INT32_MAX;
+	
+	*color = 0;
 	// while (s + 1 < data->objects.nsphere)
 	while (s < data->objects.nsphere)
 	{
@@ -31,14 +41,22 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 		}
 		s++;
 	}
-	*color = 0;
+	if (cylindr_intersect(data->scene.camera, *ray,  &data->objects.cylind[0]))
+	{
+		*color = set_color(data->objects.cylind[0].color, data->scene.alight.light_range, data->scene.alight.color);
+		return;
+	}
+	if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[0]))
+	{
+		*color = set_color(data->objects.plane[0].color, data->scene.alight.light_range, data->scene.alight.color);
+		return;
+	}
+	// shadow(data, &min_dist, color, ray);
+	// void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist)
+
 }
 void ray_tracing(t_data *data)
 {
-	// (void)data;
-	// printf("In ray_tracing\n");
-	// printf("data->screen->height = %f\n", data->screen.height);
-	// printf("data->scene.camera.view_point.x = %f\n", data->scene.camera.view_point.x);
 	int mlx_x;
 	int mlx_y;
 	float x_angle;

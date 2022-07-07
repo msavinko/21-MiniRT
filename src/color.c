@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 17:44:42 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 15:40:56 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_dectohex(unsigned int num)
 
 	if (!num)
 		return ("00");
-	hex = calloc(2, sizeof(char));
+	hex = malloc(sizeof(char) * 3);
+	hex[3] = '\0';
 	temp = num;
 	i = 1;
 	while (i >= 0)
@@ -63,14 +64,13 @@ float	get_color(float color, float light, double bright)
 {
 	float	res;
 
+
 	if (color < light)
-		res = color + light * 0.2;
-	else if (color > light)
-		res = color * 0.6 + light;
+		res = color + light * 0.3;// + 255*0.7;
 	else
-		res = color;
+		res = color * 0.6 + light;
 	if (res > 255)
-			res = 255;
+		res = 255;
 	else if (res < 0)
 		res = 0;
 	return (res * bright);

@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 18:02:16 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 15:04:14 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void vector_normalize(t_coord *a);
 void vector_multiply(t_coord *direction, float multiply);
 float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
+t_coord  vec3_mul(t_coord a, t_coord b);
 
-int sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
+float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
+float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
+float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
 
 // float set_color(t_color color);
 char *ft_dectohex(unsigned int num);

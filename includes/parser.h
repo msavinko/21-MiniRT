@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:41:57 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 12:29:20 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 14:27:10 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ typedef struct s_parser
 	char *line;
 	char **map;
 } t_parser;
+
+typedef struct s_count_obj
+{
+	int	i;
+	int	s;
+	int	p;
+	int	c;
+} t_count_obj;
 
 // init_parser.c
 void init_parser(t_parser *pars);
@@ -69,5 +77,5 @@ void fill_l(char *str, t_light *light);
 void fill_sp(char *str, t_sphere *sphere);
 void fill_pl(char *str, t_plane *plane);
 void fill_cy(char *str, t_cylind *cylind);
-
+void	fill_screen(t_data *data);
 #endif
