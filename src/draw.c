@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:00 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 14:53:58 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 		}
 		s++;
 	}
-	if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[0]))
-	{
-		*color = set_color(data->objects.plane[0].color, data->scene.alight.light_range, data->scene.alight.color);
-		return;
-	}
 	if (cylindr_intersect(data->scene.camera, *ray,  &data->objects.cylind[0]))
 	{
 		*color = set_color(data->objects.cylind[0].color, data->scene.alight.light_range, data->scene.alight.color);
+		return;
+	}
+	if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[0]))
+	{
+		*color = set_color(data->objects.plane[0].color, data->scene.alight.light_range, data->scene.alight.color);
 		return;
 	}
 
