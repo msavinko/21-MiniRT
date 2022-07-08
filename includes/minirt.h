@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 13:36:34 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 19:11:39 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <math.h>
 #include "parser.h"
 #include "draw.h"
+#include "key_def.h"
 
-#define ESCAPE 53
 #define WIDTH_1 1920.00
 #define HEIGHT_1 1080.00
 
