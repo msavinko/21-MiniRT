@@ -6,27 +6,21 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 14:55:14 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 12:49:57 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
+float sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 {
 	float	b;
 	float	c;
 	float	discr;
 	float	dist;
 	t_coord	cam_sphere;
-	t_coord	a;
-	float a2;
 
-	if (!sphere)
-		return (0);
  	cam_sphere = vector_subtract(cam.view_point, sphere->coord);
-	a = vector_subtract(ray, cam.view_point);
-	a2 = vector_scalar(a, a);
 	b = 2.0f * (vector_scalar(cam_sphere, ray));
 	c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius * sphere->radius);
 	discr = (b * b) - (4.0f * c);
@@ -38,7 +32,7 @@ int sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	return (0);
 }
 
-int	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
+float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
 {
 	float	d;
 	float c;
@@ -57,7 +51,7 @@ int	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
 
 }
 
-int	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
+float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 {
 	float	dist;
 	float	a;

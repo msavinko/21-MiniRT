@@ -56,6 +56,9 @@ void	obj_valid(t_parser *pars, t_objects *obj)
 			obj->ncylinder++;
 		i++;
 	}
+	if (!obj->nplane && !obj->nsphere && !obj->ncylinder)
+		error_parser("You need at least one of these 3 simple \
+		geometric objects: plane, sphere, cylinder.");
 }
 
 void	letters_valid(t_parser *pars)

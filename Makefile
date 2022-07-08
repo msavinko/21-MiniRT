@@ -16,6 +16,9 @@ FILES_SRC		=	main.c \
 					vector.c\
 					intersect.c\
 					color.c \
+					dist_obj.c \
+					shadow.c \
+					shadow_intersect.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
