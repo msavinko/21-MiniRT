@@ -6,22 +6,23 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 14:14:52 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 14:29:10 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-char	*ft_dectohex(unsigned int num)
+char *ft_dectohex(unsigned int num)
 {
-	char			*hex;
-	char			c;
-	int				i;
-	unsigned int	temp;
+	char *hex;
+	char c;
+	int i;
+	unsigned int temp;
 
 	if (!num)
 		return ("00");
-	hex = calloc(2, sizeof(char));
+	hex = malloc(sizeof(char) * 3);
+	hex[3] = '\0';
 	temp = num;
 	i = 1;
 	while (i >= 0)
@@ -37,10 +38,10 @@ char	*ft_dectohex(unsigned int num)
 	return (hex);
 }
 
-unsigned long	htoi(const char *s)
+unsigned long htoi(const char *s)
 {
-	int	i;
-	int	n;
+	int i;
+	int n;
 
 	n = 0;
 	i = 0;
@@ -59,36 +60,53 @@ unsigned long	htoi(const char *s)
 	return (n);
 }
 
-float	get_color(float color, float light, double bright)
+unsigned int set_color(t_color color, t_data *data, int flag)
 {
-	float	res;
+	unsigned long result;
+	char *res;
+	float r;
+	float g;
+	float b;
+	float tmp;
 
-	if (color < light)
-		res = color + light * 0.2;
-	else if (color > light)
-		res = color * 0.6 + light;
-	else
-		res = color;
-	if (res > 255)
-			res = 255;
-	else if (res < 0)
-		res = 0;
-	return (res * bright);
-}
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	r = color.r * tmp / 255;
+	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	g = color.g * tmp / 255;
+	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	b = color.b * tmp / 255;
 
-unsigned int	set_color(t_color color, double l, t_color alight)
-{
-	unsigned long	result;
-	char			*res;
-	float			r;
-	float			g;
-	float			b;
-
-	r = get_color(color.r, alight.r, l);
-	g = get_color(color.g, alight.g, l);
-	b = get_color(color.b, alight.b, l);
 	res = ft_strjoin(ft_dectohex(r), ft_dectohex(g));
 	res = ft_strjoin(res, ft_dectohex(b));
 	result = htoi(res);
 	return (result);
+}
+
+int	draw_dot(t_data *data, t_dist *dist, int flag)
+{
+	int res;
+
+	if (dist->near_obj == 1)
+	{
+		res = set_color(data->objects.sphere[dist->n_obj].color, data, flag);
+	}
+	// else if (dist->near_obj == 2)
+	// {
+	// 	res = set_color(data->objects.plane[dist->n_obj].color,
+	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
+	// }
+	// else if (dist->near_obj == 3)
+	// {
+	// 	res = set_color(data->objects.cylind[dist->n_obj].color,
+	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
+	// }
+	else 
+		res = BACK;
+	return (res);
 }
