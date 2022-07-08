@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 18:53:03 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/08 13:24:09 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #define DRAW_H
 
 #include "minirt.h"
+# define SPHERE 1
+# define PLANE 2
+# define CYLINDER 3
+# define BACK 11988192
 
 typedef struct s_scene t_scene;
 typedef struct s_alight t_alight;
@@ -26,6 +30,15 @@ typedef struct s_plane t_plane;
 typedef struct s_cylind t_cylind;
 typedef struct s_objects t_objects;
 typedef struct s_data t_data;
+
+typedef struct	s_dist
+{
+	float min_dist;
+	float dist;
+	int near_obj;
+	int n_obj;
+	struct s_coord *dot_light;
+}	t_dist;
 
 void draw(t_data *data);
 void ray_tracing(t_data *data);
@@ -48,6 +61,19 @@ float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
 // float set_color(t_color color);
 char *ft_dectohex(unsigned int num);
 unsigned long htoi(const char *s);
-unsigned int set_color(t_color color, double l, t_color alight);
+
+int	draw_dot(t_data *data, t_dist *dist, int flag);
+
+//dist_obj.c
+void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray);
+void nearest_plane(t_data *data, t_dist *dist, t_coord *ray);
+void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
+
+//shadow.c
+int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
+
+
+//shadow_intersect.c
+float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
 
 #endif

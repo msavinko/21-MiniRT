@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 07:44:17 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/08 14:29:10 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,53 @@ unsigned long htoi(const char *s)
 	return (n);
 }
 
-float get_color(float color, float light, double bright)
-{
-	float res;
-
-	if (color < light)
-		res = color + light * 0.2; // + 255*0.7;
-	else
-		res = color * 0.6 + light;
-	if (res > 255)
-		res = 255;
-	else if (res < 0)
-		res = 0;
-	return (res * bright);
-}
-
-unsigned int set_color(t_color color, double l, t_color alight)
+unsigned int set_color(t_color color, t_data *data, int flag)
 {
 	unsigned long result;
 	char *res;
 	float r;
 	float g;
 	float b;
+	float tmp;
 
-	r = get_color(color.r, alight.r, l);
-	g = get_color(color.g, alight.g, l);
-	b = get_color(color.b, alight.b, l);
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	r = color.r * tmp / 255;
+	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	g = color.g * tmp / 255;
+	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	if (tmp > 255)
+		tmp = 255;
+	b = color.b * tmp / 255;
+
 	res = ft_strjoin(ft_dectohex(r), ft_dectohex(g));
 	res = ft_strjoin(res, ft_dectohex(b));
 	result = htoi(res);
 	return (result);
+}
+
+int	draw_dot(t_data *data, t_dist *dist, int flag)
+{
+	int res;
+
+	if (dist->near_obj == 1)
+	{
+		res = set_color(data->objects.sphere[dist->n_obj].color, data, flag);
+	}
+	// else if (dist->near_obj == 2)
+	// {
+	// 	res = set_color(data->objects.plane[dist->n_obj].color,
+	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
+	// }
+	// else if (dist->near_obj == 3)
+	// {
+	// 	res = set_color(data->objects.cylind[dist->n_obj].color,
+	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
+	// }
+	else 
+		res = BACK;
+	return (res);
 }

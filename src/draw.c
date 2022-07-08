@@ -3,79 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 07:54:31 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/08 14:40:18 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+// void shadow(t_data *data, t_dist *dist, t_coord *ray)
+// {
+	
+// }
 
-void draw_objects(t_data *data, t_coord *ray, int *color_int)
+void draw_objects(t_data *data, t_coord *ray, int *color)
 {
-	float min_dist;
-	float one;
-	float two;
-	int s;
-	// int p;
-	// int c;
-	t_color *color;
+	t_dist dist;
 
-	s = 0;
-	// p = 0;
-	// c = 0;
-	min_dist = INT32_MAX;
-	*color_int = 0;
-	color = malloc(sizeof(t_color));
-	if (!color)
-		error_parser("malloc error");
-	while (s < data->objects.nsphere)
-	{
-		// if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]))
-		//{
-		//	*color_int = set_color(data->objects.sphere[s].color, data->scene.alight.light_range, data->scene.alight.color);
-		//	return;
-		// }
-		one = sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]);
-		if (s + 1 < data->objects.nsphere)
-		{
-			two = sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s + 1]);
-			if (one < two && one > 0)
-			{
-				min_dist = one;
-				*color_int = set_color(data->objects.sphere[s].color, data->scene.alight.light_range, data->scene.alight.color);
-			}
-			else if (one > two && two > 0)
-			{
-				min_dist = two;
-				*color_int = set_color(data->objects.sphere[s + 1].color, data->scene.alight.light_range, data->scene.alight.color);
-			}
-		}
-		s++;
-	}
-	// while (c < data->objects.ncylinder)
-	//{
-	//	if (cylindr_intersect(data->scene.camera, *ray, &data->objects.cylind[c]))
-	//	{
-	//		*color_int = set_color(data->objects.cylind[0].color, data->scene.alight.light_range, data->scene.alight.color);
-	//		return;
-	//	}
-	//	c++;
-	// }
-	// while (p < data->objects.nplane)
-	//{
+	dist.dot_light = malloc(sizeof (t_coord));
+	dist.near_obj = 0;
+	dist.min_dist = INT32_MAX;
+	nearest_sphere(data, &dist, ray);
+	nearest_plane(data, &dist, ray);
+	nearest_cylind(data, &dist, ray);
 
-	//	if (plane_intersect(data->scene.camera, *ray, &data->objects.plane[p]))
-	//	{
-	//		*color_int = set_color(data->objects.plane[0].color, data->scene.alight.light_range, data->scene.alight.color);
-	//		return;
-	//	}
-	//	p++;
-	//}
+	vector_multiply(ray, dist.min_dist); // точка в пространстве на ближайшем объекте
+	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray);//вектор из этой точки до источника света
+	// vector_normalize(dist.dot_light);
+	if (shadow_sphere(data, &dist, ray)) // тень есть
+		*color = draw_dot(data, &dist,1);
+	// else if (shadow_plane)
+	// *color = draw_dot(data, &dist, 0);
+	// else if (shadow_cylinder)
+	// *color = draw_dot(data, &dist, 0);
+	else
+		*color = draw_dot(data, &dist, 0);
+		//добавить источник света к цвету
 
-	// shadow(data, &min_dist, color, ray);
-	// void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist)
 }
 void ray_tracing(t_data *data)
 {
@@ -87,11 +51,10 @@ void ray_tracing(t_data *data)
 	float x_ray;
 	float y_ray;
 	t_coord ray;
-	int i = 0;
 
 	mlx_y = 0;
 	y_angle = HEIGHT / 2.0f;
-	// printf("start i = % d\n", i);
+
 	while (y_angle > (-1 * HEIGHT / 2.0f))
 	{
 		y_ray = y_angle * data->screen.y_pixel;
@@ -104,7 +67,6 @@ void ray_tracing(t_data *data)
 													//			printf("x_angle = %f, data->screen.x_pixel = %f, ray.x = %f, ray.y = %f, ray.z = %f\n", x_angle, data->screen.x_pixel, ray.x, ray.y, ray.z);
 			vector_normalize(&ray);
 			draw_objects(data, &ray, &color);
-			i++;
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
 			x_angle++;
 			mlx_x++;
@@ -112,7 +74,7 @@ void ray_tracing(t_data *data)
 		y_angle--;
 		mlx_y++;
 	}
-	// printf("i = % d\n", i);
+
 }
 
 void draw(t_data *data)
