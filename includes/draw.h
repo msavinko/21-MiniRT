@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 15:04:14 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 18:53:03 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data t_data;
 
 void draw(t_data *data);
 void ray_tracing(t_data *data);
+void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist);
 
 t_coord new_vector3(float x, float y, float z);
 t_coord vector_subtract(t_coord a, t_coord b);
@@ -38,11 +39,11 @@ void vector_normalize(t_coord *a);
 void vector_multiply(t_coord *direction, float multiply);
 float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
-t_coord  vec3_mul(t_coord a, t_coord b);
+t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
-float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
-float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
+float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
+float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
 
 // float set_color(t_color color);
 char *ft_dectohex(unsigned int num);

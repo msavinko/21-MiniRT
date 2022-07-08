@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 17:28:19 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 18:35:39 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 	mlx_hook(data.window, 2, (1L << 0), ft_key_hook, &data);
 	mlx_hook(data.window, 17, 0, close_minirt, &data);
 	mlx_loop(data.mlx);
+	printf("HI\n");
 	free_data(&data);
 	return (0);
 }

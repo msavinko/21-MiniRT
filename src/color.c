@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/07 15:40:56 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 07:44:17 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-char	*ft_dectohex(unsigned int num)
+char *ft_dectohex(unsigned int num)
 {
-	char			*hex;
-	char			c;
-	int				i;
-	unsigned int	temp;
+	char *hex;
+	char c;
+	int i;
+	unsigned int temp;
 
 	if (!num)
 		return ("00");
@@ -38,10 +38,10 @@ char	*ft_dectohex(unsigned int num)
 	return (hex);
 }
 
-unsigned long	htoi(const char *s)
+unsigned long htoi(const char *s)
 {
-	int	i;
-	int	n;
+	int i;
+	int n;
 
 	n = 0;
 	i = 0;
@@ -60,13 +60,12 @@ unsigned long	htoi(const char *s)
 	return (n);
 }
 
-float	get_color(float color, float light, double bright)
+float get_color(float color, float light, double bright)
 {
-	float	res;
-
+	float res;
 
 	if (color < light)
-		res = color + light * 0.3;// + 255*0.7;
+		res = color + light * 0.2; // + 255*0.7;
 	else
 		res = color * 0.6 + light;
 	if (res > 255)
@@ -76,13 +75,13 @@ float	get_color(float color, float light, double bright)
 	return (res * bright);
 }
 
-unsigned int	set_color(t_color color, double l, t_color alight)
+unsigned int set_color(t_color color, double l, t_color alight)
 {
-	unsigned long	result;
-	char			*res;
-	float			r;
-	float			g;
-	float			b;
+	unsigned long result;
+	char *res;
+	float r;
+	float g;
+	float b;
 
 	r = get_color(color.r, alight.r, l);
 	g = get_color(color.g, alight.g, l);
