@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 14:29:10 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:23:40 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,36 @@ unsigned long htoi(const char *s)
 	return (n);
 }
 
+int join_color(float r, float g, float b)
+{
+	char *part1;
+	char *part2;
+	char *str_r;
+	char *str_g;
+	char *str_b;
+	int result;
+
+	str_r = ft_dectohex(r);
+	str_g = ft_dectohex(g);
+	str_b = ft_dectohex(b);
+
+	part1 = ft_strjoin(str_r, str_g);
+	part2 = ft_strjoin(part1, str_b);
+	if (r)
+		free(str_r);
+	if (g)
+		free(str_g);
+	if (b)
+		free(str_b);
+	free(part1);
+	result = htoi(part2);
+	free(part2);
+	return (result);
+}
 unsigned int set_color(t_color color, t_data *data, int flag)
 {
 	unsigned long result;
-	char *res;
+	// char *res;
 	float r;
 	float g;
 	float b;
@@ -82,13 +108,12 @@ unsigned int set_color(t_color color, t_data *data, int flag)
 		tmp = 255;
 	b = color.b * tmp / 255;
 
-	res = ft_strjoin(ft_dectohex(r), ft_dectohex(g));
-	res = ft_strjoin(res, ft_dectohex(b));
-	result = htoi(res);
+	result = join_color(r, g, b);
+
 	return (result);
 }
 
-int	draw_dot(t_data *data, t_dist *dist, int flag)
+int draw_dot(t_data *data, t_dist *dist, int flag)
 {
 	int res;
 
@@ -106,7 +131,7 @@ int	draw_dot(t_data *data, t_dist *dist, int flag)
 	// 	res = set_color(data->objects.cylind[dist->n_obj].color,
 	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
 	// }
-	else 
+	else
 		res = BACK;
 	return (res);
 }

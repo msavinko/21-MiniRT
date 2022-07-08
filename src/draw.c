@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 14:40:18 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 20:15:31 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 // void shadow(t_data *data, t_dist *dist, t_coord *ray)
 // {
-	
+
 // }
 
 void draw_objects(t_data *data, t_coord *ray, int *color)
 {
 	t_dist dist;
 
-	dist.dot_light = malloc(sizeof (t_coord));
+	dist.dot_light = malloc(sizeof(t_coord));
 	dist.near_obj = 0;
 	dist.min_dist = INT32_MAX;
 	nearest_sphere(data, &dist, ray);
 	nearest_plane(data, &dist, ray);
 	nearest_cylind(data, &dist, ray);
 
-	vector_multiply(ray, dist.min_dist); // точка в пространстве на ближайшем объекте
-	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray);//вектор из этой точки до источника света
+	vector_multiply(ray, dist.min_dist);							  // точка в пространстве на ближайшем объекте
+	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
 	// vector_normalize(dist.dot_light);
 	if (shadow_sphere(data, &dist, ray)) // тень есть
-		*color = draw_dot(data, &dist,1);
+		*color = draw_dot(data, &dist, 1);
 	// else if (shadow_plane)
 	// *color = draw_dot(data, &dist, 0);
 	// else if (shadow_cylinder)
 	// *color = draw_dot(data, &dist, 0);
 	else
 		*color = draw_dot(data, &dist, 0);
-		//добавить источник света к цвету
-
+	//добавить источник света к цвету
+	// free(dist.dot_light); //если чистить, то появляются черные пятна на сферах
 }
 void ray_tracing(t_data *data)
 {
@@ -74,7 +74,6 @@ void ray_tracing(t_data *data)
 		y_angle--;
 		mlx_y++;
 	}
-
 }
 
 void draw(t_data *data)
