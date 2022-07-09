@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 14:29:10 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/09 13:37:41 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ unsigned int set_color(t_color color, t_data *data, int flag)
 	float b;
 	float tmp;
 
-	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;// надо умножить на косинус между векторм dot_light и нормалью к объекту
 	if (tmp > 255)
 		tmp = 255;
 	r = color.r * tmp / 255;
@@ -88,7 +88,7 @@ unsigned int set_color(t_color color, t_data *data, int flag)
 	return (result);
 }
 
-int	draw_dot(t_data *data, t_dist *dist, int flag)
+int	draw_dot(t_data *data, t_dist *dist, int flag)// флаг 0 - тень есть, 1 - нет
 {
 	int res;
 
@@ -106,7 +106,7 @@ int	draw_dot(t_data *data, t_dist *dist, int flag)
 	// 	res = set_color(data->objects.cylind[dist->n_obj].color,
 	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
 	// }
-	else 
+	else
 		res = BACK;
 	return (res);
 }

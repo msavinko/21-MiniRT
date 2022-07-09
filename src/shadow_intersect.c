@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_intersect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 14:42:19 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:40:11 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 	float	c;
 	float	discr;
 	float	dist;
-	
+
 	b = 2.0f * (vector_scalar(*dot_sphere, *dot_light));
 	c = vector_scalar(*dot_sphere, *dot_sphere) - (sphere->radius * sphere->radius);
 	discr = (b * b) - (4.0f * c);
@@ -29,7 +29,7 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 		return (dist);
 	if (dist < 0.0f)
 		dist = (-1 * b + sqrt(discr)) / 2;
-	else if (dist > 0.0f)
+	if (dist > 0.0f)
 		return (dist);
 	return (0);
 }
@@ -44,7 +44,7 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 // 	c = vector_scalar(plane->orient_vector, ray);
 // 	if (c == 0)
 // 		return (0);
-// 	d =  plane->coord.z; 
+// 	d =  plane->coord.z;
 // 	pn = vector_scalar(cam.view_point, plane->orient_vector);
 // 	dist = (d - pn) /c;
 // 	if (dist < 0)

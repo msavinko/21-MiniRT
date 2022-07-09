@@ -3,44 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 14:40:18 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/09 14:43:47 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 // void shadow(t_data *data, t_dist *dist, t_coord *ray)
 // {
-	
+
 // }
+
+float	dot_normal(t_data *data, t_dist *dist, t_coord *ray)
+{
+	t_coord	normal;
+	float	intens_light;
+
+//	if (dist->near_obj == 1)//точка, которую мы рисуем на сфере
+//	{
+		normal.x = ray->x - data->objects.sphere[dist->n_obj].coord.x;
+		normal.y = ray->y - data->objects.sphere[dist->n_obj].coord.y;
+		normal.z = ray->z - data->objects.sphere[dist->n_obj].coord.z;
+//	}
+	intens_light = vector_scalar(*dist->dot_light, normal) \
+	 	/ vector_length(*dist->dot_light) / vector_length(normal);
+	if (intens_light < 0)
+		intens_light *= -1;
+//	printf("intens_light = %f\n", intens_light);
+	return (intens_light);
+}
 
 void draw_objects(t_data *data, t_coord *ray, int *color)
 {
 	t_dist dist;
+	float	intens_light;
 
 	dist.dot_light = malloc(sizeof (t_coord));
+	dist.dot_normal = malloc(sizeof (t_coord));
 	dist.near_obj = 0;
 	dist.min_dist = INT32_MAX;
 	nearest_sphere(data, &dist, ray);
 	nearest_plane(data, &dist, ray);
 	nearest_cylind(data, &dist, ray);
 
-	vector_multiply(ray, dist.min_dist); // точка в пространстве на ближайшем объекте
+	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray);//вектор из этой точки до источника света
-	// vector_normalize(dist.dot_light);
+	intens_light = dot_normal(data, &dist, ray);
+	// *dist.dot_normal = dot_normal(data, &dist, ray);
+	// intens_light = vector_scalar(*dist.dot_light, *dist.dot_normal) \
+	// 	/ vector_length(*dist.dot_light) / vector_length(*dist.dot_normal);
+	// // vector_normalize(dist.dot_light);
 	if (shadow_sphere(data, &dist, ray)) // тень есть
-		*color = draw_dot(data, &dist,1);
+		*color = draw_dot(data, &dist, 0);
 	// else if (shadow_plane)
 	// *color = draw_dot(data, &dist, 0);
 	// else if (shadow_cylinder)
 	// *color = draw_dot(data, &dist, 0);
 	else
-		*color = draw_dot(data, &dist, 0);
-		//добавить источник света к цвету
-
+		*color = draw_dot(data, &dist, intens_light);
+//	printf("intens_light = %f\n", intens_light);
 }
+
 void ray_tracing(t_data *data)
 {
 	int mlx_x;
