@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:45:19 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 13:35:35 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/06 11:46:11 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void fill_sp(char *str, t_sphere *sphere)
 	fill_coord(&i, str, &sphere->coord);
 	while_space(&i, str);
 	sphere->radius = ft_atof(&str[i]) / 2;
+
 	while_space(&i, str);
 	fill_color(&i, str, &sphere->color);
 	if (sphere->color.r < 0 || sphere->color.r > 255 || sphere->color.g < 0 || sphere->color.g > 255 || sphere->color.b < 0 || sphere->color.b > 255)
@@ -57,7 +58,6 @@ void fill_pl(char *str, t_plane *plane)
 	fill_color(&i, str, &plane->color);
 	if (plane->color.r < 0 || plane->color.r > 255 || plane->color.g < 0 || plane->color.g > 255 || plane->color.b < 0 || plane->color.b > 255)
 		error_parser("R,G,B colors not in range 0-255");
-	// print_plane(plane);
 }
 
 void fill_cy(char *str, t_cylind *cylind)
@@ -81,5 +81,4 @@ void fill_cy(char *str, t_cylind *cylind)
 	fill_color(&i, str, &cylind->color);
 	if (cylind->color.r < 0 || cylind->color.r > 255 || cylind->color.g < 0 || cylind->color.g > 255 || cylind->color.b < 0 || cylind->color.b > 255)
 		error_parser("R,G,B colors not in range 0-255");
-	// print_cylind(cylind);
 }

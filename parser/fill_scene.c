@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:24:43 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/01 12:49:58 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/06 11:36:04 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ void	fill_color(int *ind, char *str, t_color *color)
 	color->r = ft_atoi(&str[i]);
 	while (str[i] != ',')
 		i++;
+	while (ft_isspace(str[i]))
+		i++;
 	i++;
 	color->g = ft_atoi(&str[i]);
 	while (str[i] != ',')
 		i++;
+	while (ft_isspace(str[i]))
+		i++;
 	i++;
 	color->b = ft_atoi(&str[i]);
+	i++;
 	*ind = i;
 }
 
@@ -37,12 +42,17 @@ void	fill_coord(int *ind, char *str, t_coord *coord)
 	coord->x = ft_atof(&str[i]);
 	while (str[i] != ',')
 		i++;
+	while (ft_isspace(str[i]))
+		i++;
 	i++;
 	coord->y = ft_atof(&str[i]);
 	while (str[i] != ',')
 		i++;
+	while (ft_isspace(str[i]))
+		i++;
 	i++;
 	coord->z = ft_atof(&str[i]);
+	i++;
 	*ind = i;
 }
 
