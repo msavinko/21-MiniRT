@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 20:15:31 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/11 09:58:53 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	else
 		*color = draw_dot(data, &dist, 0);
 	//добавить источник света к цвету
-	// free(dist.dot_light); //если чистить, то появляются черные пятна на сферах
+	free(dist.dot_light); //если чистить, то появляются черные пятна на сферах
 }
 void ray_tracing(t_data *data)
 {
