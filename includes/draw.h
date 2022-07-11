@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:14:29 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:42:56 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
 char *ft_dectohex(unsigned int num);
 unsigned long htoi(const char *s);
 
-int	draw_dot(t_data *data, t_dist *dist, int flag);
+int	draw_dot(t_data *data, t_dist *dist, float flag);
 
 //dist_obj.c
 void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray);
@@ -72,9 +72,9 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow.c
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
-
+int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
-
+float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
 #endif

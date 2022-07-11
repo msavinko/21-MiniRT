@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:14:37 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/11 10:34:58 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,5 @@ void free_data(t_data *data);
 
 // print_structs.c
 void print_objects(t_data *data);
-
+int close_minirt(t_data *data);
 #endif

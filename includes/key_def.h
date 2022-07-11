@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_def.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:10:34 by mariasavino       #+#    #+#             */
-/*   Updated: 2022/07/08 19:54:24 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/11 10:34:08 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@
 #define CAM_UP 13
 #define CAM_DOWN 1
 
+typedef struct s_data t_data;
+int ft_key_hook(int keycode, t_data *data);
 #endif

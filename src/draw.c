@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:02:11 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:55:13 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray);//вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);
+	// printf("intens light: %f\n", intens_light);
 	// *dist.dot_normal = dot_normal(data, &dist, ray);
 	// intens_light = vector_scalar(*dist.dot_light, *dist.dot_normal) \
 	// 	/ vector_length(*dist.dot_light) / vector_length(*dist.dot_normal);
 	// // vector_normalize(dist.dot_light);
 	if (shadow_sphere(data, &dist, ray)) // тень есть
-		*color = draw_dot(data, &dist, 0);
-	// else if (shadow_plane)
-	// *color = draw_dot(data, &dist, 0);
-	// else if (shadow_cylinder)
-	// *color = draw_dot(data, &dist, 0);
-	else
 		*color = draw_dot(data, &dist, intens_light);
+	else if (shadow_plane(data, &dist, ray))
+		*color = draw_dot(data, &dist, intens_light);
+	// else if (shadow_cylinder(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, intens_light);
+	else
+		*color = draw_dot(data, &dist, 0);
 //	printf("intens_light = %f\n", intens_light);
 }
 
@@ -103,6 +104,5 @@ void ray_tracing(t_data *data)
 
 void draw(t_data *data)
 {
-
 	ray_tracing(data);
 }

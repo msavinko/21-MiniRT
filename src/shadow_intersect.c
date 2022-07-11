@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:13:22 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:55:04 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,32 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 	dist = (-1 * b - sqrt(discr)) / 2;
 	if (dist > 0.0f)
 		return (dist);
-	if (dist < 0.0f)
-		dist = (-1 * b + sqrt(discr)) / 2;
-	if (dist > 0.0f)
-		return (dist);
+	// if (dist < 0.0f)
+	// 	dist = (-1 * b + sqrt(discr)) / 2;
+	// else if (dist > 0.0f)
+	// 	return (dist);
 	return (0);
 }
 
-// float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
-// {
-// 	float	d;
-// 	float c;
-// 	float pn;
-// 	float dist;
+float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere)
+{
+	float	d;
+	float c;
+	float pn;
+	float dist;
 
-// 	c = vector_scalar(plane->orient_vector, ray);
-// 	if (c == 0)
-// 		return (0);
-// 	d =  plane->coord.z;
-// 	pn = vector_scalar(cam.view_point, plane->orient_vector);
-// 	dist = (d - pn) /c;
-// 	if (dist < 0)
-// 		return (0);
-// 	return (dist);
+	c = vector_scalar(plane->orient_vector, *dot_sphere);
+	if (c == 0)
+		return (0);
+	d =  plane->coord.z;
+	pn = vector_scalar(*dot_light, plane->orient_vector);
+	dist = (d - pn) /c;
+	if (dist < 0)
+		return (0);
+	return (dist);
+}
 
-// }
-
-// float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
+// float	cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot_cylind)
 // {
 // 	float	dist;
 // 	float	a;
@@ -63,7 +62,6 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 // 	float	discr;
 // 	t_coord	cam_cy;
 
-// 	cam_cy = vector_subtract(cylind->coord, cam.view_point);
 // 	vector_normalize(&cylind->orient_vector);
 // 	a = 1 - pow(vector_scalar(ray, cylind->orient_vector), 2);
 // 	b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray, cylind->orient_vector) * vector_scalar(cam_cy,cylind->orient_vector));
