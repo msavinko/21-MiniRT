@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 13:24:09 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/11 10:14:29 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_dist
 	int near_obj;
 	int n_obj;
 	struct s_coord *dot_light;
+	struct s_coord *dot_normal;
 }	t_dist;
 
 void draw(t_data *data);

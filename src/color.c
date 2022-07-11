@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 18:23:40 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/11 10:05:34 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int join_color(float r, float g, float b)
 	free(part2);
 	return (result);
 }
-unsigned int set_color(t_color color, t_data *data, int flag)
+unsigned int set_color(t_color color, t_data *data, int flag)// флаг 0 - тень есть, 1 - нет
 {
 	unsigned long result;
 	// char *res;
