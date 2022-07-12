@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 16:22:16 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:03:50 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 	int i = *ind;
 	int s = 0;
 	int p = 0;
+	int cy = 0;
 
 	while (s < data->objects.nsphere)
 	{
-		if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]))
+		if (sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[s]) != 0.0f)
 		{
 			*color = set_color(data->objects.sphere[s].color, data->scene.alight.light_range);
 			i++;
@@ -29,14 +30,18 @@ void draw_objects(t_data *data, t_coord *ray, int *color, int *ind)
 		}
 		s++;
 	}
-	if (cylindr_intersect(data->scene.camera, *ray,  &data->objects.cylind[0]))
+	while (cy < data->objects.ncylinder)
 	{
-		*color = set_color(data->objects.cylind[0].color, data->scene.alight.light_range);
-		return;
+		if (cylindr_intersect(data->scene.camera, *ray,  &data->objects.cylind[cy]) != 0.0f)
+		{
+			*color = set_color(data->objects.cylind[cy].color, data->scene.alight.light_range);
+			return;
+		}
+		cy++;
 	}
 	while (p < data->objects.nplane)
 	{
-		if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[p]))
+		if (plane_intersect(data->scene.camera, *ray,  &data->objects.plane[p]) != 0.0f)
 		{
 			*color = set_color(data->objects.plane[p].color, data->scene.alight.light_range);
 			return;
