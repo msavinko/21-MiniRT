@@ -16,6 +16,7 @@ FILES_SRC		=	main.c \
 					vector.c\
 					intersect.c\
 					color.c \
+					key_hook.c
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \

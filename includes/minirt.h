@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 15:46:12 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:12:10 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <math.h>
 #include "parser.h"
 #include "draw.h"
+#include "key_def.h"
 
 #define ESCAPE 53
 #define WIDTH_1 1920.00
@@ -131,6 +132,6 @@ void free_data(t_data *data);
 // print_structs.c
 void print_objects(t_data *data);
 
-
+int close_minirt(t_data *data);
 
 #endif

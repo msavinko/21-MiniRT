@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/12 12:41:33 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:29:33 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	float m;
 	float	discr;
 	t_coord	cam_cy;
-
+	t_coord disc2;
 	t_plane plane;
 
 	cam_cy = vector_subtract(cylind->coord, cam.view_point);
@@ -203,12 +203,16 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 		return (dist1);
 	m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);	
 	if (dist2 > 0.0f && m >= 0 && m <= cylind->height)
-	if (dist2 > 0.0f)
 		return (dist2);
 	plane.coord = cylind->coord;
 	plane.orient_vector = cylind->orient_vector;
 	plane.color = cylind->color;
 	if (disc_intersect(cam, ray, &plane, (cylind->diameter)/2) != 0.0f)
 		return (disc_intersect(cam, ray, &plane, (cylind->diameter)/2));
+	disc2 = cylind->orient_vector;
+    vector_multiply(&disc2, cylind->height);
+    plane.coord = vector_addition(cylind->coord, disc2);
+    if (disc_intersect(cam, ray, &plane, (cylind->diameter)/2))
+        return (disc_intersect(cam, ray, &plane, (cylind->diameter)/2));
 	return (0);
 }

@@ -3,29 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/04 10:39:18 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/12 15:11:39 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int close_minirt(void)
+int close_minirt(t_data *data)
 {
 	printf("\nExit\n");
+	free_data(data);
 	exit(0);
 	return (0);
 }
 
-int ft_key_hook(int keycode, t_data *data)
-{
-	(void)data;
-	if (keycode == ESCAPE)
-		close_minirt();
-	return (0);
-}
+
+// int ft_key_hook(int keycode, t_data *data)
+// {
+// 	(void)data;
+// 	if (keycode == ESCAPE)
+// 		close_minirt();
+// 	return (0);
+// }
 
 int main(int argc, char **argv)
 {
