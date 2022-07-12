@@ -3,30 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 10:32:32 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:48:59 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:54:58 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-// void ft_key_hook_camera(int keycode, t_data *data)
-// {
-// 	if (keycode == CAM_UP)
-// 	{
-// 		printf("cam up %f\n", data->scene.camera.orient_vector.y);
-// 		data->scene.camera.orient_vector.y += 0.1;
-// 	}
-// 	if (keycode == CAM_DOWN)
-// 		data->scene.camera.orient_vector.y -= 0.1;
-// 	if (keycode == CAM_RIGHT)
-// 		data->scene.camera.orient_vector.x += 0.1;
-// 	if (keycode == CAM_LEFT)
-// 		data->scene.camera.orient_vector.x -= 0.1;
-// }
+void ft_key_hook_camera(int keycode, t_data *data)
+{
+	if (keycode == CAM_UP)
+	{
+		if (data->scene.camera.orient_vector.y <= 1)
+			data->scene.camera.orient_vector.y += 0.1;
+	}
+	if (keycode == CAM_DOWN)
+	{
+		if (data->scene.camera.orient_vector.y >= -1)
+			data->scene.camera.orient_vector.y -= 0.1;
+	}
+	if (keycode == CAM_LEFT)
+	{
+		if (data->scene.camera.orient_vector.x <= 1)
+			data->scene.camera.orient_vector.x += 0.1;
+	}
+	if (keycode == CAM_RIGHT)
+	{
+		if (data->scene.camera.orient_vector.x >= -1)
+			data->scene.camera.orient_vector.x -= 0.1;
+	}
+}
 int ft_key_hook(int keycode, t_data *data)
 {
 	if (keycode == ESCAPE)
@@ -43,7 +51,7 @@ int ft_key_hook(int keycode, t_data *data)
 		data->scene.camera.view_point.z -= 1;
 	if (keycode == DIST_MIN)
 		data->scene.camera.view_point.z += 1;
-	// ft_key_hook_camera(keycode, data);
+	ft_key_hook_camera(keycode, data);
 	draw(data);
 	return (0);
 }
