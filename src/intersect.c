@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/12 12:05:58 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:41:33 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,18 +145,6 @@ float plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
             return (0);
         return (dist);
     }
-    // else if (c < -(1e-6))
-    // {
-    //     c = vector_scalar(vector3_negate(plane->orient_vector), ray);
-    //     pn = vector_scalar(d, vector3_negate(plane->orient_vector));
-    //     dist = pn / c;
-    //     if (dist < 0)
-    //         return (0);
-    //     return (dist);
-    // }
-	// dist = pn / ln;
-	// if (dist < 0)
-	// 	return (0);
 	return (0);	
 }
 
@@ -169,14 +157,9 @@ float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
 	float dist;
 	
 	t = 0;
-	// printf("color %f %f %f\n", plane->color.r, plane->color.g, plane->color.b);
-	// printf("cam %f %f %f \n", cam.view_point.x, cam.view_point.y, cam.view_point.z);
-	// printf("ray %f %f %f \n", ray.x, ray.y, ray.z);
 	t = plane_intersect(cam, ray, plane);
 	if (t != 0.0f)
 	{
-		//printf("I am in disc intersect\n");
-	//printf("plane.coord %f %f %f \n", plane->coord.x,plane->coord.y, plane->coord.z);
 		vector_multiply(&ray, t);
 		p = vector_addition(cam.view_point, ray);
 		v = vector_subtract(p, plane->coord); 
@@ -202,27 +185,20 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	float m;
 	float	discr;
 	t_coord	cam_cy;
-	//t_coord disc2;
+
 	t_plane plane;
 
-	//printf("cylind center %f, %f, %f\n", cylind->coord.x,  cylind->coord.y,  cylind->coord.z);
 	cam_cy = vector_subtract(cylind->coord, cam.view_point);
-	//printf("cylind orient %f, %f, %f\n", cylind->orient_vector.x,  cylind->orient_vector.y,  cylind->orient_vector.z);
 	vector_normalize(&cylind->orient_vector);
-	//printf("normalized cylind orient %f, %f, %f\n", cylind->orient_vector.x,  cylind->orient_vector.y,  cylind->orient_vector.z);
 	a = 1 - pow(vector_scalar(ray, cylind->orient_vector), 2);
 	b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray, cylind->orient_vector) * vector_scalar(cam_cy,cylind->orient_vector));
 	c = vector_scalar(cam_cy, cam_cy) - pow(vector_scalar(cam_cy, cylind->orient_vector), 2) - (cylind->diameter / 2) * (cylind->diameter / 2);
-	//printf("diametr %f\n", cylind->diameter);
-	//printf("height %f\n", cylind->height);
 	discr = (b * b) - (4.0f *a * c);
 	if (discr < 0.0f)
 		return (0);
 	dist1 = (-b - sqrtf(discr)) / (2 * a);
 	dist2 = (-b + sqrtf(discr)) / (2 * a);
 	m = vector_scalar(ray, cylind->orient_vector) * dist1 - vector_scalar(cam_cy, cylind->orient_vector);
-	//printf("m %f\n", m);
-	//if (dist1 > 0)
 	if (dist1 > 0.0f && m >= 0 && m <= cylind->height)
 		return (dist1);
 	m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);	
@@ -234,10 +210,5 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	plane.color = cylind->color;
 	if (disc_intersect(cam, ray, &plane, (cylind->diameter)/2) != 0.0f)
 		return (disc_intersect(cam, ray, &plane, (cylind->diameter)/2));
-	// disc2 = cylind->orient_vector;
-	// vector_multiply(&disc2, cylind->height);
-	// plane.coord = vector_addition(cylind->coord, disc2);
-	// if (disc_intersect(cam, ray, &plane, (cylind->diameter)/2))
-	// 	return (disc_intersect(cam, ray, &plane, (cylind->diameter)/2));
 	return (0);
 }
