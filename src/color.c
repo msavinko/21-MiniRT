@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 13:48:43 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 15:08:56 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,17 @@ int join_color(float r, float g, float b)
 
 	part1 = ft_strjoin(str_r, str_g);
 	part2 = ft_strjoin(part1, str_b);
-	if (r)
-		free(str_r);
-	if (g)
-		free(str_g);
-	if (b)
-		free(str_b);
-	free(part1);
+	// if (r)
+	// 	free(str_r);
+	// if (g)
+	// 	free(str_g);
+	// if (b)
+	// 	free(str_b);
+	// if (part1)
+	// 	free(part1);
 	result = htoi(part2);
-	free(part2);
+	// if (part2)
+	// 	free(part2);
 	return (result);
 }
 unsigned int set_color(t_color color, t_data *data, float flag)// флаг 0 - тень есть, 1 - нет
@@ -115,7 +117,7 @@ unsigned int set_color(t_color color, t_data *data, float flag)// флаг 0 - �
 	return (result);
 }
 
-int draw_dot(t_data *data, t_dist *dist, float flag)
+int	draw_dot(t_data *data, t_dist *dist, float flag)// флаг 0 - тень есть, 1 - нет
 {
 	int res;
 

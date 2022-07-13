@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:53:17 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 15:29:44 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #define WIDTH_1 1920.00
 #define HEIGHT_1 1080.00
 
-#define WIDTH 800.00
-#define HEIGHT 600.00
+#define WIDTH 1200.00
+#define HEIGHT 800.00
 
 
 typedef struct s_color //ЦВЕТ
