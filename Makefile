@@ -12,7 +12,6 @@ HEADER_RT		=	$(addprefix includes/, \
 DIR_LIB			=	libft/
 LIBFT			=	$(DIR_LIB)libft.a
 
-#include your directory name and files here
 DIR_SRC			=	src/
 FILES_SRC		=	main.c \
 					print_structs.c \
@@ -36,7 +35,7 @@ FILES_PARSE		=	parser.c \
 
 SRCS_SRC		=	$(addprefix $(DIR_SRC), $(FILES_SRC))
 SRCS_PARSE		=	$(addprefix $(DIR_PARSE), $(FILES_PARSE))
-OBJS_SRC		=	$(SRCS_SRC:%.c=%.o) $(SRCS_PARSE:%.c=%.o)
+OBJS_SRC		=	$(addprefix objects/, $(FILES_SRC:%.c=%.o) $(FILES_PARSE:%.c=%.o))
 
 
 CC				=	cc
@@ -54,6 +53,7 @@ all		:	mlx libft $(NAME_RT)
 
 mlx:
 			@make -C $(MLX_PATH)
+			echo "$(OBJS_SRC)"
 
 libft	:
 			@make -C $(DIR_LIB)
@@ -61,7 +61,10 @@ libft	:
 $(NAME_RT)	:	 $(OBJS_SRC) $(MLX_PATH)$(MLX)
 			$(CC) $(OBJS_SRC) $(LIBFT) $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@
 
-%.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
+objects/%.o	:	src/%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
+			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
+
+objects/%.o	:	parser/%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
 
 clean	:
