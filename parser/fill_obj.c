@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:45:19 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/11 10:14:18 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 11:53:48 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	fill_sp(char *str, t_sphere *sphere)
 	fill_coord(&i, str, &sphere->coord);
 	while_space(&i, str);
 	sphere->radius = ft_atof(&str[i]) / 2;
+
 	while_space(&i, str);
 	fill_color(&i, str, &sphere->color);
 	if (sphere->color.r < 0 || sphere->color.r > 255 || sphere->color.g < 0

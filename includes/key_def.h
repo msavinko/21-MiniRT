@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:10:34 by mariasavino       #+#    #+#             */
-/*   Updated: 2022/07/11 10:34:08 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 11:53:00 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 #define RIGHT 124
 #define DIST_PLUS 24
 #define DIST_MIN 27
-#define CAM_LEFT 0
-#define CAM_RIGHT 2
-#define CAM_UP 13
-#define CAM_DOWN 1
+
+#define	W 13
+#define A 0
+#define S 1
+#define D 2
 
 typedef struct s_data t_data;
 int ft_key_hook(int keycode, t_data *data);
