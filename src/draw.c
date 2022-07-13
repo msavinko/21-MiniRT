@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/12 16:10:23 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/13 10:44:30 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ void ray_tracing(t_data *data)
 	mlx_y = 0;
 	y_angle = HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
 	//y_angle = HEIGHT / 2.0f;
-	while (y_angle > (-1 * HEIGHT / 2.0f))
+	while (y_angle > (-1 * HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
 	{
 		y_ray = y_angle * data->screen.y_pixel;
 		//x_angle = -1.0f * WIDTH / 2.0f;
 		x_angle = -1.0f * WIDTH / 2.0f + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
 		mlx_x = 0;
-		while (x_angle < WIDTH / 2.0f)
+		while (x_angle < WIDTH / 2.0f + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
 		{
 			x_ray = x_angle * data->screen.x_pixel;
-			//ray = new_vector3(x_ray, y_ray, -1.0f);
-			ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z); // -1 только когда камера в 000 и направлена на -1
+			ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z);
+			//ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z); // -1 только когда камера в 000 и направлена на -1
 												 //			printf("x_angle = %f, data->screen.x_pixel = %f, ray.x = %f, ray.y = %f, ray.z = %f\n", x_angle, data->screen.x_pixel, ray.x, ray.y, ray.z);
 			vector_normalize(&ray);
 			draw_objects(data, &ray, &color, &i);

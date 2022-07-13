@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/12 14:29:33 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:03:41 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ float	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	float	c;
 	float	discr;
 	float	dist;
+	float	dist2;
 	t_coord	cam_sphere;
 	t_coord	a;
 	float a2;
@@ -56,10 +57,13 @@ float	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	if (discr < 0)
 		return (0);
 	dist = (-1 * b - sqrtf(discr)) / 2;
+	dist2 = (-1 * b + sqrtf(discr)) / 2;
 	//printf("dist %f\n", dist);
 	//printf("k1 %f, k2 %f, k3 %f, discr %f, dist %f\n", k1, k2, k3, discr, dist);
 	if (dist > 0.0f)
 		return (dist);
+	else if (dist2 > 0)
+		return (dist2);
 	return (0);
 }
 // Пока оставим без внимания случай, когда камера внутри сферы, иначе надо добавить второй корень, определение,
