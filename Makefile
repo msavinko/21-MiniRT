@@ -1,7 +1,12 @@
 NAME_RT			=	miniRT
 
 INCLUDES_RT		=	includes/
-HEADER_RT		=	includes/minirt.h
+HEADER_RT		=	$(addprefix includes/, \
+					draw.h \
+					key_def.h \
+					minirt.h \
+					parser.h \
+					)
 
 #LIBFT
 DIR_LIB			=	libft/
