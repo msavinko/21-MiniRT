@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/09 13:37:41 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:53:16 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ unsigned long htoi(const char *s)
 	return (n);
 }
 
-unsigned int set_color(t_color color, t_data *data, int flag)
+unsigned int set_color(t_color color, t_data *data, float flag)
 {
 	unsigned long result;
 	char *res;
@@ -69,18 +69,19 @@ unsigned int set_color(t_color color, t_data *data, int flag)
 	float b;
 	float tmp;
 
-	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;// надо умножить на косинус между векторм dot_light и нормалью к объекту
-	if (tmp > 255)
-		tmp = 255;
-	r = color.r * tmp / 255;
-	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
-	if (tmp > 255)
-		tmp = 255;
-	g = color.g * tmp / 255;
-	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
-	if (tmp > 255)
-		tmp = 255;
-	b = color.b * tmp / 255;
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255.0f;// надо умножить на косинус между векторм dot_light и нормалью к объекту
+//	printf("tmp = %f flag = %f data->scene.light.bright = %f\n", tmp, flag, data->scene.light.bright);
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	r = color.r * tmp / 255.0f;
+	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * 255.0f;
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	g = color.g * tmp / 255.0f;
+	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * 255.0f;
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	b = color.b * tmp / 255.0f;
 
 	res = ft_strjoin(ft_dectohex(r), ft_dectohex(g));
 	res = ft_strjoin(res, ft_dectohex(b));
@@ -88,7 +89,7 @@ unsigned int set_color(t_color color, t_data *data, int flag)
 	return (result);
 }
 
-int	draw_dot(t_data *data, t_dist *dist, int flag)// флаг 0 - тень есть, 1 - нет
+int	draw_dot(t_data *data, t_dist *dist, float flag)// флаг 0 - тень есть, 1 - нет
 {
 	int res;
 

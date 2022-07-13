@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/09 14:43:47 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:45:55 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ float	dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 		normal.y = ray->y - data->objects.sphere[dist->n_obj].coord.y;
 		normal.z = ray->z - data->objects.sphere[dist->n_obj].coord.z;
 //	}
-	intens_light = vector_scalar(*dist->dot_light, normal) \
-	 	/ vector_length(*dist->dot_light) / vector_length(normal);
+	vector_normalize(&normal);
+	vector_normalize(dist->dot_light);
+	intens_light = vector_scalar(*dist->dot_light, normal);// \
+	// 	/ vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0)
-		intens_light *= -1;
+		intens_light = 0;
 //	printf("intens_light = %f\n", intens_light);
 	return (intens_light);
 }
@@ -51,18 +53,26 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray);//вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);
+
 	// *dist.dot_normal = dot_normal(data, &dist, ray);
 	// intens_light = vector_scalar(*dist.dot_light, *dist.dot_normal) \
 	// 	/ vector_length(*dist.dot_light) / vector_length(*dist.dot_normal);
 	// // vector_normalize(dist.dot_light);
-	if (shadow_sphere(data, &dist, ray)) // тень есть
+//	printf(" %f\n", intens_light);
+	if (shadow_sphere(data, &dist, ray))
+	{
+		// printf("!!\n");
 		*color = draw_dot(data, &dist, 0);
+	}
 	// else if (shadow_plane)
 	// *color = draw_dot(data, &dist, 0);
 	// else if (shadow_cylinder)
 	// *color = draw_dot(data, &dist, 0);
 	else
+	{
+		// printf("intens_light %f\n", intens_light);
 		*color = draw_dot(data, &dist, intens_light);
+	}
 //	printf("intens_light = %f\n", intens_light);
 }
 
