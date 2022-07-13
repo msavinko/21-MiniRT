@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:03:41 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:17:18 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,10 +203,10 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	dist1 = (-b - sqrtf(discr)) / (2 * a);
 	dist2 = (-b + sqrtf(discr)) / (2 * a);
 	m = vector_scalar(ray, cylind->orient_vector) * dist1 - vector_scalar(cam_cy, cylind->orient_vector);
-	if (dist1 > 0.0f && m >= 0 && m <= cylind->height)
+	if (dist1 > 0.0f && m >= 0 && m <= cylind->height && dist1 < dist2)
 		return (dist1);
 	m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);	
-	if (dist2 > 0.0f && m >= 0 && m <= cylind->height)
+	if (dist2 > 0.0f && m >= 0 && m <= cylind->height && dist1 < 0)
 		return (dist2);
 	plane.coord = cylind->coord;
 	plane.orient_vector = cylind->orient_vector;
