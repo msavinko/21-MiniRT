@@ -24,6 +24,7 @@ FILES_SRC		=	main.c \
 					shadow.c \
 					shadow_intersect.c \
 					key_hook.c \
+					mouse_hook.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \

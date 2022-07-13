@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:52:45 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 13:21:23 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
+# define DISK 4
 # define BACK 11988192
 
 typedef struct s_scene t_scene;
@@ -81,4 +82,7 @@ float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
 float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
+
+
+
 #endif

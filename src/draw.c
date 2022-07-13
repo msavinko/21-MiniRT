@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:54:53 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 14:46:40 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 	//	}
 	intens_light = vector_scalar(*dist->dot_light, normal) / vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0)
-		intens_light *= -1;
+		intens_light = 0;
 	//	printf("intens_light = %f\n", intens_light);
 	return (intens_light);
 }
