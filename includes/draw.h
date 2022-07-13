@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 13:24:09 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/13 11:52:45 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_dist
 	int near_obj;
 	int n_obj;
 	struct s_coord *dot_light;
+	struct s_coord *dot_normal;
 }	t_dist;
 
 void draw(t_data *data);
@@ -62,7 +63,7 @@ float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
 char *ft_dectohex(unsigned int num);
 unsigned long htoi(const char *s);
 
-int	draw_dot(t_data *data, t_dist *dist, int flag);
+int	draw_dot(t_data *data, t_dist *dist, float flag);
 
 //dist_obj.c
 void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray);
@@ -71,9 +72,13 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow.c
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
+int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 
+float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
+float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
+float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
 
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
-
+float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
 #endif

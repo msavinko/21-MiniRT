@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 18:23:40 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/11 13:48:43 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,34 +86,36 @@ int join_color(float r, float g, float b)
 	free(part2);
 	return (result);
 }
-unsigned int set_color(t_color color, t_data *data, int flag)
+unsigned int set_color(t_color color, t_data *data, float flag)// флаг 0 - тень есть, 1 - нет
 {
 	unsigned long result;
-	// char *res;
 	float r;
 	float g;
 	float b;
 	float tmp;
+	float col;
 
-	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
-	if (tmp > 255)
-		tmp = 255;
-	r = color.r * tmp / 255;
-	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
-	if (tmp > 255)
-		tmp = 255;
-	g = color.g * tmp / 255;
-	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * 255;
-	if (tmp > 255)
-		tmp = 255;
-	b = color.b * tmp / 255;
+	col = 255.0f;
+
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * col;
+	if (tmp > col)
+		tmp = col;
+	r = color.r * tmp / col;
+	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * col;
+	if (tmp > col)
+		tmp = col;
+	g = color.g * tmp / col;
+	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * col;
+	if (tmp > col)
+		tmp = col;
+	b = color.b * tmp / col;
 
 	result = join_color(r, g, b);
 
 	return (result);
 }
 
-int draw_dot(t_data *data, t_dist *dist, int flag)
+int draw_dot(t_data *data, t_dist *dist, float flag)
 {
 	int res;
 
@@ -121,16 +123,14 @@ int draw_dot(t_data *data, t_dist *dist, int flag)
 	{
 		res = set_color(data->objects.sphere[dist->n_obj].color, data, flag);
 	}
-	// else if (dist->near_obj == 2)
-	// {
-	// 	res = set_color(data->objects.plane[dist->n_obj].color,
-	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
-	// }
-	// else if (dist->near_obj == 3)
-	// {
-	// 	res = set_color(data->objects.cylind[dist->n_obj].color,
-	// 			data->scene.alight.light_range, data->scene.alight.color, flag);
-	// }
+	else if (dist->near_obj == 2)
+	{
+		res = set_color(data->objects.plane[dist->n_obj].color, data, flag);
+	}
+	else if (dist->near_obj == 3)
+	{
+		res = set_color(data->objects.cylind[dist->n_obj].color, data, flag);
+	}
 	else
 		res = BACK;
 	return (res);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 19:11:39 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/13 11:53:17 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 #define WIDTH 800.00
 #define HEIGHT 600.00
+
 
 typedef struct s_color //ЦВЕТ
 {
@@ -129,5 +130,5 @@ void free_data(t_data *data);
 
 // print_structs.c
 void print_objects(t_data *data);
-
+int close_minirt(t_data *data);
 #endif

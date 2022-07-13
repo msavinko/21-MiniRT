@@ -1,7 +1,12 @@
 NAME_RT			=	miniRT
 
 INCLUDES_RT		=	includes/
-HEADER_RT		=	includes/minirt.h
+HEADER_RT		=	$(addprefix includes/, \
+					draw.h \
+					key_def.h \
+					minirt.h \
+					parser.h \
+					)
 
 #LIBFT
 DIR_LIB			=	libft/
@@ -19,6 +24,7 @@ FILES_SRC		=	main.c \
 					dist_obj.c \
 					shadow.c \
 					shadow_intersect.c \
+					key_hook.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
@@ -53,7 +59,7 @@ libft	:
 			@make -C $(DIR_LIB)
 
 $(NAME_RT)	:	 $(OBJS_SRC) $(MLX_PATH)$(MLX)
-			$(CC) $(OBJS_SRC) $(LIBFT)  $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@
+			$(CC) $(OBJS_SRC) $(LIBFT) $(MLX_PATH)$(MLX) $(MLX_FLAGS) -o $@
 
 %.o	:	%.c $(LIBFT) $(HEADER_RT) $(MLX_PATH)$(MLX) Makefile
 			$(CC) $(CFLAGS) -I $(INCLUDES_RT) -c $< -o $@
