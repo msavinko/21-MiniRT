@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/12 15:12:10 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:29:44 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@
 #include "draw.h"
 #include "key_def.h"
 
-#define ESCAPE 53
 #define WIDTH_1 1920.00
 #define HEIGHT_1 1080.00
 
-#define WIDTH 800.00
-#define HEIGHT 600.00
+#define WIDTH 1200.00
+#define HEIGHT 800.00
 
 
 typedef struct s_color //ЦВЕТ
 {
-	float r;
-	float g;
-	float b;
+	int r;
+	int g;
+	int b;
 } t_color;
 
 typedef struct s_coord //КООРДИНАТЫ
@@ -109,10 +108,10 @@ typedef struct s_scene //СТРУКТУРА С ОБЩИМ СВЕТОМ, КАМЕ
 
 typedef struct s_screen // ЭКРАН
 {
-	float	width;
-	float	height;
-	float	x_pixel;
-	float	y_pixel;
+	float width;
+	float height;
+	float x_pixel;
+	float y_pixel;
 	// float	fov;
 } t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
@@ -131,7 +130,5 @@ void free_data(t_data *data);
 
 // print_structs.c
 void print_objects(t_data *data);
-
 int close_minirt(t_data *data);
-
 #endif

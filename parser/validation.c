@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:54 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/30 13:52:44 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/07 14:19:58 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void capital_valid(t_parser *pars)
+void	capital_valid(t_parser *pars)
 {
-	int i;
-	int a;
-	int c;
-	int l;
+	int	i;
+	int	a;
+	int	c;
+	int	l;
 
 	i = 0;
 	a = 0;
@@ -38,9 +38,9 @@ void capital_valid(t_parser *pars)
 		letter can only be declared once in the scene");
 }
 
-void obj_valid(t_parser *pars, t_objects *obj)
+void	obj_valid(t_parser *pars, t_objects *obj)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	obj->nplane = 0;
@@ -56,15 +56,15 @@ void obj_valid(t_parser *pars, t_objects *obj)
 			obj->ncylinder++;
 		i++;
 	}
-	if (!obj->nplane || !obj->nsphere || !obj->ncylinder)
-		error_parser("You need at least these 3 simple geometric objects: plane, sphere, cylinder.");
-	// printf("plane: %d, sphere: %d, cylinder: %d", obj->nplane, obj->nsphere, obj->ncylinder);
+	if (!obj->nplane && !obj->nsphere && !obj->ncylinder)
+		error_parser("You need at least one of these 3 simple \
+		geometric objects: plane, sphere, cylinder.");
 }
 
-void letters_valid(t_parser *pars)
+void	letters_valid(t_parser *pars)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -74,15 +74,14 @@ void letters_valid(t_parser *pars)
 			j++;
 		while (pars->map[i][j])
 		{
-			// printf("1 %c\n", pars->map[i][j]);
 			while (ft_isspace(pars->map[i][j]))
 				j++;
-			// printf("2 %c\n", pars->map[i][j]);
-			if (ft_isdigit(pars->map[i][j]) || pars->map[i][j] == '.' || pars->map[i][j] == ',' || pars->map[i][j] == '-' || pars->map[i][j] == '+')
+			if (ft_isdigit(pars->map[i][j]) || pars->map[i][j] == '.'
+				|| pars->map[i][j] == ',' || pars->map[i][j] == '-'
+				|| pars->map[i][j] == '+')
 				j++;
 			else
 				error_parser("Map contains non-valid caracters");
-			// printf("3 %c\n", pars->map[i][j]);
 		}
 		j = 0;
 		i++;
