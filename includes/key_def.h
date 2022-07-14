@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_def.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:10:34 by mariasavino       #+#    #+#             */
-/*   Updated: 2022/07/13 14:43:43 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 15:58:21 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,22 @@
 #define S 1
 #define D 2
 
+#define X 7
+#define Y 16
+#define Z 6
+
+#define L 37
+#define K 40
+
+#define O 31
+
+#define R 15
+
+#define E 14
+
+
 typedef struct s_data t_data;
 int ft_key_hook(int keycode, t_data *data);
+int ft_mouse_hook(int mousecode, int x, int y, t_data *data);
 
 #endif

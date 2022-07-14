@@ -1,20 +1,26 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/rdanyell/Desktop/minirt_rdan'
+make: Entering directory `/Users/rdanyell/Desktop/minirt_rdan1407'
 make -C mlx_1/
+echo "objects/main.o objects/print_structs.o objects/free_all.o objects/draw.o objects/vector.o objects/intersect.o objects/color.o objects/dist_obj.o objects/shadow.o objects/shadow_intersect.o objects/key_hook.o objects/mouse_hook.o objects/parser.o objects/validation.o objects/init_parser.o objects/init_parser2.o objects/fill_obj.o objects/fill_scene.o"
 make -C libft/
-cc -Wall -Wextra -Werror -g -I includes/ -c src/main.c -o src/main.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/print_structs.c -o src/print_structs.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/free_all.c -o src/free_all.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/draw.c -o src/draw.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/vector.c -o src/vector.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/intersect.c -o src/intersect.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/color.c -o src/color.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/key_hook.c -o src/key_hook.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/parser.c -o parser/parser.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/validation.c -o parser/validation.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/init_parser.c -o parser/init_parser.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_obj.c -o parser/fill_obj.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_scene.c -o parser/fill_scene.o
-cc src/main.o src/print_structs.o src/free_all.o src/draw.o src/vector.o src/intersect.o src/color.o src/key_hook.o parser/parser.o parser/validation.o parser/init_parser.o parser/fill_obj.o parser/fill_scene.o libft/libft.a  mlx_1/libmlx.a -framework OpenGL -framework AppKit -o miniRT
-make: Leaving directory `/Users/rdanyell/Desktop/minirt_rdan'
+cc -Wall -Wextra -Werror -g -I includes/ -c src/main.c -o objects/main.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/print_structs.c -o objects/print_structs.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/free_all.c -o objects/free_all.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/draw.c -o objects/draw.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/vector.c -o objects/vector.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/intersect.c -o objects/intersect.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/color.c -o objects/color.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/dist_obj.c -o objects/dist_obj.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/shadow.c -o objects/shadow.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/shadow_intersect.c -o objects/shadow_intersect.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/key_hook.c -o objects/key_hook.o
+cc -Wall -Wextra -Werror -g -I includes/ -c src/mouse_hook.c -o objects/mouse_hook.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/parser.c -o objects/parser.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/validation.c -o objects/validation.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/init_parser.c -o objects/init_parser.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/init_parser2.c -o objects/init_parser2.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_obj.c -o objects/fill_obj.o
+cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_scene.c -o objects/fill_scene.o
+cc objects/main.o objects/print_structs.o objects/free_all.o objects/draw.o objects/vector.o objects/intersect.o objects/color.o objects/dist_obj.o objects/shadow.o objects/shadow_intersect.o objects/key_hook.o objects/mouse_hook.o objects/parser.o objects/validation.o objects/init_parser.o objects/init_parser2.o objects/fill_obj.o objects/fill_scene.o libft/libft.a mlx_1/libmlx.a -framework OpenGL -framework AppKit -o miniRT
+make: Leaving directory `/Users/rdanyell/Desktop/minirt_rdan1407'
  
