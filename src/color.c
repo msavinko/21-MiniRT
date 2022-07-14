@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 11:42:05 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 12:12:53 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,15 +121,16 @@ int	draw_dot(t_data *data, t_dist *dist, float flag)// флаг 0 - тень е�
 {
 	int res;
 
-	if (dist->near_obj == 1)
+	if (dist->near_obj == SPHERE)
 	{
 		res = set_color(data->objects.sphere[dist->n_obj].color, data, flag);
 	}
-	else if (dist->near_obj == 2)
+	else if (dist->near_obj == PLANE)
 	{
 		res = set_color(data->objects.plane[dist->n_obj].color, data, flag);
 	}
-	else if (dist->near_obj == 3 || dist->near_obj == 4)
+	else if (dist->near_obj == CYLINDER || dist->near_obj == BOTTOM_DISK
+		|| dist->near_obj == TOP_DISK)
 	{
 		res = set_color(data->objects.cylind[dist->n_obj].color, data, flag);
 	}

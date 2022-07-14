@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 11:49:07 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 12:32:29 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 	}
 	else if (dist->near_obj == CYLINDER)
 		normal_cylind(data, dist, ray, &normal);
-	else if (dist->near_obj == LOWER_DISK)
+	else if (dist->near_obj == BOTTOM_DISK)
 	{
 		normal.x = data->objects.cylind[dist->n_obj].orient_vector.x;
 		normal.y = data->objects.cylind[dist->n_obj].orient_vector.y;
 		normal.z = data->objects.cylind[dist->n_obj].orient_vector.z;
 	}
-	else if (dist->near_obj == UPPER_DISK)
+	else
 	{
 		normal.x = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.x;
 		normal.y = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.y;
@@ -61,7 +61,7 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 	}
 //	vector_normalize(&normal);
 //	vector_normalize(dist->dot_light);
-	intens_light = vector_scalar(*dist->dot_light, normal) \
+	intens_light = vector_scalar(*dist->dot_light, normal)
 	 	/ vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0)
 		intens_light = 0;

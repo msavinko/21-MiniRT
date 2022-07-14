@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 11:37:06 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 12:11:26 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
-# define LOWER_DISK 4
-# define UPPER_DISK 5
+# define BOTTOM_DISK 4
+# define TOP_DISK 5
 # define BACK 11988192
 
 typedef struct s_scene t_scene;
@@ -43,6 +43,14 @@ typedef struct	s_dist
 	struct s_coord *dot_normal;
 }	t_dist;
 
+typedef struct s_coef
+{
+	float	a;
+	float	b;
+	float	c;
+	float	discr;
+}	t_coef;
+
 void draw(t_data *data);
 void ray_tracing(t_data *data);
 void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist);
@@ -59,7 +67,7 @@ t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
+float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind, t_dist *dist, int *i);
 
 // float set_color(t_color color);
 char *ft_dectohex(unsigned int num);
@@ -75,10 +83,6 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 //shadow.c
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
-
-// float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
-// float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
-// float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
 
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
