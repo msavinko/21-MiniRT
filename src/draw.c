@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 12:32:29 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 15:11:10 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 		*color = draw_dot(data, &dist, 0);
 	if (shadow_plane(data, &dist, ray))
 		*color = draw_dot(data, &dist, 0);
-	// else if (shadow_cylinder)
-	// *color = draw_dot(data, &dist, 0);
+	else if (shadow_cylinder(data, &dist, ray))
+	*color = draw_dot(data, &dist, 0);
 	else
 		*color = draw_dot(data, &dist, intens_light);
 	if (dist.dot_light)

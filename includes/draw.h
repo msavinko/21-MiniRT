@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 12:11:26 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 15:16:17 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,19 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 //shadow.c
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
+int shadow_cylinder(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
-float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
+float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot);
+
+float shadow_disk_plane_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane);
+float	shadow_disc_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane, float r);
+void	shadow_get_discr(t_coord *dot_light, t_cylind *cylind, t_coord *dot, t_coef *coef);
+float	shadow_pipe_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot);
+float   shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot);
+
+
 
 
 

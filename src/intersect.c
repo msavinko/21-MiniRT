@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 12:32:41 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:41:36 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,15 @@ t_coord vector3_negate(t_coord a)
     return (a);
 }
 
-float plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
+float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
 {
-	// t_coord pc;
 	t_coord	d;
 	float pn;
-	//float ln;
 	float c;
 	float dist;
 
-	//pc = vector_subtract(plane->coord, cam.view_point);
-	//pn = vector_scalar(pc, plane->orient_vector);
-	//ln = vector_scalar(ray, plane->orient_vector);
 	c = vector_scalar(plane->orient_vector, ray);
 	d = vector_subtract(plane->coord, cam.view_point);
-   // if (c > 1e-6)
 	if (c != 0)
     {
         pn = vector_scalar(d, plane->orient_vector);
@@ -74,25 +68,20 @@ float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
 {
 	t_coord	p;
 	t_coord	v;
-	float d;
 	float t;
 	float dist;
 
-	t = 0;
 	t = plane_intersect(cam, ray, plane);
 	if (t != 0.0f)
 	{
 		vector_multiply(&ray, t);
 		p = vector_addition(cam.view_point, ray);
 		v = vector_subtract(p, plane->coord);
-		d = vector_scalar(v, v);
-		dist = sqrtf(d);
+		dist = sqrtf(vector_scalar(v, v));
 		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
 			return (t);
 		if (dist <= r)
-		{
 			return (t);
-		}
 	}
 	return (0);
 }
@@ -100,16 +89,14 @@ float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
 void	get_discr(struct s_camera cam, t_coord ray,  t_cylind *cylind, t_coef *coef)
 {
 	t_coord cam_cy;
-	// float	a;
-	// float	b;
-	// float	c;
-	// float	discr;
 
 	cam_cy = vector_subtract(cylind->coord, cam.view_point);
 	vector_normalize(&cylind->orient_vector);
 	coef->a = 1 - pow(vector_scalar(ray, cylind->orient_vector), 2);
-	coef->b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray, cylind->orient_vector) * vector_scalar(cam_cy,cylind->orient_vector));
-	coef->c = vector_scalar(cam_cy, cam_cy) - pow(vector_scalar(cam_cy, cylind->orient_vector), 2) - (cylind->diameter / 2) * (cylind->diameter / 2);
+	coef->b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray,
+		cylind->orient_vector) * vector_scalar(cam_cy,cylind->orient_vector));
+	coef->c = vector_scalar(cam_cy, cam_cy) - pow(vector_scalar(cam_cy,
+		cylind->orient_vector), 2) - (cylind->diameter / 2) * (cylind->diameter / 2);
 	coef->discr = (coef->b * coef->b) - (4.0f * coef->a * coef->c);
 }
 
