@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 14:50:32 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 17:17:32 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
-# define DISK 4
+# define BOTTOM_DISK 4
+# define TOP_DISK 5
 # define BACK 11988192
 
 typedef struct s_scene t_scene;
@@ -39,8 +40,15 @@ typedef struct	s_dist
 	int near_obj;
 	int n_obj;
 	struct s_coord *dot_light;
-	struct s_coord *dot_normal;
 }	t_dist;
+
+typedef struct s_coef
+{
+	float	a;
+	float	b;
+	float	c;
+	float	discr;
+}	t_coef;
 
 void draw(t_data *data);
 void ray_tracing(t_data *data);
@@ -58,11 +66,11 @@ t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
+float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind, t_dist *dist, int *i);
 
 // float set_color(t_color color);
-char *ft_dectohex(unsigned int num);
-unsigned long htoi(const char *s);
+// char *ft_dectohex(unsigned int num);
+// unsigned long htoi(const char *s);
 
 int	draw_dot(t_data *data, t_dist *dist, float flag);
 
@@ -74,14 +82,19 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 //shadow.c
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
-
-float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
-float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
+int shadow_cylinder(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow_intersect.c
-float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
-float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
+int shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
+int	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot);
+int	shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot);
+
+float shadow_disk_plane_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane);
+float	shadow_disc_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane, float r);
+void	shadow_get_discr(t_coord *dot_light, t_cylind *cylind, t_coord *dot, t_coef *coef);
+float	shadow_pipe_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot);
+
+
 
 
 

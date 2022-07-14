@@ -6,21 +6,19 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 15:08:56 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 17:02:47 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-char *ft_dectohex(unsigned int num)
+char	*ft_dectohex(int num)
 {
-	char *hex;
-	char c;
-	int i;
-	unsigned int temp;
+	char	*hex;
+	char	c;
+	int		i;
+	int		temp;
 
-	if (!num)
-		return ("00");
 	hex = malloc(sizeof(char) * 3);
 	hex[3] = '\0';
 	temp = num;
@@ -38,10 +36,10 @@ char *ft_dectohex(unsigned int num)
 	return (hex);
 }
 
-unsigned long htoi(const char *s)
+int	htoi(const char *s)
 {
-	int i;
-	int n;
+	int	i;
+	int	n;
 
 	n = 0;
 	i = 0;
@@ -60,79 +58,65 @@ unsigned long htoi(const char *s)
 	return (n);
 }
 
-int join_color(float r, float g, float b)
+void	join_color(float r, float g, float b, int *result)
 {
-	char *part1;
-	char *part2;
-	char *str_r;
-	char *str_g;
-	char *str_b;
-	int result;
+	char	*part1;
+	char	*part2;
+	char	*str_r;
+	char	*str_g;
+	char	*str_b;
 
 	str_r = ft_dectohex(r);
 	str_g = ft_dectohex(g);
 	str_b = ft_dectohex(b);
-
 	part1 = ft_strjoin(str_r, str_g);
 	part2 = ft_strjoin(part1, str_b);
-	// if (r)
-	// 	free(str_r);
-	// if (g)
-	// 	free(str_g);
-	// if (b)
-	// 	free(str_b);
-	// if (part1)
-	// 	free(part1);
-	result = htoi(part2);
-	// if (part2)
-	// 	free(part2);
-	return (result);
+	*result = htoi(part2);
+	free(str_r);
+	free(str_g);
+	free(str_b);
+	free(part1);
+	free(part2);
 }
-unsigned int set_color(t_color color, t_data *data, float flag)// флаг 0 - тень есть, 1 - нет
+
+int	set_color(t_color color, t_data *data, float flag)// 0 - тень, 1 - нет
 {
-	unsigned long result;
-	float r;
-	float g;
-	float b;
-	float tmp;
-	float col;
+	int		result;
+	float	r;
+	float	g;
+	float	b;
+	float	tmp;
 
-	col = 255.0f;
-
-	tmp = data->scene.alight.color.r * data->scene.alight.light_range + flag * data->scene.light.bright * col;
-	if (tmp > col)
-		tmp = col;
-	r = color.r * tmp / col;
-	tmp = data->scene.alight.color.g * data->scene.alight.light_range + flag * data->scene.light.bright * col;
-	if (tmp > col)
-		tmp = col;
-	g = color.g * tmp / col;
-	tmp = data->scene.alight.color.b * data->scene.alight.light_range + flag * data->scene.light.bright * col;
-	if (tmp > col)
-		tmp = col;
-	b = color.b * tmp / col;
-
-	result = join_color(r, g, b);
-
+	tmp = data->scene.alight.color.r * data->scene.alight.light_range
+		+ flag * data->scene.light.bright * 255.0f;
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	r = color.r * tmp / 255.0f;
+	tmp = data->scene.alight.color.g * data->scene.alight.light_range
+		+ flag * data->scene.light.bright * 255.0f;
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	g = color.g * tmp / 255.0f;
+	tmp = data->scene.alight.color.b * data->scene.alight.light_range
+		+ flag * data->scene.light.bright * 255.0f;
+	if (tmp > 255.0f)
+		tmp = 255.0f;
+	b = color.b * tmp / 255.0f;
+	join_color(r, g, b, &result);
 	return (result);
 }
 
-int	draw_dot(t_data *data, t_dist *dist, float flag)// флаг 0 - тень есть, 1 - нет
+int	draw_dot(t_data *data, t_dist *dist, float flag)// 0 - тень, 1 - нет
 {
-	int res;
+	int	res;
 
-	if (dist->near_obj == 1)
-	{
+	if (dist->near_obj == SPHERE)
 		res = set_color(data->objects.sphere[dist->n_obj].color, data, flag);
-	}
-	else if (dist->near_obj == 2)
-	{
+	else if (dist->near_obj == PLANE)
 		res = set_color(data->objects.plane[dist->n_obj].color, data, flag);
-	}
-	else if (dist->near_obj == 3)
-	{
+	else if (dist->near_obj == CYLINDER || dist->near_obj == BOTTOM_DISK
+		|| dist->near_obj == TOP_DISK)
 		res = set_color(data->objects.cylind[dist->n_obj].color, data, flag);
-	}
 	else
 		res = BACK;
 	return (res);
