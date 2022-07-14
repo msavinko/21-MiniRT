@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:23:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 15:08:56 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 11:42:05 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	draw_dot(t_data *data, t_dist *dist, float flag)// флаг 0 - тень е�
 	{
 		res = set_color(data->objects.plane[dist->n_obj].color, data, flag);
 	}
-	else if (dist->near_obj == 3)
+	else if (dist->near_obj == 3 || dist->near_obj == 4)
 	{
 		res = set_color(data->objects.cylind[dist->n_obj].color, data, flag);
 	}

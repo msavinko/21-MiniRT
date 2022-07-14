@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:56:49 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 12:07:17 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ float sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 // 	c = vector_scalar(plane->orient_vector, ray);
 // 	if (c >1e-6)
 // 		return (0);
-// 	d =  plane->coord.z; 
+// 	d =  plane->coord.z;
 // 	pn = vector_scalar(cam.view_point, plane->orient_vector);
 // 	dist = (d - pn) /c;
 // 	if (dist < 0)
@@ -99,13 +99,13 @@ float plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
 	t_coord pc;
 	t_coord	d;
 	float pn;
-	float ln;
+	//float ln;
 	float c;
 	float dist;
-	
-	pc = vector_subtract(plane->coord, cam.view_point);
-	pn = vector_scalar(pc, plane->orient_vector);
-	ln = vector_scalar(ray, plane->orient_vector);
+
+	//pc = vector_subtract(plane->coord, cam.view_point);
+	//pn = vector_scalar(pc, plane->orient_vector);
+	//ln = vector_scalar(ray, plane->orient_vector);
 	c = vector_scalar(plane->orient_vector, ray);
 	d = vector_subtract(plane->coord, cam.view_point);
    // if (c > 1e-6)
@@ -117,7 +117,7 @@ float plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane)
             return (0);
         return (dist);
     }
-	return (0);	
+	return (0);
 }
 
 float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
@@ -127,14 +127,14 @@ float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
 	float d;
 	float t;
 	float dist;
-	
+
 	t = 0;
 	t = plane_intersect(cam, ray, plane);
 	if (t != 0.0f)
 	{
 		vector_multiply(&ray, t);
 		p = vector_addition(cam.view_point, ray);
-		v = vector_subtract(p, plane->coord); 
+		v = vector_subtract(p, plane->coord);
 		d = vector_scalar(v, v);
 		dist = sqrtf(d);
 		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
@@ -173,7 +173,7 @@ float	cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	m = vector_scalar(ray, cylind->orient_vector) * dist1 - vector_scalar(cam_cy, cylind->orient_vector);
 	if (dist1 > 0.0f && m >= 0 && m <= cylind->height && dist1 < dist2)
 		return (dist1);
-	m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);	
+	m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);
 	if (dist2 > 0.0f && m >= 0 && m <= cylind->height && dist1 < 0)
 		return (dist2);
 	plane.coord = cylind->coord;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 14:50:32 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 11:37:06 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
-# define DISK 4
+# define LOWER_DISK 4
+# define UPPER_DISK 5
 # define BACK 11988192
 
 typedef struct s_scene t_scene;
@@ -75,9 +76,9 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 
-float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
-float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
+// float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
+// float	plane_intersect(struct s_camera cam, t_coord ray,  t_plane *plane);
+// float cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind);
 
 //shadow_intersect.c
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
