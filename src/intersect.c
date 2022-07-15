@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 11:58:56 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:17:56 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ float sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	return (0);
 }
 
-t_coord vector3_negate(t_coord a)
-{
-    a.x = -a.x;
-    a.y = -a.y;
-    a.z = -a.z;
-    return (a);
-}
 
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
 {

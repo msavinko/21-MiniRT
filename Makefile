@@ -24,7 +24,6 @@ FILES_SRC		=	main.c \
 					shadow.c \
 					shadow_intersect.c \
 					key_hook.c \
-					mouse_hook.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
@@ -54,6 +53,7 @@ all		:	mlx libft $(NAME_RT)
 
 mlx:
 			@make -C $(MLX_PATH)
+			echo "$(OBJS_SRC)"
 
 libft	:
 			@make -C $(DIR_LIB)

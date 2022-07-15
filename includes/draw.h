@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 12:58:23 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:16:04 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_coef
 }	t_coef;
 
 void draw(t_data *data);
-void ray_tracing(t_data *data);
 void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist);
 
 t_coord new_vector3(float x, float y, float z);

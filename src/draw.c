@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 12:43:40 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:16:24 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	if (shadow_plane(data, &dist, ray))
 		*color = draw_dot(data, &dist, 0);
 	else if (shadow_cylinder(data, &dist, ray))
-	*color = draw_dot(data, &dist, 0);
+		*color = draw_dot(data, &dist, 0);
 	else
 		*color = draw_dot(data, &dist, intens_light);
 	// if (dist.dot_light)
 		free(dist.dot_light);
 }
 
-void ray_tracing(t_data *data)
+void draw(t_data *data)
 {
 	int mlx_x;
 	int mlx_y;
@@ -108,7 +108,6 @@ void ray_tracing(t_data *data)
 
 	mlx_y = 0;
 	y_angle = HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
-
 	while (y_angle > (-1 * HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
 	{
 		y_ray = y_angle * data->screen.y_pixel + data->scene.camera.view_point.y;
@@ -127,10 +126,4 @@ void ray_tracing(t_data *data)
 		y_angle--;
 		mlx_y++;
 	}
-}
-
-void draw(t_data *data)
-{
-	ray_tracing(data);
-	// free_data(data);
 }
