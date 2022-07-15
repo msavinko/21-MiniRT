@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:45:19 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:53:48 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/15 14:00:39 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	fill_screen(t_data *data)
 {
 	data->screen.width = 2 * tanf((data->scene.camera.fov / 2) * (M_PI / 180));
 	data->screen.height = data->screen.width * HEIGHT / WIDTH;
-	data->screen.x_pixel = data->screen.width / WIDTH;
-	data->screen.y_pixel = data->screen.height / HEIGHT;
+	data->screen.x_pixel = data->screen.width / WIDTH; // шаг по Х
+	data->screen.y_pixel = data->screen.height / HEIGHT; // шаг по У
 }

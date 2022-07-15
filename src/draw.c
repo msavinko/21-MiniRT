@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:16:24 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 15:33:49 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);///
-	if (shadow_sphere(data, &dist, ray))
-		*color = draw_dot(data, &dist, 0);
-	if (shadow_plane(data, &dist, ray))
-		*color = draw_dot(data, &dist, 0);
-	else if (shadow_cylinder(data, &dist, ray))
-		*color = draw_dot(data, &dist, 0);
-	else
+	// if (shadow_sphere(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, 0);
+	// if (shadow_plane(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, 0);
+	// else if (shadow_cylinder(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, 0);
+	// else
 		*color = draw_dot(data, &dist, intens_light);
 	// if (dist.dot_light)
 		free(dist.dot_light);
@@ -99,24 +99,24 @@ void draw(t_data *data)
 {
 	int mlx_x;
 	int mlx_y;
-	float x_angle;
-	float y_angle;
+	int x_angle;
+	int y_angle;
 	int color;
 	float x_ray;
 	float y_ray;
 	t_coord ray;
 
 	mlx_y = 0;
-	y_angle = HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
-	while (y_angle > (-1 * HEIGHT / 2.0f + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
+	y_angle = HEIGHT / 2;// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
+	while (y_angle > (-1 * HEIGHT / 2))// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
 	{
 		y_ray = y_angle * data->screen.y_pixel + data->scene.camera.view_point.y;
-		x_angle = -1.0f * WIDTH / 2.0f + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
+		x_angle = -1 * WIDTH / 2;// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
 		mlx_x = 0;
-		while (x_angle < WIDTH / 2.0f + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
+		while (x_angle < WIDTH / 2)// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
 		{
-			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x;
-			ray = new_vector3(x_ray, y_ray, data->scene.camera.view_point.z - 1); // -1 только когда камера в 000 и направлена на -1
+			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x; // -400 * шаг + координаты камеры = объективная точка в пространстве
+			ray = new_vector3(x_ray, y_ray, -1);
 			vector_normalize(&ray);
 			draw_objects(data, &ray, &color);
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
