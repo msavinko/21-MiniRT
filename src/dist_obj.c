@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 11:44:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 11:14:20 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 15:55:01 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
 			dist->near_obj = 1;
 			dist->n_obj = i;
 		}
+		else
+			data->m_dist.near_obj = 0;
 		i++;
 	}
 }
