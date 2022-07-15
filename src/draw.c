@@ -6,38 +6,38 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:33:49 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 18:55:28 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
- void normal_cylind(t_data *data, t_dist *dist, t_coord *ray, t_coord *normal)
- {
-	float	n;
-	t_coord	*tmp;
+//  void normal_cylind(t_data *data, t_dist *dist, t_coord *dot, t_coord *normal)
+//  {
+// 	float	n;
+// 	t_coord	*tmp;
 
-	tmp = malloc(sizeof(t_coord));
-	*tmp = vector_subtract(data->objects.cylind[dist->n_obj].coord, *ray);//вектор из основания цилиндра до точки
-	vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
-	n = vector_scalar(*tmp, data->objects.cylind[dist->n_obj].orient_vector);
-	*tmp = data->objects.cylind[dist->n_obj].orient_vector;
-	vector_multiply(tmp, n);
-	normal->x = tmp->x - ray->x;
-	normal->y = tmp->y - ray->y;
-	normal->z = tmp->z - ray->z;
-	free(tmp);
- }
+// 	tmp = malloc(sizeof(t_coord));
+// 	*tmp = vector_subtract(data->objects.cylind[dist->n_obj].coord, *dot);//вектор из основания цилиндра до точки
+// 	vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
+// 	n = vector_scalar(*tmp, data->objects.cylind[dist->n_obj].orient_vector);
+// 	*tmp = data->objects.cylind[dist->n_obj].orient_vector;
+// 	vector_multiply(tmp, n);
+// 	normal->x = tmp->x - dot->x;
+// 	normal->y = tmp->y - dot->y;
+// 	normal->z = tmp->z - dot->z;
+// 	free(tmp);
+//  }
 
-float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
+float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 {
 	t_coord normal;
 	float intens_light;
 
 	if (dist->near_obj == SPHERE)
 	{
-		normal.x = ray->x - data->objects.sphere[dist->n_obj].coord.x;
-		normal.y = ray->y - data->objects.sphere[dist->n_obj].coord.y;
-		normal.z = ray->z - data->objects.sphere[dist->n_obj].coord.z;
+		normal.x = dot->x - data->objects.sphere[dist->n_obj].coord.x;
+		normal.y = dot->y - data->objects.sphere[dist->n_obj].coord.y;
+		normal.z = dot->z - data->objects.sphere[dist->n_obj].coord.z;
 	}
 	else if (dist->near_obj == PLANE)
 	{
@@ -46,8 +46,37 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 		normal.z = data->objects.plane[dist->n_obj].orient_vector.z;
 	}
 	else if (dist->near_obj == CYLINDER)
-		normal_cylind(data, dist, ray, &normal);
-	else if (dist->near_obj == BOTTOM_DISK)
+	{
+		float m;
+		vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
+		// m = (vector_scalar(*dot, data->objects.cylind[dist->n_obj].orient_vector)
+			// + vector_scalar(data->objects.cylind[dist->n_obj].coord, data->objects.cylind[dist->n_obj].orient_vector));
+		m = (vector_scalar(*dot, data->objects.cylind[dist->n_obj].orient_vector)
+			+ vector_scalar(data->objects.cylind[dist->n_obj].coord, data->objects.cylind[dist->n_obj].orient_vector));
+		//	printf("m = %f\n", m);
+		normal.x = data->objects.cylind[dist->n_obj].orient_vector.x * m - dot->x;
+		normal.y = data->objects.cylind[dist->n_obj].orient_vector.y * m - dot->y;
+		normal.z = data->objects.cylind[dist->n_obj].orient_vector.z * m - dot->z;
+
+		// float	n;
+		// t_coord	tmp;
+
+		// tmp.x = -data->objects.cylind[dist->n_obj].coord.x + dot->x;//вектор из основания цилиндра до точки
+		// tmp.y = -data->objects.cylind[dist->n_obj].coord.y + dot->y;//вектор из основания цилиндра до точки
+		// tmp.z = -data->objects.cylind[dist->n_obj].coord.z + dot->z;//вектор из основания цилиндра до точки
+
+		// vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
+		// n = vector_scalar(tmp, data->objects.cylind[dist->n_obj].orient_vector);
+		// tmp.x = data->objects.cylind[dist->n_obj].orient_vector.x;
+		// tmp.y = data->objects.cylind[dist->n_obj].orient_vector.y;
+		// tmp.z = data->objects.cylind[dist->n_obj].orient_vector.z;
+		// vector_multiply(&tmp, n);
+		// normal.x = tmp.x * n - dot->x;
+		// normal.y = tmp.y * n - dot->y;
+		// normal.z = tmp.z * n - dot->z;
+		// // printf("normal.x %f, normal.y %f, normal.z %f\n", normal.x, normal.y, normal.z);
+	}
+	else if (dist->near_obj == TOP_DISK)
 	{
 		normal.x = data->objects.cylind[dist->n_obj].orient_vector.x;
 		normal.y = data->objects.cylind[dist->n_obj].orient_vector.y;
@@ -83,13 +112,13 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);///
-	// if (shadow_sphere(data, &dist, ray))
-	// 	*color = draw_dot(data, &dist, 0);
+	if (shadow_sphere(data, &dist, ray))
+		*color = draw_dot(data, &dist, 0);
 	// if (shadow_plane(data, &dist, ray))
 	// 	*color = draw_dot(data, &dist, 0);
 	// else if (shadow_cylinder(data, &dist, ray))
 	// 	*color = draw_dot(data, &dist, 0);
-	// else
+	else
 		*color = draw_dot(data, &dist, intens_light);
 	// if (dist.dot_light)
 		free(dist.dot_light);

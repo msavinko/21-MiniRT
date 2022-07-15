@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:19:21 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 18:58:22 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@ float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot
 	float	discr;
 	float	dist;
 
+// printf("dot_sphere x %f, y %f, z %f\n", dot_sphere->x, dot_sphere->y, dot_sphere->z);
 	b = 2.0f * (vector_scalar(*dot_sphere, *dot_light));
-	c = vector_scalar(*dot_light, *dot_light) - (sphere->radius * sphere->radius);
+	c = vector_scalar(*dot_sphere, *dot_sphere) - (sphere->radius * sphere->radius);
 	discr = (b * b) - (4.0f * c);
 //	printf("discr: %f\n", discr);
 	if (discr < 0.0f)
 		return (0);
-	dist = (-1.0f * b - sqrt(discr)) / 2.0f;
+	dist = (-1.0f * b - sqrtf(discr)) / 2.0f;
 	if (dist > 0.0f)
 		return (dist);
 	if (dist < 0.0f)
-		dist = (-1.0f * b + sqrt(discr)) / 2.0f;
+		dist = (-1.0f * b + sqrtf(discr)) / 2.0f;
 	if (dist > 0.0f)
 		return (dist);
 	return (0);
