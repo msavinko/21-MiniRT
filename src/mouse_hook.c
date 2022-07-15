@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:15 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 10:17:57 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:03:35 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,10 +329,26 @@ int ft_mouse_hook(int mousecode, int x, int y, t_data *data)
 	if (data->m_dist.near_obj > 0)
 	{
 		mlx_hook(data->window, 2, (1L << 0), ft_key_hook_coord, data);
-		// printf("x before : %f\n", data->objects.sphere[data->m_dist.n_obj].coord.x);
-		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
-		// printf("x after :  %f\n", data->objects.sphere[data->m_dist.n_obj].coord.x);
 	}
 	draw(data);
+	return (0);
+}
+
+int ft_mouse(int mouse, int x, int y, t_data *data)
+{
+	if (mouse == 1)
+		ft_mouse_hook(mouse, x, y, data);
+	if (mouse == 2)
+	{
+		printf("You pressed 2\n");
+		mlx_hook(data->window, 2, (1L << 0), ft_key_hook, data);
+		mlx_hook(data->window, 17, 0, close_minirt, data);
+		return (1);
+	}
+	if (mouse != 1 && mouse != 2)
+	{
+		printf("exit from mouse\n");
+		ray_tracing(data);
+	}
 	return (0);
 }

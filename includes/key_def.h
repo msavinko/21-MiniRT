@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:10:34 by mariasavino       #+#    #+#             */
-/*   Updated: 2022/07/14 15:58:21 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 12:55:37 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@
 typedef struct s_data t_data;
 int ft_key_hook(int keycode, t_data *data);
 int ft_mouse_hook(int mousecode, int x, int y, t_data *data);
+int ft_mouse(int mouse, int x, int y, t_data *data);
 
 #endif

@@ -1,24 +1,21 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/rdanyell/Desktop/minirt_rdan1407'
 make -C mlx_1/
- 
-echo "objects/main.o objects/print_structs.o objects/free_all.o objects/draw.o objects/vector.o objects/intersect.o objects/inetsect_utils.o objects/color.o objects/dist_obj.o objects/shadow.o objects/shadow_intersect.o objects/key_hook.o objects/mouse_hook.o objects/parser.o objects/validation.o objects/init_parser.o objects/init_parser2.o objects/fill_obj.o objects/fill_scene.o"
+echo "objects/main.o objects/print_structs.o objects/free_all.o objects/draw.o objects/vector.o objects/intersect.o objects/intersect_utils.o objects/color.o objects/dist_obj.o objects/shadow.o objects/shadow_intersect.o objects/key_hook.o objects/mouse_hook.o objects/parser.o objects/validation.o objects/init_parser.o objects/init_parser2.o objects/fill_obj.o objects/fill_scene.o"
 make -C libft/
  
 make: *** No rule to make target `objects/main.o', needed by `miniRT'.
-
 make: *** No rule to make target `objects/print_structs.o', needed by `miniRT'.
+
 make: *** No rule to make target `objects/free_all.o', needed by `miniRT'.
 
 make: *** No rule to make target `objects/draw.o', needed by `miniRT'.
 make: *** No rule to make target `objects/vector.o', needed by `miniRT'.
 
 make: *** No rule to make target `objects/intersect.o', needed by `miniRT'.
-
-make: *** No rule to make target `objects/inetsect_utils.o', needed by `miniRT'.
+make: *** No rule to make target `objects/intersect_utils.o', needed by `miniRT'.
 make: *** No rule to make target `objects/color.o', needed by `miniRT'.
-make: 
-*** No rule to make target `objects/dist_obj.o', needed by `miniRT'.
+make: *** No rule to make target `objects/dist_obj.o', needed by `miniRT'.
 
 make: *** No rule to make target `objects/shadow.o', needed by `miniRT'.
 make: *** No rule to make target `objects/shadow_intersect.o', needed by `miniRT'.
@@ -29,9 +26,7 @@ make: *** No rule to make target `objects/mouse_hook.o', needed by `miniRT'.
 
 make: *** No rule to make target `objects/parser.o', needed by `miniRT'.
 make: *** No rule to make target `objects/validation.o', needed by `miniRT'.
-
 make: *** No rule to make target `objects/init_parser.o', needed by `miniRT'.
-
 make: *** No rule to make target `objects/init_parser2.o', needed by `miniRT'.
 make: *** No rule to make target `objects/fill_obj.o', needed by `miniRT'.
 make: *** No rule to make target `objects/fill_scene.o', needed by `miniRT'.
