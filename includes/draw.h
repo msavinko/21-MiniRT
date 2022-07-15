@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:16:04 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:23:02 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
+float	cylindr_intersect(t_data *data, t_coord ray, t_dist *dist, int *i);
 
 // float set_color(t_color color);
 
@@ -94,6 +94,10 @@ float   shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *
 
 
 
-
+//intersect_utils.c
+t_coord	vector3_negate(t_coord a);
+void	get_discr(t_camera cam, t_coord ray, t_cylind *cylind, t_coef *coef);
+void	get_nearest(t_dist *dist, float dist_min, float *dist_disc, int *i);
+void	get_plane(t_plane *plane, t_cylind cylind);
 
 #endif

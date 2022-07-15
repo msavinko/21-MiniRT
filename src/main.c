@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:18:12 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:30:21 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	draw(data);
 	mlx_hook(data->window, 2, (1L << 0), ft_key_hook, data);
 	mlx_hook(data->window, 17, 0, close_minirt, data);
-	// mlx_mouse_hook(data->window, ft_mouse_hook, data);
+	mlx_mouse_hook(data->window, ft_mouse, data);
 	mlx_loop(data->mlx);
 	free_data(data);
 	return (0);
