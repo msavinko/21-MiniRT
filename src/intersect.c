@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 14:41:36 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:58:56 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ float	pipe_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	{
 		dist1 = (-coef.b - sqrtf(coef.discr)) / (2 * coef.a);
 		dist2 = (-coef.b + sqrtf(coef.discr)) / (2 * coef.a);
-		m = vector_scalar(ray, cylind->orient_vector) * dist1 - vector_scalar(cam_cy, cylind->orient_vector);
+		m = vector_scalar(ray, cylind->orient_vector) \
+			* dist1 - vector_scalar(cam_cy, cylind->orient_vector);
 		if (dist1 > 0.0f && m >= 0 && m <= cylind->height && dist1 < dist2)
 		{
 
@@ -131,7 +132,7 @@ float	pipe_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 	return(dist_min);
 }
 
-float   cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind, t_dist *dist, int *i)
+float   cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
 {
 
     float   dist3;
@@ -146,31 +147,14 @@ float   cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind, t
     plane.color = cylind->color;
     dist3 = disc_intersect(cam, ray, &plane, (cylind->diameter)/2);
     if (dist3 > 0.0f && dist3 < dist_min)
-    {
         dist_min = dist3;
-    }
     disc2 = cylind->orient_vector;
     vector_multiply(&disc2, cylind->height);
     plane.coord = vector_addition(cylind->coord, disc2);
     plane.orient_vector = cylind->orient_vector;
     dist4 = disc_intersect(cam, ray, &plane, (cylind->diameter)/2);
     if (dist4 > 0.0f && dist4 < dist_min)
-    {
-        dist_min = dist4;
-    }
-    if (dist_min > 0.0f && dist_min != 100000000000.0f)
-	{
-		if (dist_min < dist->min_dist)
-		{
-			dist->min_dist = dist_min;
-			dist->near_obj = 3;
-			if (dist_min == dist3)
-				dist->near_obj = 4;
-			if (dist_min == dist4)
-				dist->near_obj = 5;
-			dist->n_obj = *i;
-		}
-        return (dist_min);
-	}
+		dist_min = dist4;
+		return (dist_min);
     return (0);
 }

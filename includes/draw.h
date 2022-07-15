@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 15:16:17 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 12:58:23 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_dist
 	int near_obj;
 	int n_obj;
 	struct s_coord *dot_light;
-	struct s_coord *dot_normal;
+	// struct s_coord *dot_normal;
 }	t_dist;
 
 typedef struct s_coef
@@ -67,13 +67,11 @@ t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind, t_dist *dist, int *i);
+float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind);
 
 // float set_color(t_color color);
-char *ft_dectohex(unsigned int num);
-unsigned long htoi(const char *s);
 
-int	draw_dot(t_data *data, t_dist *dist, float flag);
+int	draw_dot(t_data *data, t_dist *dist, float intens_light);
 
 //dist_obj.c
 void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray);

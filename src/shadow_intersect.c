@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 15:02:52 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:53:29 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ float shadow_disk_plane_intersect(t_coord *dot_light, t_coord *dot, t_plane *pla
 
 	c = vector_scalar(plane->orient_vector, *dot_light);
 	d = vector_subtract(plane->coord, *dot);
-	if (c != 0)
-    {
-        pn = vector_scalar(d, plane->orient_vector);
-        dist = pn / c;
-        if (dist < 0)
-            return (0);
-        return (dist);
-    }
+	if (c != 0) // плоскость не параллельна лучу
+	{
+		pn = vector_scalar(d, plane->orient_vector);
+		dist = pn / c;
+		if (dist < 0)
+			return (0);
+		return (dist);
+	}
 	return (0);
 }
 float	shadow_disc_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane, float r)
@@ -88,16 +88,16 @@ float	shadow_disc_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane, fl
 		v = vector_subtract(p, plane->coord);
 		dist = sqrtf(vector_scalar(v, v));
 		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
-			return (t);
+			return (1);
 		if (dist <= r)
-			return (t);
+			return (1);
 	}
 	return (0);
 }
 
-float   shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot)
+float	shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot)
 {
-	t_coord disc2;
+	t_coord top_disc;
 	t_plane plane;
 
 	if (shadow_pipe_intersect(dot_light, cylind, dot))
@@ -107,9 +107,9 @@ float   shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *
 	plane.color = cylind->color;
 	if (shadow_disc_intersect(dot_light, dot, &plane, (cylind->diameter)/2))
 		return (1);
-	disc2 = cylind->orient_vector;
-	vector_multiply(&disc2, cylind->height);
-	plane.coord = vector_addition(cylind->coord, disc2);
+	top_disc = cylind->orient_vector;
+	vector_multiply(&top_disc, cylind->height);
+	plane.coord = vector_addition(cylind->coord, top_disc);
 	plane.orient_vector = cylind->orient_vector;
 	if (shadow_disc_intersect(dot_light, dot, &plane, (cylind->diameter)/2))
 		return (1);
@@ -133,29 +133,24 @@ void	shadow_get_discr(t_coord *dot_light, t_cylind *cylind, t_coord *dot, t_coef
 float	shadow_pipe_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *dot)
 {
 	float	m;
-	float	dist1;
-	float	dist2;
-	float	dist_min;
+	float	dist;
 	t_coef	coef;
-	t_coord cam_cy;
+	t_coord	cam_cy;
 
-	dist_min = 100000000000.0f;
 	cam_cy = vector_subtract(cylind->coord, *dot);
 	shadow_get_discr(dot_light, cylind, dot, &coef);
-	if (coef.discr  >= 0.0f)
+	if (coef.discr >= 0.0f)
 	{
-		dist1 = (-coef.b - sqrtf(coef.discr)) / (2 * coef.a);
-		dist2 = (-coef.b + sqrtf(coef.discr)) / (2 * coef.a);
+		dist = (-coef.b - sqrtf(coef.discr)) / (2 * coef.a);
 		m = vector_scalar(*dot_light, cylind->orient_vector)
-			* dist1 - vector_scalar(cam_cy, cylind->orient_vector);
-		if (dist1 > 0.0f && m >= 0 && m <= cylind->height && dist1 < dist2)
-			dist_min = dist1;
+			* dist - vector_scalar(cam_cy, cylind->orient_vector);
+		if (dist > 0.0f && m >= 0 && m <= cylind->height)// пересечение с ближней стенкой
+			return (1);
+		dist = (-coef.b + sqrtf(coef.discr)) / (2 * coef.a);
 		m = vector_scalar(*dot_light, cylind->orient_vector)
-			* dist2 - vector_scalar(cam_cy, cylind->orient_vector);
-		if (dist2 > 0.0f && m >= 0 && m <= cylind->height && dist_min < 0) //проверить это условие
-		{
-			dist_min = dist2;
-		}
+			* dist - vector_scalar(cam_cy, cylind->orient_vector);
+		if (dist > 0.0f && m >= 0 && m <= cylind->height)// пересечение сс стенкой если мы внутри цилиндра
+			return (1);
 	}
-	return(dist_min);
+	return(0);
 }
