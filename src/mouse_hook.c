@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:15 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 16:08:28 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:17:57 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ int	ft_key_hook_coord(int keycode, t_data *data)
 	}
 	if (keycode == O)
 	{
-		printf("You are changing orient vector\n");
+		printf("You pressed O\n");
 		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
 		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
@@ -285,7 +285,7 @@ int	ft_key_hook_coord(int keycode, t_data *data)
 	}
 	if (keycode == R)
 	{
-		printf("You are changing radius\n");
+		printf("You pressed R\n");
 		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
 		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
@@ -294,7 +294,7 @@ int	ft_key_hook_coord(int keycode, t_data *data)
 	if (keycode == E)
 	{
 		printf("You pressed E\n");
-		data->m_dist.near_obj = 0;
+		mlx_hook(data->window, 2, (1L << 0), ft_key_hook, data);
 		return (0);
 	}
 	return (0);
@@ -308,9 +308,9 @@ int ft_mouse_hook(int mousecode, int x, int y, t_data *data)
 	float y_ray;
 
 	printf("Hello\n");
-	if (mousecode == 4)
+	if (mousecode == 5)
 	{
-		printf("mousecode 4\n");
+		printf("mousecode 5\n");
 	}
 		x_ray = (x - WIDTH / 2) / (WIDTH);
 		y_ray = (HEIGHT / 2 - y) / (HEIGHT);

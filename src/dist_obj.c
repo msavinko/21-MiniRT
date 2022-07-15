@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 11:44:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 11:49:14 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:14:20 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray)
 	i = 0;
 	while (i < data->objects.ncylinder)
 	{
-		dist->dist = cylindr_intersect(data->scene.camera, *ray, &data->objects.cylind[i], dist, &i); 
+		dist->dist = cylindr_intersect(data, *ray, dist, &i); 
 		// if (dist->dist > 0 && dist->dist < dist->min_dist)
 		// {
 		// 	dist->min_dist = dist->dist;

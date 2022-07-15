@@ -19,6 +19,7 @@ FILES_SRC		=	main.c \
 					draw.c \
 					vector.c\
 					intersect.c\
+					intersect_utils.c \
 					color.c \
 					dist_obj.c \
 					shadow.c \

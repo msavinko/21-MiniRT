@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 11:42:16 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 12:01:36 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_coord vec3_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
-float cylindr_intersect(struct s_camera cam, t_coord ray, t_cylind *cylind, t_dist *dist, int *i);
+float	cylindr_intersect(t_data *data, t_coord ray, t_dist *dist, int *i);
 
 // float set_color(t_color color);
 char *ft_dectohex(unsigned int num);
@@ -88,6 +88,10 @@ int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere);
 float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot_sphere);
 
-
+//intersect_utils.c
+t_coord	vector3_negate(t_coord a);
+void	get_discr(t_camera cam, t_coord ray, t_cylind *cylind, t_coef *coef);
+void	get_nearest(t_dist *dist, float dist_min, float *dist_disc, int *i);
+void	get_plane(t_plane *plane, t_cylind cylind);
 
 #endif
