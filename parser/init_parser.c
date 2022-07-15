@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:06:42 by marlean           #+#    #+#             */
-/*   Updated: 2022/06/24 19:14:26 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/07 14:28:51 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,64 +26,45 @@ void	init_scene(t_scene *scene)
 	scene->alight.color.r = 0;
 	scene->alight.color.g = 0;
 	scene->alight.color.b = 0;
-	scene->camera->position.x = 0.00f;
-	scene->camera->position.y = 0.00f;
-	scene->camera->position.z = 0.00f;
-	scene->camera->orient.x = 0.00f;
-	scene->camera->orient.y = 0.00f;
-	scene->camera->orient.z = 0.00f;
-	scene->camera->fov = 0.00f;
+	scene->camera.view_point.x = 0.00f;
+	scene->camera.view_point.y = 0.00f;
+	scene->camera.view_point.z = 0.00f;
+	scene->camera.orient_vector.x = 0.00f;
+	scene->camera.orient_vector.y = 0.00f;
+	scene->camera.orient_vector.z = 0.00f;
+	scene->camera.fov = 0.00f;
 	scene->light.coord.x = 0.00f;
 	scene->light.coord.y = 0.00f;
 	scene->light.coord.z = 0.00f;
 	scene->light.bright = 0.00f;
-	scene->sphere->position.x = 0.0f;
-	scene->sphere->position.y = 0.0f;
-	scene->sphere->position.z = 0.0f;
-	scene->sphere->radius = 0.0f;
-	scene->sphere->color.r = 0;
-	scene->sphere->color.g = 0;
-	scene->sphere->color.b = 0;
 }
 
 void	init_objects(t_objects *obj)
 {
-	obj->sphere.position.x = 0.0f;
-	obj->sphere.position.y = 0.0f;
-	obj->sphere.position.z = 0.0f;
-	obj->sphere.radius = 0.0f;
-	obj->sphere.color.r = 0;
-	obj->sphere.color.g = 0;
-	obj->sphere.color.b = 0;
-	obj->plane.coord.x = 0.0f;
-	obj->plane.coord.y = 0.0f;
-	obj->plane.coord.z = 0.0f;
-	obj->plane.orient_vector.x = 0.0f;
-	obj->plane.orient_vector.y = 0.0f;
-	obj->plane.orient_vector.z = 0.0f;
-	obj->plane.color.r = 0;
-	obj->plane.color.g = 0;
-	obj->plane.color.b = 0;
-}
+	int	i;
 
-void	init_cylinder(t_objects *obj)
-{
-	obj->cylind.coord.x = 0.0f;
-	obj->cylind.coord.y = 0.0f;
-	obj->cylind.coord.z = 0.0f;
-	obj->cylind.orient_vector.x = 0.0f;
-	obj->cylind.orient_vector.y = 0.0f;
-	obj->cylind.orient_vector.z = 0.0f;
-	obj->cylind.diameter = 0.0f;
-	obj->cylind.height = 0.0f;
-	obj->cylind.color.r = 0;
-	obj->cylind.color.g = 0;
-	obj->cylind.color.b = 0;
+	obj->sphere = malloc(sizeof(t_sphere) * obj->nsphere);
+	if (!obj->sphere)
+		error_parser("Malloc error");
+	i = 0;
+	while (i < obj->nsphere)
+		init_sphere(&obj->sphere[i++]);
+	obj->plane = malloc(sizeof(t_plane) * obj->nplane);
+	if (!obj->plane)
+		error_parser("Malloc error");
+	i = 0;
+	while (i < obj->nplane)
+		init_plane(&obj->plane[i++]);
+	obj->cylind = malloc(sizeof(t_cylind) * obj->ncylinder);
+	if (!obj->cylind)
+		error_parser("Malloc error");
+	i = 0;
+	while (i < obj->ncylinder)
+		init_cylinder(&obj->cylind[i++]);
 }
 
 void	init_data(t_data *data)
 {
 	init_scene(&data->scene);
 	init_objects(&data->objects);
-	init_cylinder(&data->objects);
 }
