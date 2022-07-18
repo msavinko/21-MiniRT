@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dist_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 11:44:16 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/08 12:16:38 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/15 15:55:01 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
 		}
 		i++;
 	}
+	if (dist->near_obj == 1 && dist->n_obj != -1)
+		dist->dist = sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[dist->n_obj]);
 }
 void nearest_plane(t_data *data, t_dist *dist, t_coord *ray)
 {
@@ -45,6 +47,8 @@ void nearest_plane(t_data *data, t_dist *dist, t_coord *ray)
 		}
 		i++;
 	}
+	if (dist->near_obj == 2 && dist->n_obj != -1)
+		dist->dist = plane_intersect(data->scene.camera, *ray, &data->objects.plane[dist->n_obj]);
 }
 void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray)
 {
@@ -53,13 +57,13 @@ void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray)
 	i = 0;
 	while (i < data->objects.ncylinder)
 	{
-		dist->dist = cylindr_intersect(data->scene.camera, *ray, &data->objects.cylind[i]); 
-		if (dist->dist > 0 && dist->dist < dist->min_dist)
-		{
-			dist->min_dist = dist->dist;
-			dist->near_obj = 3;
-			dist->n_obj = i;
-		}
+		dist->dist = cylindr_intersect(data, *ray, dist, &i); 
+		// if (dist->dist > 0 && dist->dist < dist->min_dist)
+		// {
+		// 	dist->min_dist = dist->dist;
+		// 	dist->near_obj = 3;
+		// 	dist->n_obj = i;
+		// }
 		i++;
 	}
 }

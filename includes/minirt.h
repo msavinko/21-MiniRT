@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:53:17 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/14 13:46:53 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #define WIDTH_1 1920.00
 #define HEIGHT_1 1080.00
 
-#define WIDTH 800.00
-#define HEIGHT 600.00
+#define WIDTH 1200.00
+#define HEIGHT 800.00
 
 
 typedef struct s_color //ЦВЕТ
@@ -120,6 +120,7 @@ typedef struct s_data
 	struct s_objects objects;
 	struct s_scene scene;
 	struct s_screen screen;
+	struct	s_dist m_dist;
 	void *mlx;
 	void *window;
 	void *img;
