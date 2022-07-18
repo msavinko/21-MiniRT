@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 17:17:03 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/18 15:20:36 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	draw(data);
 	mlx_hook(data->window, 2, (1L << 0), ft_key_hook, data);
 	mlx_hook(data->window, 17, 0, close_minirt, data);
-	// mlx_mouse_hook(data->window, ft_mouse_hook, data);
+	mlx_mouse_hook(data->window, ft_mouse, data);
 	mlx_loop(data->mlx);
 	free_data(data);
 	return (0);

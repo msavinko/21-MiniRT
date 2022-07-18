@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 17:24:04 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/18 15:20:23 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 float sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 {
-	float	b;
-	float	c;
-	float	discr;
-	float	dist;
-	float	dist2;
-	t_coord	cam_sphere;
+	t_coef coef;
+	float dist;
+	float dist2;
+	t_coord cam_sphere;
 
- 	cam_sphere = vector_subtract(cam.view_point, sphere->coord);
-	b = 2.0f * (vector_scalar(cam_sphere, ray));
-	c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius * sphere->radius);
-	discr = (b * b) - (4.0f * c);
-	if (discr < 0)
+	cam_sphere = vector_subtract(cam.view_point, sphere->coord);
+	coef.b = 2.0f * (vector_scalar(cam_sphere, ray));
+	coef.c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius *
+													  sphere->radius);
+	coef.discr = (coef.b * coef.b) - (4.0f * coef.c);
+	if (coef.discr < 0)
 		return (0);
-	dist = (-1 * b - sqrtf(discr)) / 2;
-	dist2 = (-1 * b + sqrtf(discr)) / 2;
+	dist = (-1 * coef.b - sqrtf(coef.discr)) / 2;
+	dist2 = (-1 * coef.b + sqrtf(coef.discr)) / 2;
 	if (dist > 0.0f)
 		return (dist);
 	else if (dist2 > 0)
@@ -36,17 +35,9 @@ float sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	return (0);
 }
 
-// t_coord vector3_negate(t_coord a)
-// {
-//     a.x = -a.x;
-//     a.y = -a.y;
-//     a.z = -a.z;
-//     return (a);
-// }
-
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
 {
-	t_coord	d;
+	t_coord d;
 	float pn;
 	float c;
 	float dist;
@@ -64,10 +55,10 @@ float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
 	return (0);
 }
 
-float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
+float disc_intersect(t_camera cam, t_coord ray, t_plane *plane, float r)
 {
-	t_coord	p;
-	t_coord	v;
+	t_coord p;
+	t_coord v;
 	float t;
 	float dist;
 
@@ -86,91 +77,57 @@ float	disc_intersect(struct s_camera cam, t_coord ray,  t_plane *plane, float r)
 	return (0);
 }
 
-void	get_discr(struct s_camera cam, t_coord ray,  t_cylind *cylind, t_coef *coef)
+void pipe_inter(t_camera cam, t_coord ray, t_cylind *cyl, float *d_min)
 {
+	float m;
+	float dist1;
+	float dist2;
+	t_coef coef;
 	t_coord cam_cy;
 
-	cam_cy = vector_subtract(cylind->coord, cam.view_point);
-	vector_normalize(&cylind->orient_vector);
-	coef->a = 1 - pow(vector_scalar(ray, cylind->orient_vector), 2);
-	coef->b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray,
-		cylind->orient_vector) * vector_scalar(cam_cy,cylind->orient_vector));
-	coef->c = vector_scalar(cam_cy, cam_cy) - pow(vector_scalar(cam_cy,
-		cylind->orient_vector), 2) - (cylind->diameter / 2) * (cylind->diameter / 2);
-	coef->discr = (coef->b * coef->b) - (4.0f * coef->a * coef->c);
-}
-
-float	pipe_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind)
-{
-	float	m;
-	float	dist1;
-	float	dist2;
-	float	dist_min;
-	t_coef	coef;
-	t_coord cam_cy;
-
-	dist_min = 100000000000.0f;
-	cam_cy = vector_subtract(cylind->coord, cam.view_point);
-	get_discr(cam, ray, cylind, &coef);
-	if (coef.discr  >= 0.0f)
+	cam_cy = vector_subtract(cyl->coord, cam.view_point);
+	get_discr(cam, ray, cyl, &coef);
+	if (coef.discr >= 0.0f)
 	{
 		dist1 = (-coef.b - sqrtf(coef.discr)) / (2 * coef.a);
 		dist2 = (-coef.b + sqrtf(coef.discr)) / (2 * coef.a);
-		m = vector_scalar(ray, cylind->orient_vector) * dist1 - vector_scalar(cam_cy, cylind->orient_vector);
-		if (dist1 > 0.0f && m >= 0 && m <= cylind->height && dist1 < dist2)
-		{
-
-			dist_min = dist1;
-		}
-		m = vector_scalar(ray, cylind->orient_vector) * dist2 - vector_scalar(cam_cy, cylind->orient_vector);
-		if (dist2 > 0.0f && m >= 0 && m <= cylind->height && dist_min < 0) //проверить это условие
-		{
-			dist_min = dist2;
-		}
+		m = vector_scalar(ray, cyl->orient_vector) * dist1 -
+			vector_scalar(cam_cy, cyl->orient_vector);
+		if (dist1 > 0.0f && m >= 0 && m <= cyl->height && dist1 < dist2)
+			*d_min = dist1;
+		m = vector_scalar(ray, cyl->orient_vector) * dist2 -
+			vector_scalar(cam_cy, cyl->orient_vector);
+		if (dist2 > 0.0f && m >= 0 && m <= cyl->height && d_min < 0) //проверить это условие
+			*d_min = dist2;
 	}
-	return(dist_min);
+	return;
 }
 
-float   cylindr_intersect(struct s_camera cam, t_coord ray,  t_cylind *cylind, t_dist *dist, int *i)
+float cylindr_intersect(t_data *data, t_coord ray, t_dist *dist, int *i)
 {
+	float dist_disc[2];
+	float dist_min;
+	t_coord disc2;
+	t_plane plane;
 
-    float   dist3;
-    float   dist4;
-    float   dist_min;
-    t_coord disc2;
-    t_plane plane;
-
-	dist_min = pipe_intersect(cam, ray, cylind);
-    plane.coord = cylind->coord;
-    plane.orient_vector = cylind->orient_vector;
-    plane.color = cylind->color;
-    dist3 = disc_intersect(cam, ray, &plane, (cylind->diameter)/2);
-    if (dist3 > 0.0f && dist3 < dist_min)
-    {
-        dist_min = dist3;
-    }
-    disc2 = cylind->orient_vector;
-    vector_multiply(&disc2, cylind->height);
-    plane.coord = vector_addition(cylind->coord, disc2);
-    plane.orient_vector = cylind->orient_vector;
-    dist4 = disc_intersect(cam, ray, &plane, (cylind->diameter)/2);
-    if (dist4 > 0.0f && dist4 < dist_min)
-    {
-        dist_min = dist4;
-    }
-    if (dist_min > 0.0f && dist_min != 100000000000.0f)
+	dist_min = INT32_MAX;
+	pipe_inter(data->scene.camera, ray, &data->objects.cylind[*i], &dist_min);
+	get_plane(&plane, data->objects.cylind[*i]);
+	dist_disc[0] = disc_intersect(data->scene.camera, ray, &plane,
+								  (data->objects.cylind[*i].diameter) / 2);
+	if (dist_disc[0] > 0.0f && dist_disc[0] < dist_min)
+		dist_min = dist_disc[0];
+	disc2 = data->objects.cylind[*i].orient_vector;
+	vector_multiply(&disc2, data->objects.cylind[*i].height);
+	plane.coord = vector_addition(data->objects.cylind[*i].coord, disc2);
+	dist_disc[1] = disc_intersect(data->scene.camera, ray, &plane,
+								  (data->objects.cylind[*i].diameter) / 2);
+	if (dist_disc[1] > 0.0f && dist_disc[1] < dist_min)
+		dist_min = dist_disc[1];
+	if (dist_min > 0.0f && dist_min != INT32_MAX)
 	{
-		if (dist_min < dist->min_dist)
-		{
-			dist->min_dist = dist_min;
-			dist->near_obj = 3;
-			if (dist_min == dist3)
-				dist->near_obj = 4;
-			if (dist_min == dist4)
-				dist->near_obj = 5;
-			dist->n_obj = *i;
-		}
-        return (dist_min);
+		get_nearest(dist, dist_min, dist_disc, i);
+		return (dist_min);
 	}
-    return (0);
+	return (0);
 }

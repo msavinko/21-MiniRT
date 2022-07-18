@@ -1,20 +1,35 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/rdanyell/Desktop/minirt_rdan'
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/rdanyell/Desktop/minirt_rdan1407'
 make -C mlx_1/
+echo "objects/main.o objects/print_structs.o objects/free_all.o objects/draw.o objects/vector.o objects/intersect.o objects/intersect_utils.o objects/color.o objects/dist_obj.o objects/shadow.o objects/shadow_intersect.o objects/key_hook.o objects/mouse_hook.o objects/parser.o objects/validation.o objects/init_parser.o objects/init_parser2.o objects/fill_obj.o objects/fill_scene.o"
 make -C libft/
-cc -Wall -Wextra -Werror -g -I includes/ -c src/main.c -o src/main.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/print_structs.c -o src/print_structs.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/free_all.c -o src/free_all.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/draw.c -o src/draw.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/vector.c -o src/vector.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/intersect.c -o src/intersect.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/color.c -o src/color.o
-cc -Wall -Wextra -Werror -g -I includes/ -c src/key_hook.c -o src/key_hook.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/parser.c -o parser/parser.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/validation.c -o parser/validation.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/init_parser.c -o parser/init_parser.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_obj.c -o parser/fill_obj.o
-cc -Wall -Wextra -Werror -g -I includes/ -c parser/fill_scene.c -o parser/fill_scene.o
-cc src/main.o src/print_structs.o src/free_all.o src/draw.o src/vector.o src/intersect.o src/color.o src/key_hook.o parser/parser.o parser/validation.o parser/init_parser.o parser/fill_obj.o parser/fill_scene.o libft/libft.a  mlx_1/libmlx.a -framework OpenGL -framework AppKit -o miniRT
-make: Leaving directory `/Users/rdanyell/Desktop/minirt_rdan'
+ 
+make: *** No rule to make target `objects/main.o', needed by `miniRT'.
+make: *** No rule to make target `objects/print_structs.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/free_all.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/draw.o', needed by `miniRT'.
+make: *** No rule to make target `objects/vector.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/intersect.o', needed by `miniRT'.
+make: *** No rule to make target `objects/intersect_utils.o', needed by `miniRT'.
+make: *** No rule to make target `objects/color.o', needed by `miniRT'.
+make: *** No rule to make target `objects/dist_obj.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/shadow.o', needed by `miniRT'.
+make: *** No rule to make target `objects/shadow_intersect.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/key_hook.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/mouse_hook.o', needed by `miniRT'.
+
+make: *** No rule to make target `objects/parser.o', needed by `miniRT'.
+make: *** No rule to make target `objects/validation.o', needed by `miniRT'.
+make: *** No rule to make target `objects/init_parser.o', needed by `miniRT'.
+make: *** No rule to make target `objects/init_parser2.o', needed by `miniRT'.
+make: *** No rule to make target `objects/fill_obj.o', needed by `miniRT'.
+make: *** No rule to make target `objects/fill_scene.o', needed by `miniRT'.
+
+make: Leaving directory `/Users/rdanyell/Desktop/minirt_rdan1407'
  

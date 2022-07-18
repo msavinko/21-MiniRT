@@ -6,7 +6,7 @@
 /*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/18 15:08:26 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/18 15:17:40 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_data
 	struct s_objects objects;
 	struct s_scene scene;
 	struct s_screen screen;
+	struct s_dist m_dist;
 	void *mlx;
 	void *window;
 	void *img;
