@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/14 17:22:30 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/18 15:10:49 by mariasavino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
- void normal_cylind(t_data *data, t_dist *dist, t_coord *ray, t_coord *normal)
- {
-	float	n;
-	t_coord	*tmp;
+void normal_cylind(t_data *data, t_dist *dist, t_coord *ray, t_coord *normal)
+{
+	float n;
+	t_coord *tmp;
 
 	tmp = malloc(sizeof(t_coord));
-	*tmp = vector_subtract(data->objects.cylind[dist->n_obj].coord, *ray);//вектор из основания цилиндра до точки
+	*tmp = vector_subtract(data->objects.cylind[dist->n_obj].coord, *ray); //вектор из основания цилиндра до точки
 	vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
 	n = vector_scalar(*tmp, data->objects.cylind[dist->n_obj].orient_vector);
 	*tmp = data->objects.cylind[dist->n_obj].orient_vector;
@@ -26,7 +26,7 @@
 	normal->y = tmp->y - ray->y;
 	normal->z = tmp->z - ray->z;
 	free(tmp);
- }
+}
 
 float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 {
@@ -59,10 +59,9 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *ray)
 		normal.y = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.y;
 		normal.z = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.z;
 	}
-//	vector_normalize(&normal);
-//	vector_normalize(dist->dot_light);
-	intens_light = vector_scalar(*dist->dot_light, normal)
-	 	/ vector_length(*dist->dot_light) / vector_length(normal);
+	//	vector_normalize(&normal);
+	//	vector_normalize(dist->dot_light);
+	intens_light = vector_scalar(*dist->dot_light, normal) / vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0.0f)
 		intens_light = 0.0f;
 	return (intens_light);
@@ -82,7 +81,7 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 
 	vector_multiply(ray, dist.min_dist);							  // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
-	intens_light = dot_normal(data, &dist, ray);///
+	intens_light = dot_normal(data, &dist, ray);					  ///
 	if (shadow_sphere(data, &dist, ray))
 		*color = draw_dot(data, &dist, 0);
 	if (shadow_plane(data, &dist, ray))
