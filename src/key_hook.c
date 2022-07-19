@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 10:32:32 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 14:15:33 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/19 12:20:55 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int ft_key_hook(int keycode, t_data *data)
 	if (keycode == LEFT)
 		data->scene.camera.view_point.x -= 0.1;
 	if (keycode == DIST_PLUS)
-		data->scene.camera.view_point.z -= 0.1;
+		data->scene.camera.view_point.z -= 0.5;
 	if (keycode == DIST_MIN)
-		data->scene.camera.view_point.z += 0.1;
+		data->scene.camera.view_point.z += 0.5;
 	// ft_key_hook_camera(keycode, data);
 	draw(data);
 	return (0);

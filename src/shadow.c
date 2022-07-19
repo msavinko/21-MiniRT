@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:16:44 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/18 15:21:01 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/19 16:08:04 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@ int shadow_sphere(t_data *data, t_dist *dist, t_coord *ray)
 	i = 0;
 	while (i < data->objects.nsphere)
 	{
-		vector_normalize(dist->dot_light);
-		dot_sphere.x = data->objects.sphere[i].coord.x - ray->x; // луч из проверяемой точки до центра сферы
-		dot_sphere.y = data->objects.sphere[i].coord.y - ray->y; // луч из проверяемой точки до центра сферы
-		dot_sphere.z = data->objects.sphere[i].coord.z - ray->z; // луч из проверяемой точки до центра сферы
+		// vector_normalize(dist->dot_light);
+		dot_sphere = vector_subtract(data->objects.sphere[i].coord, *ray); // луч из проверяемой точки до центра сферы
 		// vector_normalize(&dot_sphere);
-
 		dist_shadow = shadow_sphere_intersect(dist->dot_light, &data->objects.sphere[i], &dot_sphere); //функия возвращает дистанцию от проверяемой точки до каждого объекта на прямой до источника света
-		// printf("dist_shadow %f\n", dist_shadow);
-		if (dist_shadow >= 0.0f && dist_shadow < 1.0f) // vector_length(*dist->dot_light))//проверяемый луч прям до источника света, т.еб если что-то загораживает, то дистанцию надо умножить на число меньше 1
-			return (1);
+		// float len = vector_length(*dist->dot_light);// printf("dist_shadow %f\n", dist_shadow);
+		// printf("dot_light len: %f and dist_shadow: %f\n", len, dist_shadow);
+		if (dist_shadow > 0.0f && dist_shadow < 1.0f)//vector_length(*dist->dot_light))//проверяемый луч прям до источника света, т.еб если что-то загораживает, то дистанцию надо умножить на число меньше 1
+			return (1); //shadow
 		i++;
 	}
 	return (0);
