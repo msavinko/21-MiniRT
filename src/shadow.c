@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:16:44 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 18:56:56 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/16 15:31:34 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray)
 		dot_sphere.x = data->objects.sphere[i].coord.x - ray->x;// луч из проверяемой точки до центра сферы
 		dot_sphere.y = data->objects.sphere[i].coord.y - ray->y;// луч из проверяемой точки до центра сферы
 		dot_sphere.z = data->objects.sphere[i].coord.z - ray->z;// луч из проверяемой точки до центра сферы
+		printf("dot_sphere.x %f\n", dot_sphere.x);
 		// vector_normalize(&dot_sphere);
 
 		dist_shadow = shadow_sphere_intersect(dist->dot_light, &data->objects.sphere[i], &dot_sphere); //функия возвращает дистанцию от проверяемой точки до каждого объекта на прямой до источника света
