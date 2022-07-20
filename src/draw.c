@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/19 15:48:53 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:21:26 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 {
 	t_coord normal;
 	float intens_light;
+	float m;
+	// (void)data; (void)dot;
 
+	// printf("dist->dist %f, dist->dot_light.x %f, dist->min_dist %f, dist->n_obj %d, dist->near_obj %d\n",
+	// 	 dist->dist, dist->dot_light->x, dist->min_dist, dist->n_obj, dist->near_obj);
 	if (dist->near_obj == SPHERE)
 		normal = vector_subtract(*dot, data->objects.sphere[dist->n_obj].coord);
 	else if (dist->near_obj == PLANE)
@@ -40,25 +44,19 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 			data->objects.plane[dist->n_obj].orient_vector.y, data->objects.plane[dist->n_obj].orient_vector.z);
 	else if (dist->near_obj == CYLINDER)
 	{
-		float m;
 		vector_normalize(&data->objects.cylind[dist->n_obj].orient_vector);
 		m = (vector_scalar(*dot, data->objects.cylind[dist->n_obj].orient_vector)
 			+ vector_scalar(data->objects.cylind[dist->n_obj].coord, data->objects.cylind[dist->n_obj].orient_vector));
-		normal.x = data->objects.cylind[dist->n_obj].orient_vector.x * m - dot->x;
-		normal.y = data->objects.cylind[dist->n_obj].orient_vector.y * m - dot->y;
-		normal.z = data->objects.cylind[dist->n_obj].orient_vector.z * m - dot->z;
+		normal = vector_multiply1(&data->objects.cylind[dist->n_obj].orient_vector, m);
+		normal = vector_subtract(normal, *dot);
 	}
 	else if (dist->near_obj == TOP_DISK)
 		normal = new_vector3(data->objects.cylind[dist->n_obj].orient_vector.x,
 			data->objects.cylind[dist->n_obj].orient_vector.y, data->objects.cylind[dist->n_obj].orient_vector.z);
 	else
-	{
-		normal.x = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.x;
-		normal.y = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.y;
-		normal.z = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.z;
-	}
-	// vector_normalize(&normal);
-	// vector_normalize(dist->dot_light);
+		normal = vector_multiply1(&data->objects.cylind[dist->n_obj].orient_vector, -1.0f);
+	vector_normalize(&normal);
+	vector_normalize(dist->dot_light);
 	intens_light = vector_scalar(*dist->dot_light, normal)
 	 	/ vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0)
@@ -68,29 +66,34 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 
 void draw_objects(t_data *data, t_coord *ray, int *color)
 {
-	t_dist dist;
-	float intens_light;
-
-	dist.dot_light = malloc(sizeof(t_coord));
-	dist.near_obj = 0;
-	dist.min_dist = INT32_MAX;
-	nearest_sphere(data, &dist, ray);
-	nearest_plane(data, &dist, ray);
-	nearest_cylind(data, &dist, ray); //нашли ближайший объект, заполнили dist
-
-	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
-	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
-	intens_light = dot_normal(data, &dist, ray);///
-	if (shadow_sphere(data, &dist, ray))
-		*color = draw_dot(data, &dist, 0);
+	t_dist *dist = malloc(sizeof(t_dist));
+	float intens_light = 0.0f;
+	dist->dot_light = malloc(sizeof(t_coord));
+	dist->near_obj = 0;
+	dist->n_obj = -1;
+	dist->min_dist = INT32_MAX;
+	nearest_sphere(data, dist, ray);
+	nearest_plane(data, dist, ray);
+	nearest_cylind(data, dist, ray); //нашли ближайший объект, заполнили dist
+	
+	vector_multiply(ray, dist->min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
+	// когда исправим положение камеры, к ray нужно будет прибавить центр камеры (view_point)
+	*dist->dot_light = vector_subtract(data->scene.light.coord, *ray); // вектор из этой точки до источника света
+	// *dist->dot_light = vector_subtract(*ray, data->scene.light.coord); // вектор из этой точки до источника света
+	if (dist->near_obj)
+		intens_light = dot_normal(data, dist, ray);///
+	// if (shadow_sphere(data, dist, ray))
+	// 	*color = draw_dot(data, dist, 0);
 	// if (shadow_plane(data, &dist, ray))
 	// 	*color = draw_dot(data, &dist, 0);
 	// else if (shadow_cylinder(data, &dist, ray))
 	// 	*color = draw_dot(data, &dist, 0);
-	else
-		*color = draw_dot(data, &dist, intens_light);
-	// if (dist.dot_light)
-		free(dist.dot_light);
+	// else
+		*color = draw_dot(data, dist, intens_light);
+	if (dist->dot_light)
+		free(dist->dot_light);
+	if (dist)
+		free(dist);
 }
 
 void draw(t_data *data)

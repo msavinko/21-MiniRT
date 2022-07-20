@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/19 12:37:16 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/20 14:14:17 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_coord vector_addition(t_coord a, t_coord b);
 float vector_length(t_coord a);
 void vector_normalize(t_coord *a);
 void vector_multiply(t_coord *direction, float multiply);
+t_coord	vector_multiply1(t_coord *direction, float multiply);
 float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
 t_coord vec3_mul(t_coord a, t_coord b);

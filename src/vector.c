@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/19 11:29:06 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/20 14:14:21 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,16 @@ void	vector_multiply(t_coord *direction, float multiply) // Умножение �
 	direction->y *= multiply;
 	direction->z *= multiply;
 }
+t_coord	vector_multiply1(t_coord *direction, float multiply) // Умножение вектора на число
+{
+	t_coord result;
+
+	result.x = direction->x * multiply;
+	result.y = direction->y * multiply;
+	result.z = direction->z * multiply;
+	return (result);
+}
+
 
 float	vector_sumpow2(t_coord a) // Квадрат длины вектора
 {
