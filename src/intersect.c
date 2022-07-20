@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:30:05 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:18:28 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ float	disc_intersect(t_camera cam, t_coord ray, t_plane *plane, float r)
 	if (t != 0.0f)
 	{
 		vector_multiply(&ray, t);
-		p = vector_addition(cam.view_point, ray);
+		p = vector_add(cam.view_point, ray);
 		v = vector_subtract(p, plane->coord);
 		dist = sqrtf(vector_scalar(v, v));
 		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
@@ -120,7 +120,7 @@ float	cylindr_intersect(t_data *data, t_coord ray, t_dist *dist, int *i)
 		dist_min = dist_disc[0];
 	disc2 = data->objects.cylind[*i].orient_vector;
 	vector_multiply(&disc2, data->objects.cylind[*i].height);
-	plane.coord = vector_addition(data->objects.cylind[*i].coord, disc2);
+	plane.coord = vector_add(data->objects.cylind[*i].coord, disc2);
 	dist_disc[1] = disc_intersect(data->scene.camera, ray, &plane, \
 		(data->objects.cylind[*i].diameter) / 2);
 	if (dist_disc[1] > 0.0f && dist_disc[1] < dist_min)

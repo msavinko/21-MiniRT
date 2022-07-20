@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:32:58 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:17:11 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void shadow(t_data *data, t_color *color, t_coord *ray, float min_dist);
 
 t_coord new_vector3(float x, float y, float z);
 t_coord vector_subtract(t_coord a, t_coord b);
-t_coord vector_addition(t_coord a, t_coord b);
+t_coord vector_add(t_coord a, t_coord b);
 float vector_length(t_coord a);
 void vector_normalize(t_coord *a);
 void vector_multiply(t_coord *direction, float multiply);
+t_coord	vector_multiply1(t_coord *direction, float multiply);
 float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
 t_coord vec3_mul(t_coord a, t_coord b);

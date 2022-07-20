@@ -14,7 +14,6 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 DIR_SRC			=	src/
 FILES_SRC		=	main.c \
-					print_structs.c \
 					free_all.c \
 					draw.c \
 					vector.c\
@@ -55,7 +54,6 @@ all		:	mlx libft $(NAME_RT)
 
 mlx:
 			@make -C $(MLX_PATH)
-			echo "$(OBJS_SRC)"
 
 libft	:
 			@make -C $(DIR_LIB)

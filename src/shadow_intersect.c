@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_intersect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 18:58:22 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:18:49 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ float	shadow_disc_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane, fl
 	if (t != 0.0f)
 	{
 		vector_multiply(dot_light, t);
-		p = vector_addition(*dot, *dot_light);
+		p = vector_add(*dot, *dot_light);
 		v = vector_subtract(p, plane->coord);
 		dist = sqrtf(vector_scalar(v, v));
 		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
@@ -110,7 +110,7 @@ float	shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *do
 		return (1);
 	top_disc = cylind->orient_vector;
 	vector_multiply(&top_disc, cylind->height);
-	plane.coord = vector_addition(cylind->coord, top_disc);
+	plane.coord = vector_add(cylind->coord, top_disc);
 	plane.orient_vector = cylind->orient_vector;
 	if (shadow_disc_intersect(dot_light, dot, &plane, (cylind->diameter)/2))
 		return (1);

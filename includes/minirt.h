@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:32:43 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 12:43:47 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #define WIDTH_1 1920.00
 #define HEIGHT_1 1080.00
 
-#define WIDTH 1200.00
-#define HEIGHT 800.00
+#define WIDTH 200.00
+#define HEIGHT 100.00
 
 
 typedef struct s_color //ЦВЕТ
@@ -110,8 +110,11 @@ typedef struct s_screen // ЭКРАН
 {
 	float width;
 	float height;
-	float x_pixel;
-	float y_pixel;
+	t_coord	start;
+	t_coord	step_w;
+	t_coord	step_h;
+	// float x_pixel;
+	// float y_pixel;
 	// float	fov;
 } t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
@@ -129,7 +132,6 @@ typedef struct s_data
 // free_all.c
 void free_data(t_data *data);
 
-// print_structs.c
-void print_objects(t_data *data);
+
 int close_minirt(t_data *data);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:19:48 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:17:04 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_coord	vector_subtract(t_coord a, t_coord b) // Разность векторо
 	return (difference);
 }
 
-t_coord	vector_addition(t_coord a, t_coord b) // Сумма векторов
+t_coord	vector_add(t_coord a, t_coord b) // Сумма векторов
 {
 	t_coord	sum;
 
@@ -72,6 +72,16 @@ void	vector_multiply(t_coord *direction, float multiply) // Умножение �
 	direction->x *= multiply;
 	direction->y *= multiply;
 	direction->z *= multiply;
+}
+
+t_coord	vector_multiply1(t_coord *direction, float multiply) // Умножение вектора на число
+{
+	t_coord result;
+
+	result.x = direction->x * multiply;
+	result.y = direction->y * multiply;
+	result.z = direction->z * multiply;
+	return (result);
 }
 
 float	vector_sumpow2(t_coord a) // Квадрат длины вектора

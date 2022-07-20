@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/16 15:27:46 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:17:49 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);///
-	if (shadow_sphere(data, &dist, ray))
-		*color = draw_dot(data, &dist, 0);
+	// if (shadow_sphere(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, 0);
 	// // if (shadow_plane(data, &dist, ray))
 	// // 	*color = draw_dot(data, &dist, 0);
 	// // else if (shadow_cylinder(data, &dist, ray))
@@ -110,74 +110,80 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 		free(dist.dot_light);
 }
 
-void draw(t_data *data)
-{
-	int mlx_x;
-	int mlx_y;
-	int x_angle;
-	int y_angle;
-	int color;
-	float x_ray;
-	float y_ray;
-	t_coord ray;
-
-	mlx_y = 0;
-	y_angle = HEIGHT / 2;// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
-	while (y_angle > (-1 * HEIGHT / 2))// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
-	{
-		y_ray = y_angle * data->screen.y_pixel + data->scene.camera.view_point.y;
-		x_angle = -1 * WIDTH / 2;// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
-		mlx_x = 0;
-		while (x_angle < WIDTH / 2)// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
-		{
-			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x; // -400 * шаг + координаты камеры = объективная точка в пространстве
-			ray = new_vector3(x_ray, y_ray, -1);
-			vector_normalize(&ray);
-			draw_objects(data, &ray, &color);
-			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
-			x_angle++;
-			mlx_x++;
-		}
-		y_angle--;
-		mlx_y++;
-	}
-}
-
-// static void	found_ray(t_coord *ray, int w, int h, )
-// {
-// 	vector_addition(vector_multiply(&step_w, w), vector_multiply(&step_h, h)),  //start + w/W * step_w + h/H * step_h;
-// }
-
 // void draw(t_data *data)
 // {
-// 	int		mlx_x;
-// 	int		mlx_y;
-// 	int		w;
-// 	int		h;
-// 	int		color;
-// 	t_coord	start;
-// 	t_coord	step_w;
-// 	t_coord	step_h;
-// 	t_coord	*ray;
+// 	int mlx_x;
+// 	int mlx_y;
+// 	int x_angle;
+// 	int y_angle;
+// 	int color;
+// 	float x_ray;
+// 	float y_ray;
+// 	t_coord ray;
 
-// 	ray = malloc(sizeof(t_coord));
 // 	mlx_y = 0;
-// 	h = 0;
-// 	while (h < HEIGHT)// движение по экрану вниз
+// 	y_angle = HEIGHT / 2;// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
+// 	while (y_angle > (-1 * HEIGHT / 2))// + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
 // 	{
-// 		w = 0;
+// 		y_ray = y_angle * data->screen.y_pixel + data->scene.camera.view_point.y;
+// 		x_angle = -1 * WIDTH / 2;// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
 // 		mlx_x = 0;
-// 		while (w < WIDTH)// движение по экрану направо
+// 		while (x_angle < WIDTH / 2)// + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
 // 		{
-// 			found_ray(ray, w, h); //start + w/W * step_w + h/H * step_h;
+// 			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x; // -400 * шаг + координаты камеры = объективная точка в пространстве
+// 			ray = new_vector3(x_ray, y_ray, -1);
 // 			vector_normalize(&ray);
 // 			draw_objects(data, &ray, &color);
 // 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
-// 			w++;
+// 			x_angle++;
 // 			mlx_x++;
 // 		}
-// 		h++;
+// 		y_angle--;
 // 		mlx_y++;
 // 	}
-// 	free(ray);
 // }
+
+static void	found_ray(t_data *data, t_coord *ray, int w, int h)
+{
+	t_coord curr_step_w;
+	t_coord curr_step_h;
+
+	
+	curr_step_w = vector_multiply1(&data->screen.step_w, w);
+	curr_step_h = vector_multiply1(&data->screen.step_h, h);
+
+	*ray = vector_add(vector_add(curr_step_w, curr_step_w), data->screen.start); //start + w/W * step_w + h/H * step_h;
+
+}
+
+void draw(t_data *data)
+{
+	int		mlx_x;
+	int		mlx_y;
+	int		w;
+	int		h;
+	int		color;
+
+	t_coord	*ray;
+
+	mlx_y = 0;
+	h = 0;
+	while (h < HEIGHT)// движение по экрану вниз
+	{
+		w = 0;
+		mlx_x = 0;
+		while (w < WIDTH)// движение по экрану направо
+		{
+			ray = malloc(sizeof(t_coord));
+			found_ray(data, ray, w, h); //start + w/W * step_w + h/H * step_h;
+			vector_normalize(ray);
+			draw_objects(data, ray, &color);
+			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
+			w++;
+			mlx_x++;
+			free(ray);
+		}
+		h++;
+		mlx_y++;
+	}
+}
