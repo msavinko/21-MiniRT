@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:32:58 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:55:02 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void nearest_plane(t_data *data, t_dist *dist, t_coord *ray);
 void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow.c
-int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
+int shadow_sphere(t_data *data, t_dist *dist, t_coord *ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 int shadow_cylinder(t_data *data, t_dist *dist, t_coord *ray);
 

@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 12:24:51 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:10:29 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 		normal.z = -1.0f * data->objects.cylind[dist->n_obj].orient_vector.z;
 	}
 	vector_normalize(&normal);
-	vector_normalize(dist->dot_light);
+	// vector_normalize(dist->dot_light);
 	intens_light = vector_scalar(*dist->dot_light, normal)
 	 	/ vector_length(*dist->dot_light) / vector_length(normal);
 	if (intens_light < 0)
@@ -85,31 +85,37 @@ float dot_normal(t_data *data, t_dist *dist, t_coord *dot)
 
 void draw_objects(t_data *data, t_coord *ray, int *color)
 {
-	t_dist dist;
-	float intens_light;
+	t_dist *dist = malloc(sizeof(t_dist));
+	float intens_light = 0.0f;
 
-	dist.dot_light = malloc(sizeof(t_coord));
-	dist.near_obj = 0;
-	dist.n_obj = -1;
-	dist.min_dist = INT32_MAX;
-	nearest_sphere(data, &dist, ray);
-	nearest_plane(data, &dist, ray);
-	nearest_cylind(data, &dist, ray); //нашли ближайший объект, заполнили dist
+	dist->dot_light = malloc(sizeof(t_coord));
+	dist->near_obj = 0;
+	dist->n_obj = -1;
+	dist->min_dist = INT32_MAX;
+	nearest_sphere(data, dist, ray);
+	nearest_plane(data, dist, ray);
+	nearest_cylind(data, dist, ray); //нашли ближайший объект, заполнили dist
 
-	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
+	vector_multiply(ray, dist->min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
 	*ray = vector_addition(*ray, data->scene.camera.view_point);
-	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
-	intens_light = dot_normal(data, &dist, ray);///
-	// if (shadow_sphere(data, &dist, ray))
-	// 	*color = draw_dot(data, &dist, 0);
-	// // if (shadow_plane(data, &dist, ray))
-	// // 	*color = draw_dot(data, &dist, 0);
-	// // else if (shadow_cylinder(data, &dist, ray))
-	// // 	*color = draw_dot(data, &dist, 0);
-	// else
-		*color = draw_dot(data, &dist, intens_light);
+	*dist->dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
+	if (!dist->near_obj)
+		*color = BACK;
+	else
+	{
+		intens_light = dot_normal(data, dist, ray);///
+		if (shadow_sphere(data, dist, ray))
+			*color = draw_dot(data, dist, 0);
+		// // if (shadow_plane(data, &dist, ray))
+		// // 	*color = draw_dot(data, &dist, 0);
+		// // else if (shadow_cylinder(data, &dist, ray))
+		// // 	*color = draw_dot(data, &dist, 0);
+		else
+			*color = draw_dot(data, dist, intens_light);
+	}
 	// if (dist.dot_light)
-		free(dist.dot_light);
+		free(dist->dot_light);
+		free(dist);
 }
 
 void draw(t_data *data)
@@ -121,7 +127,7 @@ void draw(t_data *data)
 	int color;
 	float x_ray;
 	float y_ray;
-	t_coord ray;
+	t_coord *ray;
 
 	mlx_y = 0;
 	y_angle = HEIGHT / 2 + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
@@ -132,13 +138,15 @@ void draw(t_data *data)
 		mlx_x = 0;
 		while (x_angle < WIDTH / 2 + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
 		{
+			ray = malloc(sizeof(t_coord));
 			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x; // -400 * шаг + координаты камеры = объективная точка в пространстве
-			ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z);
-			vector_normalize(&ray);
-			draw_objects(data, &ray, &color);
+			*ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z);
+			vector_normalize(ray);
+			draw_objects(data, ray, &color);
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
 			x_angle++;
 			mlx_x++;
+			free(ray);
 		}
 		y_angle--;
 		mlx_y++;
