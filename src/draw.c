@@ -126,15 +126,15 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 
 void	legend_put(t_data *data)
 {
-	mlx_string_put(data->mlx, data->window, 20, 30, 0x696969, "arrow keys (cursor) - change the POINT of view");
+	mlx_string_put(data->mlx, data->window, 20, 30, 0x696969, "-/+ and arrow keys (cursor) - change the POINT of view");
 	mlx_string_put(data->mlx, data->window, 20, 50, 0x696969, "WASD - change the ANGLE of view");
-	mlx_string_put(data->mlx, data->window, 20, 70, 0x696969, "left click - object selection");
+	mlx_string_put(data->mlx, data->window, 20, 70, 0x696969, "left click - OBJECT selection");
 	mlx_string_put(data->mlx, data->window, 20, 90, 0x696969, "XYZ (after left click) - COORDINATES selection");
 	mlx_string_put(data->mlx, data->window, 20, 110, 0x696969, "R (after left click) - change the RADIUS");
 	mlx_string_put(data->mlx, data->window, 20, 130, 0x696969, "O (after left click) - change the ORIENT VECTOR");
-	mlx_string_put(data->mlx, data->window, 20, 150, 0x696969, "K - decrease parameter");
-	mlx_string_put(data->mlx, data->window, 20, 170, 0x696969, "L - increase parameter");
-	mlx_string_put(data->mlx, data->window, 20, 190, 0x696969, "right click - camera control");
+	mlx_string_put(data->mlx, data->window, 20, 150, 0x696969, "K - DECREASE the selected parameter");
+	mlx_string_put(data->mlx, data->window, 20, 170, 0x696969, "L - INCREASE the selected parameter");
+	mlx_string_put(data->mlx, data->window, 20, 190, 0x696969, "right click - return to CAMERA control");
 }
 
 void draw(t_data *data)
