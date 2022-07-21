@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:54:53 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 12:04:45 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	// intens_light = vector_scalar(*dist.dot_light, *dist.dot_normal) \
 	// 	/ vector_length(*dist.dot_light) / vector_length(*dist.dot_normal);
 	// // vector_normalize(dist.dot_light);
-	if (shadow_sphere(data, &dist, ray)) // тень есть
-		*color = draw_dot(data, &dist, intens_light);
-	else if (shadow_plane(data, &dist, ray))
-		*color = draw_dot(data, &dist, intens_light);
+	// if (shadow_sphere(data, &dist, ray)) // тень есть
+	// 	*color = draw_dot(data, &dist, intens_light);
+	// else if (shadow_plane(data, &dist, ray))
+	// 	*color = draw_dot(data, &dist, intens_light);
 	// else if (shadow_cylinder(data, &dist, ray))
 	// 	*color = draw_dot(data, &dist, intens_light);
-	else
+	// else
 		*color = draw_dot(data, &dist, 0);
 	//	printf("intens_light = %f\n", intens_light);
 }
