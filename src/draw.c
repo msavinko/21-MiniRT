@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 12:16:14 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 12:24:51 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,14 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 
 	dist.dot_light = malloc(sizeof(t_coord));
 	dist.near_obj = 0;
+	dist.n_obj = -1;
 	dist.min_dist = INT32_MAX;
 	nearest_sphere(data, &dist, ray);
 	nearest_plane(data, &dist, ray);
 	nearest_cylind(data, &dist, ray); //нашли ближайший объект, заполнили dist
 
 	vector_multiply(ray, dist.min_dist); // ray теперь точка в пространстве на ближайшем объекте, а не точка на видоискателе камеры
+	*ray = vector_addition(*ray, data->scene.camera.view_point);
 	*dist.dot_light = vector_subtract(data->scene.light.coord, *ray); //вектор из этой точки до источника света
 	intens_light = dot_normal(data, &dist, ray);///
 	// if (shadow_sphere(data, &dist, ray))
