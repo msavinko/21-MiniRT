@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 14:51:09 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 15:19:48 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ t_coord	new_vector3(float x, float y, float z) // Создание нового 
 t_coord	vector_subtract(t_coord a, t_coord b) // Разность векторов
 {
 	t_coord	difference;
-
-	// printf("a.x = %f\n", a.x);
-	// printf("a.y = %f\n", a.y);
-	// printf("a.z = %f\n", a.z);
-	// printf("b.x = %f\n", b.x);
-	// printf("b.y = %f\n", b.y);
-	// printf("b.z = %f\n", b.z);
-	// difference = malloc(sizeof(t_coord));
-	// if (!difference)
-	// 	exit (1);
 	difference.x = a.x - b.x;
 	difference.y = a.y - b.y;
 	difference.z = a.z - b.z;

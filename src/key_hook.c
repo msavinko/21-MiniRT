@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 10:32:32 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/13 11:58:29 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 12:17:07 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int ft_key_hook(int keycode, t_data *data)
 	if (keycode == ESCAPE)
 		close_minirt(data);
 	if (keycode == UP)
-		data->scene.camera.view_point.y += 1;
+		data->scene.camera.view_point.y += 0.1;
 	if (keycode == DOWN)
-		data->scene.camera.view_point.y -= 1;
+		data->scene.camera.view_point.y -= 0.1;
 	if (keycode == RIGHT)
-		data->scene.camera.view_point.x += 1;
+		data->scene.camera.view_point.x += 0.1;
 	if (keycode == LEFT)
-		data->scene.camera.view_point.x -= 1;
+		data->scene.camera.view_point.x -= 0.1;
 	if (keycode == DIST_PLUS)
 		data->scene.camera.view_point.z -= 1;
 	if (keycode == DIST_MIN)
 		data->scene.camera.view_point.z += 1;
-	ft_key_hook_camera(keycode, data);
+	// ft_key_hook_camera(keycode, data);
 	draw(data);
 	return (0);
 }
