@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:19:48 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:50:45 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,14 @@ t_coord  vec3_mul(t_coord a, t_coord b)
     z.z = a.z * b.z;
     return (z);
 }
+
+t_coord  vec_vec_mul(t_coord a, t_coord b)
+{
+	t_coord z;
+
+    z.x = a.y * b.z - a.z * b.y;
+    z.y = a.z * b.x - a.x * b.z;
+    z.z = a.x * b.y - a.y * b.x;
+    return (z);
+}
+
