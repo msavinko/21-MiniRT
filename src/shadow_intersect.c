@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_intersect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 14:26:49 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/22 17:09:26 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ float	shadow_cylindr_intersect(t_coord *dot_light, t_cylind *cylind, t_coord *do
 	t_coord top_disc;
 	t_plane plane;
 
-	if (shadow_pipe_intersect(dot_light, cylind, dot))
-		return (1);
+	// if (shadow_pipe_intersect(dot_light, cylind, dot))
+	// 	return (1);
 	plane.coord = cylind->coord;
 	plane.orient_vector = cylind->orient_vector;
 	plane.color = cylind->color;

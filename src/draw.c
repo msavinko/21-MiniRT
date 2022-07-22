@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 14:10:29 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/22 16:57:26 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,20 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 	{
 		intens_light = dot_normal(data, dist, ray);///
 		if (shadow_sphere(data, dist, ray))
+		{
 			*color = draw_dot(data, dist, 0);
-		// // if (shadow_plane(data, &dist, ray))
-		// // 	*color = draw_dot(data, &dist, 0);
-		// // else if (shadow_cylinder(data, &dist, ray))
-		// // 	*color = draw_dot(data, &dist, 0);
+			return ;
+		}
+		if (shadow_plane(data, dist, ray))
+		{
+		 	*color = draw_dot(data, dist, 0);
+			return ;
+		}
+		if (shadow_cylinder(data, dist, ray))
+		{
+		 	*color = draw_dot(data, dist, 0);
+			return ;
+		}
 		else
 			*color = draw_dot(data, dist, intens_light);
 	}

@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:16:44 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/22 16:27:07 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:49:54 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,7 @@ int shadow_sphere(t_data *data, t_dist *dist, t_coord *ray)
 			if (((vector_length(dot_sph) > data->objects.sphere[i].radius && vector_length(lgt_sph) > data->objects.sphere[i].radius)) && // обе точки снаружи сферы
 				(vector_scalar(dot_sph, *dist->dot_light) > 0 && vector_scalar(lgt_sph, *dist->dot_light) < 0)) // высота ch попадает на отрезок DL
 				if ((vector_length(vec_vec_mul(dot_sph, *dist->dot_light)) / vector_length(*dist->dot_light) < data->objects.sphere[i].radius) || vector_length(vec_vec_mul(dot_sph, lgt_sph)) / vector_length(*dist->dot_light) == 0)
-					{printf("%d %d   ", dist->near_obj, dist->n_obj);
-			 		return (1);}
-			// if (vector_scalar(dot_sph, *dist->dot_light) <= 0)
-			// {
-			// 	if (vector_length(dot_sph) <= data->objects.sphere[i].radius && vector_length(lgt_sph) < data->objects.sphere[i].radius)
-			// 		return (1);
-			// }
-			// else if (vector_scalar(lgt_sph, *dist->dot_light) > 0)
-			// {
-			// 	printf("%d %d   ", dist->near_obj, dist->n_obj);
-			// 	if (vector_length(lgt_sph) <= data->objects.sphere[i].radius && vector_length(dot_sph) > data->objects.sphere[i].radius)
-			// 		return (1);
-			// }
-			// else
-			// {
-			// 	if (vector_length(vec_vec_mul(dot_sph, lgt_sph)) / vector_length(*dist->dot_light) < data->objects.sphere[i].radius)
-			// 		return (1);
-			// }
+					return (1);
 		}
 		i++;
 	}
@@ -90,12 +73,20 @@ int shadow_sphere(t_data *data, t_dist *dist, t_coord *ray)
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray)
 {
 	int i;
+	t_coord pl_dot;
+	t_coord pl_lgt;
 
 	i = 0;
-	while (i < data->objects.nplane)
+	while (i < data->objects.nsphere)
 	{
-		if (shadow_plane_intersect(dist->dot_light, &data->objects.plane[i], ray))
-			return (1);
+		if (dist->near_obj != PLANE || (i != dist->n_obj && dist->near_obj == PLANE))
+		{
+			pl_dot = vector_subtract(*ray, data->objects.plane[i].coord);// луч из проверяемой точки до центра сферы
+			pl_lgt = vector_subtract(data->scene.light.coord, data->objects.plane[i].coord);// луч из источника света до центра проверяемой сферы
+			if ((vector_scalar(pl_dot, data->objects.plane[i].orient_vector) > 0 && vector_scalar(pl_lgt, data->objects.plane[i].orient_vector) < 0) ||
+				(vector_scalar(pl_dot, data->objects.plane[i].orient_vector) < 0 && vector_scalar(pl_lgt, data->objects.plane[i].orient_vector) > 0))
+			 		return (1);
+		}
 		i++;
 	}
 	return (0);
