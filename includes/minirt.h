@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/22 16:14:27 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/23 14:58:58 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,18 @@ typedef struct s_screen // ЭКРАН
 {
 	float width;
 	float height;
-	float x_pixel;
-	float y_pixel;
-	// float	fov;
+	t_coord	start;
+	t_coord	step_w;
+	t_coord	step_h;
 } t_screen;
+
+// typedef struct s_screen // ЭКРАН
+// {
+// 	float width;
+// 	float height;
+// 	float x_pixel;
+// 	float y_pixel;
+// } t_screen;
 // ОБЩАЯ СТРУКТУРА В КОТОРОЙ ХРАНЯТСЯ И ОБЪЕКТЫ И ОСВЕЩЕНИЕ
 typedef struct s_data
 {

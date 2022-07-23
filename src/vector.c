@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 17:50:45 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:59:36 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,6 @@ float	vector_sumpow2(t_coord a) // Квадрат длины вектора
 
 float	vector_scalar(t_coord a, t_coord b) // Скалярное произведение векторов
 {
-	// printf("a.x %f, a.y %f, a.z %f\n", a.x, a.y, a.z);
-	// printf("b.x %f, b.y %f, b.z %f\n", b.x, b.y, b.z);
-	// printf("a.x * b.x %f, a.y * b.y % f, a.z * b.z %f\n", a.x * b.x, a.y * b.y, a.z * b.z);
-	// printf("return %f\n", a.x * b.x + a.y * b.y + a.z * b.z);
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
@@ -108,3 +104,12 @@ t_coord  vec_vec_mul(t_coord a, t_coord b)
     return (z);
 }
 
+t_coord	vector_multiply1(t_coord *direction, float multiply) // Умножение вектора на число
+{
+	t_coord result;
+
+	result.x = direction->x * multiply;
+	result.y = direction->y * multiply;
+	result.z = direction->z * multiply;
+	return (result);
+}

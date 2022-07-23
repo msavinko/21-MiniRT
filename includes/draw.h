@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 17:51:05 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:59:30 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
 t_coord vec3_mul(t_coord a, t_coord b);
 t_coord  vec_vec_mul(t_coord a, t_coord b);
+t_coord	vector_multiply1(t_coord *direction, float multiply);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);

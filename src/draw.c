@@ -6,7 +6,7 @@
 /*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:05:45 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/22 16:57:26 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/23 14:29:24 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,45 +127,51 @@ void draw_objects(t_data *data, t_coord *ray, int *color)
 		free(dist);
 }
 
+static void	found_ray(t_data *data, t_coord *ray, int w, int h)
+{
+	t_coord curr_step_w;
+	t_coord curr_step_h;
+
+
+	curr_step_w = vector_multiply1(&data->screen.step_w, w);
+	curr_step_h = vector_multiply1(&data->screen.step_h, h);
+	*ray = vector_addition(vector_addition(curr_step_w, curr_step_h), data->screen.start); //start + w/W * step_w + h/H * step_h;
+//	printf("\n curr_step_w.x %f curr_step_h.y: %f ray x: %f, ray y: %f, ray z: %f", curr_step_w.x, curr_step_h.y, ray->x,ray->y, ray->z);
+	//printf("\n\nstart x: %f, start y: %f, start z: %f\n", data->screen.start.x, data->screen.start.y, data->screen.start.z);
+}
+
 void draw(t_data *data)
 {
-	int mlx_x;
-	int mlx_y;
-	int x_angle;
-	int y_angle;
-	int color;
-	float x_ray;
-	float y_ray;
-	t_coord *ray;
+	int		mlx_x;
+	int		mlx_y;
+	int		w;
+	int		h;
+	int		color;
+
+	t_coord	*ray;
 
 	mlx_y = 0;
-	y_angle = HEIGHT / 2 + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f);
-	while (y_angle > (-1 * HEIGHT / 2 + (data->scene.camera.orient_vector.y * HEIGHT / 2.0f)))
+	h = 0;
+	while (h < HEIGHT)// движение по экрану вниз
 	{
-		y_ray = y_angle * data->screen.y_pixel + data->scene.camera.view_point.y;
-		x_angle = -1 * WIDTH / 2 + (data->scene.camera.orient_vector.x * WIDTH / 2.0f);
+		w = 0;
 		mlx_x = 0;
-		while (x_angle < WIDTH / 2 + (data->scene.camera.orient_vector.x * WIDTH / 2.0f))
+		while (w < WIDTH)// движение по экрану направо
 		{
 			ray = malloc(sizeof(t_coord));
-			x_ray = x_angle * data->screen.x_pixel + data->scene.camera.view_point.x; // -400 * шаг + координаты камеры = объективная точка в пространстве
-			*ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z);
+			found_ray(data, ray, w, h); //start + w/W * step_w + h/H * step_h;
+		//	printf("\nray x: %f, ray y: %f, ray z: %f",ray->x,ray->y, ray->z);
 			vector_normalize(ray);
 			draw_objects(data, ray, &color);
 			mlx_pixel_put(data->mlx, data->window, mlx_x, mlx_y, color);
-			x_angle++;
+			w++;
 			mlx_x++;
 			free(ray);
 		}
-		y_angle--;
+		h++;
 		mlx_y++;
 	}
 }
-
-// static void	found_ray(t_coord *ray, int w, int h, )
-// {
-// 	vector_addition(vector_multiply(&step_w, w), vector_multiply(&step_h, h)),  //start + w/W * step_w + h/H * step_h;
-// }
 
 // void draw(t_data *data)
 // {
