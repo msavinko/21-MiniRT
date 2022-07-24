@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:15 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 15:57:45 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:31:50 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	ft_x_move(int keycode, t_data *data)
 	}
 	if (data->m_dist.near_obj == 1)
 	{
-		printf("I am moving sphere x. Spere coord %f %f %f \n", data->objects.sphere[data->m_dist.n_obj].coord.x, \
-			data->objects.sphere[data->m_dist.n_obj].coord.y, data->objects.sphere[data->m_dist.n_obj].coord.z);
+		printf("I am moving sphere x\n");
 		if (keycode == L)
 			data->objects.sphere[data->m_dist.n_obj].coord.x += 1.0;
 		if (keycode == K)
@@ -132,7 +131,7 @@ int	ft_ox_move(int keycode, t_data *data) // ?? ограничить ли рам
 	{
 		printf("I am moving plane orient x\n");
 		if (keycode == L)
-			data->objects.plane[data->m_dist.n_obj].orient_vector.x += 0.1; 
+			data->objects.plane[data->m_dist.n_obj].orient_vector.x += 0.1;
 		if (keycode == K)
 			data->objects.plane[data->m_dist.n_obj].orient_vector.x -= 0.1;
 	}
@@ -155,7 +154,7 @@ int	ft_oy_move(int keycode, t_data *data) // ?? ограничить ли рам
 	{
 		printf("I am moving plane orient y\n");
 		if (keycode == L)
-			data->objects.plane[data->m_dist.n_obj].orient_vector.y += 0.1; 
+			data->objects.plane[data->m_dist.n_obj].orient_vector.y += 0.1;
 		if (keycode == K)
 			data->objects.plane[data->m_dist.n_obj].orient_vector.y -= 0.1;
 	}
@@ -178,7 +177,7 @@ int	ft_oz_move(int keycode, t_data *data) // ?? ограничить ли рам
 	{
 		printf("I am moving plane orient z\n");
 		if (keycode == L)
-			data->objects.plane[data->m_dist.n_obj].orient_vector.z += 0.1; 
+			data->objects.plane[data->m_dist.n_obj].orient_vector.z += 0.1;
 		if (keycode == K)
 			data->objects.plane[data->m_dist.n_obj].orient_vector.z -= 0.1;
 	}
@@ -255,26 +254,41 @@ int	ft_key_hook_coord(int keycode, t_data *data)
 	if (keycode == X)
 	{
 		printf("You pressed X\n");
+		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
+		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
+		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		mlx_hook(data->window, 2, (1L << 0), ft_x_move, data);
 	}
 	if (keycode == Y)
 	{
 		printf("You pressed Y\n");
+		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
+		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
+		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		mlx_hook(data->window, 2, (1L << 0), ft_y_move, data);
 	}
 	if (keycode == Z)
 	{
 		printf("You pressed Z\n");
+		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
+		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
+		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		mlx_hook(data->window, 2, (1L << 0), ft_z_move, data);
 	}
 	if (keycode == O)
 	{
 		printf("You pressed O\n");
+		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
+		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
+		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		mlx_hook(data->window, 2, (1L << 0), ft_o_move, data);
 	}
 	if (keycode == R)
 	{
 		printf("You pressed R\n");
+		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
+		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
+		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		mlx_hook(data->window, 2, (1L << 0), ft_radius, data);
 	}
 	if (keycode == E)
@@ -295,23 +309,27 @@ int ft_mouse_hook(int mousecode, int x, int y, t_data *data)
 
 	printf("Hello\n");
 	if (mousecode == 5)
+	{
 		printf("mousecode 5\n");
-	x_ray = (x - WIDTH / 2) * data->screen.x_pixel;
-	y_ray = (HEIGHT / 2 - y) * data->screen.x_pixel;
-	m_ray = new_vector3(x_ray, y_ray, -1);
-	vector_normalize(&m_ray);
-	printf("I found coord %f %f %f\n", m_ray.x, m_ray.y, m_ray.z);
+	}
+		x_ray = (x - WIDTH / 2) / (WIDTH);
+		y_ray = (HEIGHT / 2 - y) / (HEIGHT);
+		m_ray = new_vector3(x_ray, y_ray, -1); // -1 или вектор камеры?
+		printf("I found coord %f %f %f\n", m_ray.x, m_ray.y, m_ray.z);
+		// m_ray->x = x_ray;
+		// m_ray->y = y_ray;
+		// m_ray->z = -1;
 	data->m_dist.near_obj = 0;
 	data->m_dist.min_dist = INT32_MAX;
-	data->m_dist.n_obj = -1;
-	//data->m_dist.dist = -1;
 	nearest_sphere(data, &data->m_dist, &m_ray);
 	nearest_plane(data, &data->m_dist, &m_ray);
 	nearest_cylind(data, &data->m_dist, &m_ray);
 	printf("dist near obj %d\n", data->m_dist.near_obj);
 	printf("number of object %d\n", data->m_dist.n_obj);
 	if (data->m_dist.near_obj > 0)
+	{
 		mlx_hook(data->window, 2, (1L << 0), ft_key_hook_coord, data);
+	}
 	draw(data);
 	return (0);
 }
@@ -330,7 +348,7 @@ int ft_mouse(int mouse, int x, int y, t_data *data)
 	if (mouse != 1 && mouse != 2)
 	{
 		printf("exit from mouse\n");
-		ray_tracing(data);
+		draw(data);
 	}
 	return (0);
 }

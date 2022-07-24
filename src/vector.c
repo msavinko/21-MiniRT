@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/06 14:51:09 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:59:36 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ t_coord	new_vector3(float x, float y, float z) // Создание нового 
 t_coord	vector_subtract(t_coord a, t_coord b) // Разность векторов
 {
 	t_coord	difference;
-
-	// printf("a.x = %f\n", a.x);
-	// printf("a.y = %f\n", a.y);
-	// printf("a.z = %f\n", a.z);
-	// printf("b.x = %f\n", b.x);
-	// printf("b.y = %f\n", b.y);
-	// printf("b.z = %f\n", b.z);
-	// difference = malloc(sizeof(t_coord));
-	// if (!difference)
-	// 	exit (1);
 	difference.x = a.x - b.x;
 	difference.y = a.y - b.y;
 	difference.z = a.z - b.z;
@@ -91,10 +81,6 @@ float	vector_sumpow2(t_coord a) // Квадрат длины вектора
 
 float	vector_scalar(t_coord a, t_coord b) // Скалярное произведение векторов
 {
-	// printf("a.x %f, a.y %f, a.z %f\n", a.x, a.y, a.z);
-	// printf("b.x %f, b.y %f, b.z %f\n", b.x, b.y, b.z);
-	// printf("a.x * b.x %f, a.y * b.y % f, a.z * b.z %f\n", a.x * b.x, a.y * b.y, a.z * b.z);
-	// printf("return %f\n", a.x * b.x + a.y * b.y + a.z * b.z);
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
@@ -106,4 +92,24 @@ t_coord  vec3_mul(t_coord a, t_coord b)
     z.y = a.y * b.y;
     z.z = a.z * b.z;
     return (z);
+}
+
+t_coord  vec_vec_mul(t_coord a, t_coord b)
+{
+	t_coord z;
+
+    z.x = a.y * b.z - a.z * b.y;
+    z.y = a.z * b.x - a.x * b.z;
+    z.z = a.x * b.y - a.y * b.x;
+    return (z);
+}
+
+t_coord	vector_multiply1(t_coord *direction, float multiply) // Умножение вектора на число
+{
+	t_coord result;
+
+	result.x = direction->x * multiply;
+	result.y = direction->y * multiply;
+	result.z = direction->z * multiply;
+	return (result);
 }

@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-	char *pointer;
-	size_t i;
-	size_t size;
+	char	*pointer;
+	size_t	i;
+	size_t	size;
 
 	i = 0;
 	size = ft_strlen(s1);

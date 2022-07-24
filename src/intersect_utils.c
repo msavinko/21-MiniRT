@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:57:35 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/07/15 12:00:46 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/07/15 13:23:57 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_coord	vector3_negate(t_coord a)
-{
-	a.x = -a.x;
-	a.y = -a.y;
-	a.z = -a.z;
-	return (a);
-}
 
 void	get_discr(t_camera cam, t_coord ray, t_cylind *cylind, t_coef *coef)
 {
