@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/20 14:14:21 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:50:45 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,6 @@ void	vector_multiply(t_coord *direction, float multiply) // Умножение �
 	direction->y *= multiply;
 	direction->z *= multiply;
 }
-t_coord	vector_multiply1(t_coord *direction, float multiply) // Умножение вектора на число
-{
-	t_coord result;
-
-	result.x = direction->x * multiply;
-	result.y = direction->y * multiply;
-	result.z = direction->z * multiply;
-	return (result);
-}
-
 
 float	vector_sumpow2(t_coord a) // Квадрат длины вектора
 {
@@ -107,3 +97,14 @@ t_coord  vec3_mul(t_coord a, t_coord b)
     z.z = a.z * b.z;
     return (z);
 }
+
+t_coord  vec_vec_mul(t_coord a, t_coord b)
+{
+	t_coord z;
+
+    z.x = a.y * b.z - a.z * b.y;
+    z.y = a.z * b.x - a.x * b.z;
+    z.z = a.x * b.y - a.y * b.x;
+    return (z);
+}
+

@@ -55,6 +55,7 @@ all		:	mlx libft $(NAME_RT)
 
 mlx:
 			@make -C $(MLX_PATH)
+			echo "$(OBJS_SRC)"
 
 libft	:
 			@make -C $(DIR_LIB)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/20 14:14:17 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:51:05 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,16 @@ typedef struct s_plane t_plane;
 typedef struct s_cylind t_cylind;
 typedef struct s_objects t_objects;
 typedef struct s_data t_data;
-typedef struct	s_dist t_dist;
+
+typedef struct	s_dist
+{
+	float min_dist;
+	float dist;
+	int near_obj;
+	int n_obj;
+	struct s_coord *dot_light;
+	// struct s_coord *dot_normal;
+}	t_dist;
 
 typedef struct s_coef
 {
@@ -51,10 +60,10 @@ t_coord vector_addition(t_coord a, t_coord b);
 float vector_length(t_coord a);
 void vector_normalize(t_coord *a);
 void vector_multiply(t_coord *direction, float multiply);
-t_coord	vector_multiply1(t_coord *direction, float multiply);
 float vector_sumpow2(t_coord a);
 float vector_scalar(t_coord a, t_coord b);
 t_coord vec3_mul(t_coord a, t_coord b);
+t_coord  vec_vec_mul(t_coord a, t_coord b);
 
 float sphere_intersect(t_camera cam, t_coord ray, t_sphere *sphere);
 float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
@@ -70,7 +79,7 @@ void nearest_plane(t_data *data, t_dist *dist, t_coord *ray);
 void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray);
 
 //shadow.c
-int shadow_sphere(t_data *data, t_dist *dist, t_coord * ray);
+int shadow_sphere(t_data *data, t_dist *dist, t_coord *ray);
 int shadow_plane(t_data *data, t_dist *dist, t_coord *ray);
 int shadow_cylinder(t_data *data, t_dist *dist, t_coord *ray);
 

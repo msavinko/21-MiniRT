@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:55 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/19 12:45:36 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/22 16:14:27 by mcherrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@
 #define HEIGHT_1 1080.00
 
 #define WIDTH 1200.00
-#define HEIGHT 800.00
-
+#define HEIGHT 1200.00
+//  #define WIDTH 1200.00
+//  #define HEIGHT 800.00
 
 
 typedef struct s_color //ЦВЕТ
@@ -47,16 +48,6 @@ typedef struct s_coord //КООРДИНАТЫ
 	float y;
 	float z;
 } t_coord;
-
-typedef struct	s_dist
-{
-	float min_dist;
-	float dist;
-	int near_obj;
-	int n_obj;
-	struct s_coord *dot_light;
-	// struct s_coord *dot_normal;
-}	t_dist;
 
 typedef struct s_alight //ОБЩЕЕ ОСВЕЩЕНИЕ
 {
@@ -136,7 +127,6 @@ typedef struct s_data
 	void *window;
 	void *img;
 } t_data;
-
 
 // free_all.c
 void free_data(t_data *data);

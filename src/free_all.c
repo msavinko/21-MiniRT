@@ -20,6 +20,6 @@ void free_data(t_data *data)
 		free(data->objects.plane);
 	if (data->objects.cylind)
 		free(data->objects.cylind);
-	if (data)
-		free(data);
+	// if (data)
+	// 	free(data);
 }
