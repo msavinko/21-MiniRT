@@ -77,7 +77,7 @@ int shadow_plane(t_data *data, t_dist *dist, t_coord *ray)
 	t_coord pl_lgt;
 
 	i = 0;
-	while (i < data->objects.nsphere)
+	while (i < data->objects.nplane)
 	{
 		if (dist->near_obj != PLANE || (i != dist->n_obj && dist->near_obj == PLANE))
 		{

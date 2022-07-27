@@ -12,49 +12,49 @@
 
 #include "minirt.h"
 
-float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere)
-{
-	float	b;
-	float	c;
-	float	discr;
-	float	dist;
+// float shadow_sphere_intersect(t_coord *dot_light, t_sphere *sphere, t_coord *dot_sphere)
+// {
+// 	float	b;
+// 	float	c;
+// 	float	discr;
+// 	float	dist;
 
-// printf("dot_sphere x %f, y %f, z %f\n", dot_sphere->x, dot_sphere->y, dot_sphere->z);
-	b = 2.0f * (vector_scalar(*dot_sphere, *dot_light));
-	c = vector_scalar(*dot_sphere, *dot_sphere) - (sphere->radius * sphere->radius);
-	discr = (b * b) - (4.0f * c);
-//	printf("discr: %f\n", discr);
-	if (discr < 0.0f)
-		return (0);
-	dist = (-1.0f * b - sqrtf(discr)) / 2.0f;
-	if (dist > 0.0f)
-		return (dist);
-	if (dist < 0.0f)
-		dist = (-1.0f * b + sqrtf(discr)) / 2.0f;
-	if (dist > 0.0f)
-		return (dist);
-	return (0);
-}
+// // printf("dot_sphere x %f, y %f, z %f\n", dot_sphere->x, dot_sphere->y, dot_sphere->z);
+// 	b = 2.0f * (vector_scalar(*dot_sphere, *dot_light));
+// 	c = vector_scalar(*dot_sphere, *dot_sphere) - (sphere->radius * sphere->radius);
+// 	discr = (b * b) - (4.0f * c);
+// //	printf("discr: %f\n", discr);
+// 	if (discr < 0.0f)
+// 		return (0);
+// 	dist = (-1.0f * b - sqrtf(discr)) / 2.0f;
+// 	if (dist > 0.0f)
+// 		return (dist);
+// 	if (dist < 0.0f)
+// 		dist = (-1.0f * b + sqrtf(discr)) / 2.0f;
+// 	if (dist > 0.0f)
+// 		return (dist);
+// 	return (0);
+// }
 
-float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot)
-{
-	t_coord	d;
-	float pn;
-	float c;
-	float dist;
+// float	shadow_plane_intersect(t_coord *dot_light, t_plane *plane, t_coord *dot)
+// {
+// 	t_coord	d;
+// 	float pn;
+// 	float c;
+// 	float dist;
 
-	c = vector_scalar(plane->orient_vector, *dot_light);
-	d = vector_subtract(plane->coord, *dot);
-	if (c != 0)
-	{
-		pn = vector_scalar(d, plane->orient_vector);
-		dist = pn / c;
-		if (dist < 0)
-			return (0);
-		return (1);
-	}
-	return (0);
-}
+// 	c = vector_scalar(plane->orient_vector, *dot_light);
+// 	d = vector_subtract(plane->coord, *dot);
+// 	if (c != 0)
+// 	{
+// 		pn = vector_scalar(d, plane->orient_vector);
+// 		dist = pn / c;
+// 		if (dist < 0)
+// 			return (0);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 float shadow_disk_plane_intersect(t_coord *dot_light, t_coord *dot, t_plane *plane)
 {
 	t_coord	d;

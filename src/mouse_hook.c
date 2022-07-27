@@ -140,10 +140,12 @@ int	ft_ox_move(int keycode, t_data *data) // ?? ограничить ли рам
 	{
 		printf("I am moving cylind orient x\n");
 		if (keycode == L)
-			data->objects.cylind[data->m_dist.n_obj].orient_vector.x += 0.1;
+			{data->objects.cylind[data->m_dist.n_obj].orient_vector.x += 0.1;
+	data->objects.cylind[data->m_dist.n_obj].coord.x -= 1;}
 		if (keycode == K)
 			data->objects.cylind[data->m_dist.n_obj].orient_vector.x -= 0.1;
 	}
+	vector_normalize(&data->objects.cylind[data->m_dist.n_obj].orient_vector);
 	draw(data);
 	return (0);
 }
@@ -190,6 +192,7 @@ int	ft_oz_move(int keycode, t_data *data) // ?? ограничить ли рам
 		if (keycode == K)
 			data->objects.cylind[data->m_dist.n_obj].orient_vector.z -= 0.1;
 	}
+	vector_normalize(&data->objects.cylind[data->m_dist.n_obj].orient_vector);
 	draw(data);
 	return (0);
 }
@@ -320,7 +323,7 @@ int ft_mouse_hook(int mousecode, int x, int y, t_data *data)
 	}
 		x_ray = (x - WIDTH / 2) / (WIDTH);
 		y_ray = (HEIGHT / 2 - y) / (HEIGHT);
-		m_ray = new_vector3(x_ray, y_ray, -1); // -1 или вектор камеры?
+		m_ray = new_vector3(x_ray, y_ray, data->scene.camera.orient_vector.z); // -1 или вектор камеры?
 		printf("I found coord %f %f %f\n", m_ray.x, m_ray.y, m_ray.z);
 		// m_ray->x = x_ray;
 		// m_ray->y = y_ray;
