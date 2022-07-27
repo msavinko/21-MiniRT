@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minirt.h"
 
 int	ft_x_move(int keycode, t_data *data)
@@ -229,6 +230,8 @@ int	ft_o_move(int keycode, t_data *data)
 int	ft_radius(int keycode, t_data *data)
 {
 	printf("I am changing radius\n");
+	printf("data->m_dist.near_obj %d\n", data->m_dist.near_obj);
+	printf("number of object %d\n", data->m_dist.n_obj);
 	if (data->m_dist.near_obj == 1)
 	{
 		printf("I am changing sphere radius\n");
@@ -286,6 +289,9 @@ int	ft_key_hook_coord(int keycode, t_data *data)
 	if (keycode == R)
 	{
 		printf("You pressed R\n");
+		printf("dist near obj %d\n", data->m_dist.near_obj);
+		printf("number of object %d\n", data->m_dist.n_obj);
+		printf("min dist %f\n", data->m_dist.min_dist);
 		// printf("x before : data->objects.sphere[data->m_dist.n_obj].coord.x");
 		// data->objects.sphere[data->m_dist.n_obj].coord.x += 2.0;
 		// printf("x after : data->objects.sphere[data->m_dist.n_obj].coord.x");
@@ -319,13 +325,14 @@ int ft_mouse_hook(int mousecode, int x, int y, t_data *data)
 		// m_ray->x = x_ray;
 		// m_ray->y = y_ray;
 		// m_ray->z = -1;
-	data->m_dist.near_obj = 0;
+	//data->m_dist.near_obj = 0;
 	data->m_dist.min_dist = INT32_MAX;
 	nearest_sphere(data, &data->m_dist, &m_ray);
 	nearest_plane(data, &data->m_dist, &m_ray);
 	nearest_cylind(data, &data->m_dist, &m_ray);
 	printf("dist near obj %d\n", data->m_dist.near_obj);
 	printf("number of object %d\n", data->m_dist.n_obj);
+	printf("min dist %f\n", data->m_dist.min_dist);
 	if (data->m_dist.near_obj > 0)
 	{
 		mlx_hook(data->window, 2, (1L << 0), ft_key_hook_coord, data);

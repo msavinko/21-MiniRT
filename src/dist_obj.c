@@ -26,6 +26,12 @@ void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
 			dist->near_obj = 1;
 			dist->n_obj = i;
 		}
+		// else if (data->m_dist.dist == 0)
+		// {
+		// 	data->m_dist.min_dist =  INT32_MAX;
+		// 	data->m_dist.near_obj = 0;
+		// 	data->m_dist.n_obj = -1;
+		// }
 		i++;
 	}
 }
