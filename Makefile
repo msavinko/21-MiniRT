@@ -16,6 +16,7 @@ DIR_SRC			=	src/
 FILES_SRC		=	main.c \
 					draw.c \
 					vector.c\
+					vector1.c\
 					intersect.c\
 					intersect_utils.c \
 					color.c \
@@ -24,6 +25,8 @@ FILES_SRC		=	main.c \
 					shadow_intersect.c \
 					key_hook.c \
 					mouse_hook.c \
+					mouse_hook1.c \
+					mouse_hook2.c \
 					normalize.c \
 
 DIR_PARSE		=	parser/

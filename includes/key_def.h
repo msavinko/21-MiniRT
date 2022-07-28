@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_def.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:09:45 by mcherrie          #+#    #+#             */
-/*   Updated: 2022/07/15 13:23:04 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:44:13 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,11 @@ typedef struct s_data	t_data;
 int	ft_key_hook(int keycode, t_data *data);
 int	ft_mouse_hook(int mousecode, int x, int y, t_data *data);
 int	ft_mouse(int mouse, int x, int y, t_data *data);
+int	ft_key_hook_coord(int keycode, t_data *data);
+int	ft_radius(int keycode, t_data *data);
+int	ft_z_move(int keycode, t_data *data);
+int	ft_y_move(int keycode, t_data *data);
+int	ft_x_move(int keycode, t_data *data);
+int	ft_o_move(int keycode, t_data *data);
 
 #endif

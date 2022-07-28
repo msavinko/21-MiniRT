@@ -6,7 +6,7 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:06:29 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/28 14:52:18 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:45:55 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,16 @@ float	plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane);
 float	cylindr_intersect(t_data *data, t_coord ray, t_dist *dist, int *i);
 float	shadow_cylindr_intersect(t_coord *dot_light,
 			t_cylind *cylind, t_coord *dot);
-
-
+void	vector_normalize(t_coord *a);
+void	vector_multiply(t_coord *direction, float multiply);
+t_coord	mult(t_coord direction, float multiply);
+t_coord	vec3_mul(t_coord a, t_coord b);
+t_coord	vec_vec_mul(t_coord a, t_coord b);
+float	vec_scl(t_coord a, t_coord b);
+float	vec_len(t_coord a);
 t_coord	new_vector3(float x, float y, float z);
 t_coord	new_vector(t_coord vec);
 t_coord	vec_sub(t_coord a, t_coord b);
 t_coord	vector_addition(t_coord a, t_coord b);
-float	vec_len(t_coord a);
-void	vector_normalize(t_coord *a);
-void	vector_multiply(t_coord *direction, float multiply);
-t_coord	mult(t_coord direction, float multiply);
-float	vector_sumpow2(t_coord a);
-float	vec_scl(t_coord a, t_coord b);
-t_coord	vec3_mul(t_coord a, t_coord b);
-t_coord	vec_vec_mul(t_coord a, t_coord b);
-
-
-t_coord	vector3_negate(t_coord a);
 
 #endif

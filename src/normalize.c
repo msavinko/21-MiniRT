@@ -6,11 +6,21 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:20:46 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/28 14:52:39 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:44:23 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	vector_normalize(t_coord *a)
+{
+	float	length;
+
+	length = vec_len(*a);
+	a->x /= length;
+	a->y /= length;
+	a->z /= length;
+}
 
 static void	dot_normal_cylind(t_data *data, t_dist *dist,
 	t_coord *dot, t_coord *normal)

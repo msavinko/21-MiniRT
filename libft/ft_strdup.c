@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariasavinova <mariasavinova@student.42    +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:35:33 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/05 17:51:31 by mariasavino      ###   ########.fr       */
+/*   Updated: 2022/07/28 15:46:33 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-	char *pointer;
-	size_t i;
-	size_t size;
+	char	*pointer;
+	size_t	i;
+	size_t	size;
 
 	i = 0;
 	size = ft_strlen(s1);
