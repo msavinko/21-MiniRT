@@ -14,7 +14,6 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 DIR_SRC			=	src/
 FILES_SRC		=	main.c \
-					free_all.c \
 					draw.c \
 					vector.c\
 					intersect.c\
@@ -25,6 +24,7 @@ FILES_SRC		=	main.c \
 					shadow_intersect.c \
 					key_hook.c \
 					mouse_hook.c \
+					normalize.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \

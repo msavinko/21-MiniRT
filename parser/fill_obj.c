@@ -34,7 +34,6 @@ void	fill_sp(char *str, t_sphere *sphere)
 	fill_coord(&i, str, &sphere->coord);
 	while_space(&i, str);
 	sphere->radius = ft_atof(&str[i]) / 2;
-
 	while_space(&i, str);
 	fill_color(&i, str, &sphere->color);
 	if (sphere->color.r < 0 || sphere->color.r > 255 || sphere->color.g < 0
@@ -97,6 +96,6 @@ void	fill_screen(t_data *data)
 {
 	data->screen.width = 2 * tanf((data->scene.camera.fov / 2) * (M_PI / 180));
 	data->screen.height = data->screen.width * HEIGHT / WIDTH;
-	data->screen.x_pixel = data->screen.width / WIDTH; // шаг по Х
-	data->screen.y_pixel = data->screen.height / HEIGHT; // шаг по У
+	data->screen.x_pixel = data->screen.width / WIDTH;
+	data->screen.y_pixel = data->screen.height / HEIGHT;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/15 13:30:05 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:52:32 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ float	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	float	dist2;
 	t_coord	cam_sphere;
 
-	cam_sphere = vector_subtract(cam.view_point, sphere->coord);
-	coef.b = 2.0f * (vector_scalar(cam_sphere, ray));
-	coef.c = vector_scalar(cam_sphere, cam_sphere) - (sphere->radius * \
+	cam_sphere = vec_sub(cam.view_point, sphere->coord);
+	coef.b = 2.0f * (vec_scl(cam_sphere, ray));
+	coef.c = vec_scl(cam_sphere, cam_sphere) - (sphere->radius * \
 			sphere->radius);
 	coef.discr = (coef.b * coef.b) - (4.0f * coef.c);
 	if (coef.discr < 0)
@@ -35,42 +35,43 @@ float	sphere_intersect(struct s_camera cam, t_coord ray, t_sphere *sphere)
 	return (0);
 }
 
-
-float plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
+float	plane_intersect(struct s_camera cam, t_coord ray, t_plane *plane)
 {
 	t_coord	d;
-	float pn;
-	float c;
-	float dist;
+	float	pn;
+	float	c;
+	float	dist;
 
-	c = vector_scalar(plane->orient_vector, ray);
-	d = vector_subtract(plane->coord, cam.view_point);
+	c = vec_scl(plane->orient_vector, ray);
+	d = vec_sub(plane->coord, cam.view_point);
 	if (c != 0)
-    {
-        pn = vector_scalar(d, plane->orient_vector);
-        dist = pn / c;
-        if (dist < 0)
-            return (0);
-        return (dist);
-    }
+	{
+		pn = vec_scl(d, plane->orient_vector);
+		dist = pn / c;
+		if (dist < 0)
+			return (0);
+		return (dist);
+	}
 	return (0);
 }
 
-float	disc_intersect(t_camera cam, t_coord ray, t_plane *plane, float r)
+static float	disc_intersect(t_camera cam,
+	t_coord ray, t_plane *plane, float r)
 {
 	t_coord	p;
 	t_coord	v;
-	float t;
-	float dist;
+	float	t;
+	float	dist;
 
 	t = plane_intersect(cam, ray, plane);
 	if (t != 0.0f)
 	{
 		vector_multiply(&ray, t);
 		p = vector_addition(cam.view_point, ray);
-		v = vector_subtract(p, plane->coord);
-		dist = sqrtf(vector_scalar(v, v));
-		if (p.x == plane->coord.x && p.y == plane->coord.y && p.z == plane->coord.z)
+		v = vec_sub(p, plane->coord);
+		dist = sqrtf(vec_scl(v, v));
+		if (p.x == plane->coord.x && p.y == plane->coord.y
+			&& p.z == plane->coord.z)
 			return (t);
 		if (dist <= r)
 			return (t);
@@ -78,7 +79,7 @@ float	disc_intersect(t_camera cam, t_coord ray, t_plane *plane, float r)
 	return (0);
 }
 
-void	pipe_inter(t_camera cam, t_coord ray, t_cylind *cyl, float *d_min)
+static void	pipe_inter(t_camera cam, t_coord ray, t_cylind *cyl, float *d_min)
 {
 	float	m;
 	float	dist1;
@@ -86,19 +87,19 @@ void	pipe_inter(t_camera cam, t_coord ray, t_cylind *cyl, float *d_min)
 	t_coef	coef;
 	t_coord	cam_cy;
 
-	cam_cy = vector_subtract(cyl->coord, cam.view_point);
+	cam_cy = vec_sub(cyl->coord, cam.view_point);
 	get_discr(cam, ray, cyl, &coef);
 	if (coef.discr >= 0.0f)
 	{
 		dist1 = (-coef.b - sqrtf(coef.discr)) / (2 * coef.a);
 		dist2 = (-coef.b + sqrtf(coef.discr)) / (2 * coef.a);
-		m = vector_scalar(ray, cyl->orient_vector) * dist1 - \
-			vector_scalar(cam_cy, cyl->orient_vector);
+		m = vec_scl(ray, cyl->orient_vector) * dist1 - \
+			vec_scl(cam_cy, cyl->orient_vector);
 		if (dist1 > 0.0f && m >= 0 && m <= cyl->height && dist1 < dist2)
 			*d_min = dist1;
-		m = vector_scalar(ray, cyl->orient_vector) * dist2 - \
-			vector_scalar(cam_cy, cyl->orient_vector);
-		if (dist2 > 0.0f && m >= 0 && m <= cyl->height && d_min < 0) //проверить это условие
+		m = vec_scl(ray, cyl->orient_vector) * dist2 - \
+			vec_scl(cam_cy, cyl->orient_vector);
+		if (dist2 > 0.0f && m >= 0 && m <= cyl->height && d_min < 0)
 			*d_min = dist2;
 	}
 	return ;

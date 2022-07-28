@@ -11,24 +11,24 @@
 /* ************************************************************************** */
 
 #ifndef PARSER_H
-#define PARSER_H
+# define PARSER_H
 
-#include "minirt.h"
+# include "minirt.h"
 
-typedef struct s_scene t_scene;
-typedef struct s_alight t_alight;
-typedef struct s_camera t_camera;
-typedef struct s_light t_light;
-typedef struct s_coord t_coord;
-typedef struct s_color t_color;
-typedef struct s_sphere t_sphere;
-typedef struct s_plane t_plane;
-typedef struct s_cylind t_cylind;
-typedef struct s_objects t_objects;
-typedef struct s_screen t_screen;
-typedef struct s_data t_data;
+typedef struct s_scene		t_scene;
+typedef struct s_alight		t_alight;
+typedef struct s_camera		t_camera;
+typedef struct s_light		t_light;
+typedef struct s_coord		t_coord;
+typedef struct s_color		t_color;
+typedef struct s_sphere		t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_cylind		t_cylind;
+typedef struct s_objects	t_objects;
+typedef struct s_screen		t_screen;
+typedef struct s_data		t_data;
 
-typedef struct	s_parser
+typedef struct s_parser
 {
 	int		file_fd;
 	int		read_res;
@@ -36,7 +36,7 @@ typedef struct	s_parser
 	char	**map;
 }	t_parser;
 
-typedef struct	s_count_obj
+typedef struct s_count_obj
 {
 	int	i;
 	int	s;
@@ -44,14 +44,6 @@ typedef struct	s_count_obj
 	int	c;
 }	t_count_obj;
 
-void	init_parser(t_parser *pars);
-void	init_scene(t_scene *scene);
-void	init_objects(t_objects *obj);
-void	init_sphere(t_sphere *sphere);
-void	init_plane(t_plane *plane);
-void	init_cylinder(t_cylind *cylind);
-void	init_screen(t_data *data);
-void	init_data(t_data *data);
 void	error_parser(char *str);
 void	free_parser(t_parser *pars);
 void	read_file(t_parser *pars, char *arg);
@@ -60,6 +52,14 @@ int		open_scene(int argc, char **argv, t_data *data);
 void	capital_valid(t_parser *pars);
 void	obj_valid(t_parser *pars, t_objects *obj);
 void	letters_valid(t_parser *pars);
+void	init_parser(t_parser *pars);
+void	init_scene(t_scene *scene);
+void	init_objects(t_objects *obj);
+void	init_sphere(t_sphere *sphere);
+void	init_plane(t_plane *plane);
+void	init_cylinder(t_cylind *cylind);
+void	init_screen(t_data *data);
+void	init_data(t_data *data);
 void	fill_color(int *ind, char *str, t_color *color);
 void	fill_coord(int *ind, char *str, t_coord *coord);
 void	fill_a(char *str, t_alight *alight);
@@ -69,4 +69,5 @@ void	fill_sp(char *str, t_sphere *sphere);
 void	fill_pl(char *str, t_plane *plane);
 void	fill_cy(char *str, t_cylind *cylind);
 void	fill_screen(t_data *data);
+
 #endif

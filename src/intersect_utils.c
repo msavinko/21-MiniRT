@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 11:57:35 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/07/15 13:23:57 by mcherrie         ###   ########.fr       */
+/*   Created: 2022/07/28 14:25:36 by marlean           #+#    #+#             */
+/*   Updated: 2022/07/28 14:52:29 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	get_discr(t_camera cam, t_coord ray, t_cylind *cylind, t_coef *coef)
 {
 	t_coord	cam_cy;
 
-	cam_cy = vector_subtract(cylind->coord, cam.view_point);
+	cam_cy = vec_sub(cylind->coord, cam.view_point);
 	vector_normalize(&cylind->orient_vector);
-	coef->a = 1 - pow(vector_scalar(ray, cylind->orient_vector), 2);
-	coef->b = -2 * (vector_scalar(ray, cam_cy) - vector_scalar(ray, \
-		cylind->orient_vector) * vector_scalar(cam_cy, cylind->orient_vector));
-	coef->c = vector_scalar(cam_cy, cam_cy) - pow(vector_scalar(cam_cy, \
+	coef->a = 1 - pow(vec_scl(ray, cylind->orient_vector), 2);
+	coef->b = -2 * (vec_scl(ray, cam_cy) - vec_scl(ray, \
+		cylind->orient_vector) * vec_scl(cam_cy, cylind->orient_vector));
+	coef->c = vec_scl(cam_cy, cam_cy) - pow(vec_scl(cam_cy, \
 		cylind->orient_vector), 2) - (cylind->diameter / 2) * \
 		(cylind->diameter / 2);
 	coef->discr = (coef->b * coef->b) - (4.0f * coef->a * coef->c);
