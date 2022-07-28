@@ -12,14 +12,15 @@
 
 #include "minirt.h"
 
-void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
+void	nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->objects.nsphere)
 	{
-		dist->dist = sphere_intersect(data->scene.camera, *ray, &data->objects.sphere[i]);
+		dist->dist = sphere_intersect(data->scene.camera,
+				*ray, &data->objects.sphere[i]);
 		if (dist->dist > 0 && dist->dist < dist->min_dist)
 		{
 			dist->min_dist = dist->dist;
@@ -29,14 +30,16 @@ void nearest_sphere(t_data *data, t_dist *dist, t_coord *ray)
 		i++;
 	}
 }
-void nearest_plane(t_data *data, t_dist *dist, t_coord *ray)
+
+void	nearest_plane(t_data *data, t_dist *dist, t_coord *ray)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->objects.nplane)
 	{
-		dist->dist = plane_intersect(data->scene.camera, *ray, &data->objects.plane[i]);
+		dist->dist = plane_intersect(data->scene.camera,
+				*ray, &data->objects.plane[i]);
 		if (dist->dist > 0 && dist->dist < dist->min_dist)
 		{
 			dist->min_dist = dist->dist;
@@ -46,9 +49,10 @@ void nearest_plane(t_data *data, t_dist *dist, t_coord *ray)
 		i++;
 	}
 }
-void nearest_cylind(t_data *data, t_dist *dist, t_coord *ray)
+
+void	nearest_cylind(t_data *data, t_dist *dist, t_coord *ray)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->objects.ncylinder)

@@ -6,14 +6,13 @@
 /*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 10:32:32 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/21 12:17:07 by marlean          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:51:03 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-void ft_key_hook_camera(int keycode, t_data *data)
+static void	ft_key_hook_camera(int keycode, t_data *data)
 {
 	if (keycode == W)
 	{
@@ -36,7 +35,8 @@ void ft_key_hook_camera(int keycode, t_data *data)
 			data->scene.camera.orient_vector.x += 0.1;
 	}
 }
-int ft_key_hook(int keycode, t_data *data)
+
+int	ft_key_hook(int keycode, t_data *data)
 {
 	if (keycode == ESCAPE)
 		close_minirt(data);
@@ -52,7 +52,7 @@ int ft_key_hook(int keycode, t_data *data)
 		data->scene.camera.view_point.z -= 1;
 	if (keycode == DIST_MIN)
 		data->scene.camera.view_point.z += 1;
-	// ft_key_hook_camera(keycode, data);
+	ft_key_hook_camera(keycode, data);
 	draw(data);
 	return (0);
 }

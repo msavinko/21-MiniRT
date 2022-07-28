@@ -14,10 +14,10 @@
 
 static char	*ft_dectohex(int num)
 {
-	char *hex;
-	char c;
-	int i;
-	int temp;
+	char	*hex;
+	char	c;
+	int		i;
+	int		temp;
 
 	hex = malloc(sizeof(char) * 3);
 	hex[3] = '\0';
@@ -36,10 +36,10 @@ static char	*ft_dectohex(int num)
 	return (hex);
 }
 
-static int htoi(const char *s)
+static int	htoi(const char *s)
 {
-	int i;
-	int n;
+	int	i;
+	int	n;
 
 	n = 0;
 	i = 0;
@@ -58,18 +58,17 @@ static int htoi(const char *s)
 	return (n);
 }
 
-static void join_color(float r, float g, float b, int *result)
+static void	join_color(float r, float g, float b, int *result)
 {
-	char *part1;
-	char *part2;
-	char *str_r;
-	char *str_g;
-	char *str_b;
+	char	*part1;
+	char	*part2;
+	char	*str_r;
+	char	*str_g;
+	char	*str_b;
 
 	str_r = ft_dectohex(r);
 	str_g = ft_dectohex(g);
 	str_b = ft_dectohex(b);
-
 	part1 = ft_strjoin(str_r, str_g);
 	part2 = ft_strjoin(part1, str_b);
 	free(str_r);
@@ -80,13 +79,13 @@ static void join_color(float r, float g, float b, int *result)
 	free(part2);
 }
 
-static int set_color(t_color color, t_data *data, float intens_light)
+static int	set_color(t_color color, t_data *data, float intens_light)
 {
-	int result;
-	float r;
-	float g;
-	float b;
-	float tmp;
+	int		result;
+	float	r;
+	float	g;
+	float	b;
+	float	tmp;
 
 	tmp = data->scene.alight.color.r * data->scene.alight.light_range
 		+ intens_light * data->scene.light.bright * 255.0f;
@@ -107,17 +106,20 @@ static int set_color(t_color color, t_data *data, float intens_light)
 	return (result);
 }
 
-int	draw_dot(t_data *data, t_dist *dist, float intens_light)// флаг 0 - тень есть, 1 - нет
+int	draw_dot(t_data *data, t_dist *dist, float intens_light)
 {
-	int res;
+	int	res;
 
 	if (dist->near_obj == SPHERE)
-		res = set_color(data->objects.sphere[dist->n_obj].color, data, intens_light);
+		res = set_color(data->objects.sphere[dist->n_obj].color,
+				data, intens_light);
 	else if (dist->near_obj == PLANE)
-		res = set_color(data->objects.plane[dist->n_obj].color, data, intens_light);
+		res = set_color(data->objects.plane[dist->n_obj].color,
+				data, intens_light);
 	else if (dist->near_obj == CYLINDER || dist->near_obj == BOTTOM_DISK
 		|| dist->near_obj == TOP_DISK)
-		res = set_color(data->objects.cylind[dist->n_obj].color, data, intens_light);
+		res = set_color(data->objects.cylind[dist->n_obj].color,
+				data, intens_light);
 	else
 		res = BACK;
 	return (res);

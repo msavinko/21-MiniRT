@@ -14,9 +14,9 @@ LIBFT			=	$(DIR_LIB)libft.a
 
 DIR_SRC			=	src/
 FILES_SRC		=	main.c \
-					free_all.c \
 					draw.c \
 					vector.c\
+					vector1.c\
 					intersect.c\
 					intersect_utils.c \
 					color.c \
@@ -25,6 +25,9 @@ FILES_SRC		=	main.c \
 					shadow_intersect.c \
 					key_hook.c \
 					mouse_hook.c \
+					mouse_hook1.c \
+					mouse_hook2.c \
+					normalize.c \
 
 DIR_PARSE		=	parser/
 FILES_PARSE		=	parser.c \
@@ -54,7 +57,6 @@ all		:	mlx libft $(NAME_RT)
 
 mlx:
 			@make -C $(MLX_PATH)
-			echo "$(OBJS_SRC)"
 
 libft	:
 			@make -C $(DIR_LIB)

@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcherrie <mcherrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marlean <marlean@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:58:27 by marlean           #+#    #+#             */
-/*   Updated: 2022/07/16 15:23:23 by mcherrie         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:31:23 by marlean          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int close_minirt(t_data *data)
+void	free_data(t_data *data)
+{
+	if (data->objects.sphere)
+		free(data->objects.sphere);
+	if (data->objects.plane)
+		free(data->objects.plane);
+	if (data->objects.cylind)
+		free(data->objects.cylind);
+}
+
+int	close_minirt(t_data *data)
 {
 	printf("\nExit\n");
 	free_data(data);
@@ -20,9 +30,9 @@ int close_minirt(t_data *data)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	open_scene(argc, argv, data);
@@ -38,5 +48,6 @@ int main(int argc, char **argv)
 	mlx_mouse_hook(data->window, ft_mouse, data);
 	mlx_loop(data->mlx);
 	free_data(data);
+	free(data);
 	return (0);
 }
